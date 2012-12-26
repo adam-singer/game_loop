@@ -1,0 +1,8 @@
+name: game_loop
+description: The Game Loop for Dart
+version: 0.0.1
+authors:
+- John McCutchan <john@johnmccutchan.com>
+homepage: https://github.com/johnmccutchan/game_loop
+dependencies:
+  unittest: any
