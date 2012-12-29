@@ -45,4 +45,31 @@ class GameLoopAnalogInput {
       buttons[buttonId] = new GameLoopAnalogButton(buttonId);
     }
   }
+
+  /** The time the button was updated. */
+  double timeUpdated(int buttonId) {
+    GameLoopAnalogButton button = buttons[buttonId];
+    if (button == null) {
+      return 0.0;
+    }
+    return button.time;
+  }
+
+  /** The frame the button was updated. */
+  int frameUpdated(int buttonId) {
+    GameLoopAnalogButton button = buttons[buttonId];
+    if (button == null) {
+      return 0;
+    }
+    return button.frame;
+  }
+
+  /** The value of [buttonId]. */
+  double value(int buttonId) {
+    GameLoopAnalogButton button = buttons[buttonId];
+    if (button == null) {
+      return 0.0;
+    }
+    return button.value;
+  }
 }
