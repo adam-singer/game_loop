@@ -24,6 +24,7 @@ part of game_loop;
 typedef GameLoopTimerFunction(GameLoopTimer gameLoop);
 
 /** A cancellable timer that calls a [GameLoopTimerFunction] when it fires.
+ * A timer can only fire once, afterwards it is dead.
  */
 class GameLoopTimer {
   /** Game loop timer was created by */
