@@ -30,9 +30,11 @@ void update(GameLoop gameLoop) {
   }
   bool down = gameLoop.keyboard.isDown(GameLoopKeyboard.D);
   double timePressed = gameLoop.keyboard.timePressed(GameLoopKeyboard.D);
-  double timeReleased = gameLoop.keyboard.timePressed(GameLoopKeyboard.D);
-  if (down)
+  double timeReleased = gameLoop.keyboard.timeReleased(GameLoopKeyboard.D);
+  if (gameLoop.keyboard.released(GameLoopKeyboard.D)) {
     print('D down: $down $timePressed $timeReleased');
+    //gameLoop.enableFullscreen(true);
+  }
   return;
   print('frame: ${gameLoop.frame}');
   print('frameTime: ${gameLoop.frameTime}');
