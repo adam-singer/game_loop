@@ -1,0 +1,937 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>GameLoopKeyboard class / game_loop Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="game_loop" data-type="GameLoopKeyboard">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopKeyboard.html">GameLoopKeyboard</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+<h2><div class="icon-library"></div><a href="../game_loop.html">game_loop</a></h2><ul class="icon">
+<li><a href="../game_loop/GameLoop.html"><div class="icon-class"></div>GameLoop</a></li>
+<li><a href="../game_loop/GameLoopAnalogButton.html"><div class="icon-class"></div>GameLoopAnalogButton</a></li>
+<li><a href="../game_loop/GameLoopAnalogInput.html"><div class="icon-class"></div>GameLoopAnalogInput</a></li>
+<li><a href="../game_loop/GameLoopDigitalButton.html"><div class="icon-class"></div>GameLoopDigitalButton</a></li>
+<li><a href="../game_loop/GameLoopDigitalButtonEvent.html"><div class="icon-class"></div>GameLoopDigitalButtonEvent</a></li>
+<li><a href="../game_loop/GameLoopDigitalInput.html"><div class="icon-class"></div>GameLoopDigitalInput</a></li>
+<li><a href="../game_loop/GameLoopFullscreenChangeFunction.html"><div class="icon-interface"></div>GameLoopFullscreenChangeFunction</a></li>
+<li><a href="../game_loop/GameLoopGamepad.html"><div class="icon-class"></div>GameLoopGamepad</a></li>
+<li><div class="icon-class"></div><strong>GameLoopKeyboard</strong></li>
+<li><a href="../game_loop/GameLoopMouse.html"><div class="icon-class"></div>GameLoopMouse</a></li>
+<li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
+<li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
+<li><a href="../game_loop/GameLoopResizeFunction.html"><div class="icon-interface"></div>GameLoopResizeFunction</a></li>
+<li><a href="../game_loop/GameLoopTimer.html"><div class="icon-class"></div>GameLoopTimer</a></li>
+<li><a href="../game_loop/GameLoopTimerFunction.html"><div class="icon-interface"></div>GameLoopTimerFunction</a></li>
+<li><a href="../game_loop/GameLoopUpdateFunction.html"><div class="icon-interface"></div>GameLoopUpdateFunction</a></li>
+</ul>
+</div>
+<div class="content">
+        <h2><strong>GameLoopKeyboard</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<p>A keyboard input. Has digital buttons corresponding to keyboard keys.</p>
+<pre class="source">
+class GameLoopKeyboard extends GameLoopDigitalInput {
+ /** The A key. */
+ static const A = KeyCode.A;
+ /** The B key. */
+ static const B = KeyCode.B;
+ /** The C key. */
+ static const C = KeyCode.C;
+ /** The D key. */
+ static const D = KeyCode.D;
+ /** The E key. */
+ static const E = KeyCode.E;
+ /** The F key. */
+ static const F = KeyCode.F;
+ /** The G key. */
+ static const G = KeyCode.G;
+ /** The H key. */
+ static const H = KeyCode.H;
+ /** The I key. */
+ static const I = KeyCode.I;
+ /** The J key. */
+ static const J = KeyCode.J;
+ /** The K key. */
+ static const K = KeyCode.K;
+ /** The L key. */
+ static const L = KeyCode.L;
+ /** The M key. */
+ static const M = KeyCode.M;
+ /** The N key. */
+ static const N = KeyCode.N;
+ /** The O key. */
+ static const O = KeyCode.O;
+ /** The P key. */
+ static const P = KeyCode.P;
+ /** The Q key. */
+ static const Q = KeyCode.Q;
+ /** The R key. */
+ static const R = KeyCode.R;
+ /** The S key. */
+ static const S = KeyCode.S;
+ /** The T key. */
+ static const T = KeyCode.T;
+ /** The U key. */
+ static const U = KeyCode.U;
+ /** The V key. */
+ static const V = KeyCode.V;
+ /** The W key. */
+ static const W = KeyCode.W;
+ /** The X key. */
+ static const X = KeyCode.X;
+ /** The Y key. */
+ static const Y = KeyCode.Y;
+ /** The Z key. */
+ static const Z = KeyCode.Z;
+ /** The Shift key. */
+ static const SHIFT = KeyCode.SHIFT;
+ /** The Control key. */
+ static const CTRL = KeyCode.CTRL;
+ /** The Alt key. */
+ static const ALT = KeyCode.ALT;
+ /** The Space key. */
+ static const SPACE = KeyCode.SPACE;
+ /** The Zero key. */
+ static const ZERO = KeyCode.ZERO;
+ /** The One key. */
+ static const ONE = KeyCode.ONE;
+ /** The Two key. */
+ static const TWO = KeyCode.TWO;
+ /** The Three key. */
+ static const THREE = KeyCode.THREE;
+ /** The Four key. */
+ static const FOUR = KeyCode.FOUR;
+ /** The Five key. */
+ static const FIVE = KeyCode.FIVE;
+ /** The Six key. */
+ static const SIX = KeyCode.SIX;
+ /** The Seven key. */
+ static const SEVEN = KeyCode.SEVEN;
+ /** The Eight key. */
+ static const EIGHT = KeyCode.EIGHT;
+ /** The Nine key. */
+ static const NINE = KeyCode.NINE;
+ /** The Tilde key. */
+ static const TILDE = KeyCode.TILDE;
+ /** The Enter key. */
+ static const ENTER = KeyCode.ENTER;
+ /** The Up key. */
+ static const UP = KeyCode.UP;
+ /** The Down key. */
+ static const DOWN = KeyCode.DOWN;
+ /** The Left key. */
+ static const LEFT = KeyCode.LEFT;
+ /** The Right key. */
+ static const RIGHT = KeyCode.RIGHT;
+ static final List&lt;int&gt; _buttonIds = [A, B, C,
+                              D, E, F,
+                              G, H, I,
+                              J, K, L,
+                              M, N, O,
+                              P, Q, R,
+                              S, T, U,
+                              V, W, X,
+                              Y, Z,
+                              SHIFT,
+                              CTRL,
+                              ALT,
+                              SPACE,
+                              ZERO,
+                              ONE,
+                              TWO,
+                              THREE,
+                              FOUR,
+                              FIVE,
+                              SIX,
+                              SEVEN,
+                              EIGHT,
+                              NINE,
+                              TILDE,
+                              ENTER,
+                              UP,
+                              DOWN,
+                              LEFT,
+                              RIGHT
+                              ];
+
+ GameLoopKeyboard(gameLoop) : super(gameLoop, _buttonIds);
+}
+</pre>
+</div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>GameLoopKeyboard</strong></span></p>
+<div>
+<h3>Static Properties</h3>
+<div class="field"><h4 id="A">
+<button class="show-code">Code</button>
+const         <strong>A</strong> <a class="anchor-link"
+            href="#A"
+            title="Permalink to GameLoopKeyboard.A">#</a>
+        </h4>
+        <div class="doc">
+<p>The A key.</p>
+<pre class="source">
+static const A = KeyCode.A;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="ALT">
+<button class="show-code">Code</button>
+const         <strong>ALT</strong> <a class="anchor-link"
+            href="#ALT"
+            title="Permalink to GameLoopKeyboard.ALT">#</a>
+        </h4>
+        <div class="doc">
+<p>The Alt key.</p>
+<pre class="source">
+static const ALT = KeyCode.ALT;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="B">
+<button class="show-code">Code</button>
+const         <strong>B</strong> <a class="anchor-link"
+            href="#B"
+            title="Permalink to GameLoopKeyboard.B">#</a>
+        </h4>
+        <div class="doc">
+<p>The B key.</p>
+<pre class="source">
+static const B = KeyCode.B;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="C">
+<button class="show-code">Code</button>
+const         <strong>C</strong> <a class="anchor-link"
+            href="#C"
+            title="Permalink to GameLoopKeyboard.C">#</a>
+        </h4>
+        <div class="doc">
+<p>The C key.</p>
+<pre class="source">
+static const C = KeyCode.C;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="CTRL">
+<button class="show-code">Code</button>
+const         <strong>CTRL</strong> <a class="anchor-link"
+            href="#CTRL"
+            title="Permalink to GameLoopKeyboard.CTRL">#</a>
+        </h4>
+        <div class="doc">
+<p>The Control key.</p>
+<pre class="source">
+static const CTRL = KeyCode.CTRL;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="D">
+<button class="show-code">Code</button>
+const         <strong>D</strong> <a class="anchor-link"
+            href="#D"
+            title="Permalink to GameLoopKeyboard.D">#</a>
+        </h4>
+        <div class="doc">
+<p>The D key.</p>
+<pre class="source">
+static const D = KeyCode.D;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="DOWN">
+<button class="show-code">Code</button>
+const         <strong>DOWN</strong> <a class="anchor-link"
+            href="#DOWN"
+            title="Permalink to GameLoopKeyboard.DOWN">#</a>
+        </h4>
+        <div class="doc">
+<p>The Down key.</p>
+<pre class="source">
+static const DOWN = KeyCode.DOWN;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="E">
+<button class="show-code">Code</button>
+const         <strong>E</strong> <a class="anchor-link"
+            href="#E"
+            title="Permalink to GameLoopKeyboard.E">#</a>
+        </h4>
+        <div class="doc">
+<p>The E key.</p>
+<pre class="source">
+static const E = KeyCode.E;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="EIGHT">
+<button class="show-code">Code</button>
+const         <strong>EIGHT</strong> <a class="anchor-link"
+            href="#EIGHT"
+            title="Permalink to GameLoopKeyboard.EIGHT">#</a>
+        </h4>
+        <div class="doc">
+<p>The Eight key.</p>
+<pre class="source">
+static const EIGHT = KeyCode.EIGHT;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="ENTER">
+<button class="show-code">Code</button>
+const         <strong>ENTER</strong> <a class="anchor-link"
+            href="#ENTER"
+            title="Permalink to GameLoopKeyboard.ENTER">#</a>
+        </h4>
+        <div class="doc">
+<p>The Enter key.</p>
+<pre class="source">
+static const ENTER = KeyCode.ENTER;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="F">
+<button class="show-code">Code</button>
+const         <strong>F</strong> <a class="anchor-link"
+            href="#F"
+            title="Permalink to GameLoopKeyboard.F">#</a>
+        </h4>
+        <div class="doc">
+<p>The F key.</p>
+<pre class="source">
+static const F = KeyCode.F;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="FIVE">
+<button class="show-code">Code</button>
+const         <strong>FIVE</strong> <a class="anchor-link"
+            href="#FIVE"
+            title="Permalink to GameLoopKeyboard.FIVE">#</a>
+        </h4>
+        <div class="doc">
+<p>The Five key.</p>
+<pre class="source">
+static const FIVE = KeyCode.FIVE;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="FOUR">
+<button class="show-code">Code</button>
+const         <strong>FOUR</strong> <a class="anchor-link"
+            href="#FOUR"
+            title="Permalink to GameLoopKeyboard.FOUR">#</a>
+        </h4>
+        <div class="doc">
+<p>The Four key.</p>
+<pre class="source">
+static const FOUR = KeyCode.FOUR;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="G">
+<button class="show-code">Code</button>
+const         <strong>G</strong> <a class="anchor-link"
+            href="#G"
+            title="Permalink to GameLoopKeyboard.G">#</a>
+        </h4>
+        <div class="doc">
+<p>The G key.</p>
+<pre class="source">
+static const G = KeyCode.G;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="H">
+<button class="show-code">Code</button>
+const         <strong>H</strong> <a class="anchor-link"
+            href="#H"
+            title="Permalink to GameLoopKeyboard.H">#</a>
+        </h4>
+        <div class="doc">
+<p>The H key.</p>
+<pre class="source">
+static const H = KeyCode.H;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="I">
+<button class="show-code">Code</button>
+const         <strong>I</strong> <a class="anchor-link"
+            href="#I"
+            title="Permalink to GameLoopKeyboard.I">#</a>
+        </h4>
+        <div class="doc">
+<p>The I key.</p>
+<pre class="source">
+static const I = KeyCode.I;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="J">
+<button class="show-code">Code</button>
+const         <strong>J</strong> <a class="anchor-link"
+            href="#J"
+            title="Permalink to GameLoopKeyboard.J">#</a>
+        </h4>
+        <div class="doc">
+<p>The J key.</p>
+<pre class="source">
+static const J = KeyCode.J;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="K">
+<button class="show-code">Code</button>
+const         <strong>K</strong> <a class="anchor-link"
+            href="#K"
+            title="Permalink to GameLoopKeyboard.K">#</a>
+        </h4>
+        <div class="doc">
+<p>The K key.</p>
+<pre class="source">
+static const K = KeyCode.K;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="L">
+<button class="show-code">Code</button>
+const         <strong>L</strong> <a class="anchor-link"
+            href="#L"
+            title="Permalink to GameLoopKeyboard.L">#</a>
+        </h4>
+        <div class="doc">
+<p>The L key.</p>
+<pre class="source">
+static const L = KeyCode.L;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="LEFT">
+<button class="show-code">Code</button>
+const         <strong>LEFT</strong> <a class="anchor-link"
+            href="#LEFT"
+            title="Permalink to GameLoopKeyboard.LEFT">#</a>
+        </h4>
+        <div class="doc">
+<p>The Left key.</p>
+<pre class="source">
+static const LEFT = KeyCode.LEFT;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="M">
+<button class="show-code">Code</button>
+const         <strong>M</strong> <a class="anchor-link"
+            href="#M"
+            title="Permalink to GameLoopKeyboard.M">#</a>
+        </h4>
+        <div class="doc">
+<p>The M key.</p>
+<pre class="source">
+static const M = KeyCode.M;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="N">
+<button class="show-code">Code</button>
+const         <strong>N</strong> <a class="anchor-link"
+            href="#N"
+            title="Permalink to GameLoopKeyboard.N">#</a>
+        </h4>
+        <div class="doc">
+<p>The N key.</p>
+<pre class="source">
+static const N = KeyCode.N;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="NINE">
+<button class="show-code">Code</button>
+const         <strong>NINE</strong> <a class="anchor-link"
+            href="#NINE"
+            title="Permalink to GameLoopKeyboard.NINE">#</a>
+        </h4>
+        <div class="doc">
+<p>The Nine key.</p>
+<pre class="source">
+static const NINE = KeyCode.NINE;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="O">
+<button class="show-code">Code</button>
+const         <strong>O</strong> <a class="anchor-link"
+            href="#O"
+            title="Permalink to GameLoopKeyboard.O">#</a>
+        </h4>
+        <div class="doc">
+<p>The O key.</p>
+<pre class="source">
+static const O = KeyCode.O;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="ONE">
+<button class="show-code">Code</button>
+const         <strong>ONE</strong> <a class="anchor-link"
+            href="#ONE"
+            title="Permalink to GameLoopKeyboard.ONE">#</a>
+        </h4>
+        <div class="doc">
+<p>The One key.</p>
+<pre class="source">
+static const ONE = KeyCode.ONE;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="P">
+<button class="show-code">Code</button>
+const         <strong>P</strong> <a class="anchor-link"
+            href="#P"
+            title="Permalink to GameLoopKeyboard.P">#</a>
+        </h4>
+        <div class="doc">
+<p>The P key.</p>
+<pre class="source">
+static const P = KeyCode.P;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="Q">
+<button class="show-code">Code</button>
+const         <strong>Q</strong> <a class="anchor-link"
+            href="#Q"
+            title="Permalink to GameLoopKeyboard.Q">#</a>
+        </h4>
+        <div class="doc">
+<p>The Q key.</p>
+<pre class="source">
+static const Q = KeyCode.Q;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="R">
+<button class="show-code">Code</button>
+const         <strong>R</strong> <a class="anchor-link"
+            href="#R"
+            title="Permalink to GameLoopKeyboard.R">#</a>
+        </h4>
+        <div class="doc">
+<p>The R key.</p>
+<pre class="source">
+static const R = KeyCode.R;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="RIGHT">
+<button class="show-code">Code</button>
+const         <strong>RIGHT</strong> <a class="anchor-link"
+            href="#RIGHT"
+            title="Permalink to GameLoopKeyboard.RIGHT">#</a>
+        </h4>
+        <div class="doc">
+<p>The Right key.</p>
+<pre class="source">
+static const RIGHT = KeyCode.RIGHT;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="S">
+<button class="show-code">Code</button>
+const         <strong>S</strong> <a class="anchor-link"
+            href="#S"
+            title="Permalink to GameLoopKeyboard.S">#</a>
+        </h4>
+        <div class="doc">
+<p>The S key.</p>
+<pre class="source">
+static const S = KeyCode.S;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="SEVEN">
+<button class="show-code">Code</button>
+const         <strong>SEVEN</strong> <a class="anchor-link"
+            href="#SEVEN"
+            title="Permalink to GameLoopKeyboard.SEVEN">#</a>
+        </h4>
+        <div class="doc">
+<p>The Seven key.</p>
+<pre class="source">
+static const SEVEN = KeyCode.SEVEN;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="SHIFT">
+<button class="show-code">Code</button>
+const         <strong>SHIFT</strong> <a class="anchor-link"
+            href="#SHIFT"
+            title="Permalink to GameLoopKeyboard.SHIFT">#</a>
+        </h4>
+        <div class="doc">
+<p>The Shift key.</p>
+<pre class="source">
+static const SHIFT = KeyCode.SHIFT;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="SIX">
+<button class="show-code">Code</button>
+const         <strong>SIX</strong> <a class="anchor-link"
+            href="#SIX"
+            title="Permalink to GameLoopKeyboard.SIX">#</a>
+        </h4>
+        <div class="doc">
+<p>The Six key.</p>
+<pre class="source">
+static const SIX = KeyCode.SIX;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="SPACE">
+<button class="show-code">Code</button>
+const         <strong>SPACE</strong> <a class="anchor-link"
+            href="#SPACE"
+            title="Permalink to GameLoopKeyboard.SPACE">#</a>
+        </h4>
+        <div class="doc">
+<p>The Space key.</p>
+<pre class="source">
+static const SPACE = KeyCode.SPACE;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="T">
+<button class="show-code">Code</button>
+const         <strong>T</strong> <a class="anchor-link"
+            href="#T"
+            title="Permalink to GameLoopKeyboard.T">#</a>
+        </h4>
+        <div class="doc">
+<p>The T key.</p>
+<pre class="source">
+static const T = KeyCode.T;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="THREE">
+<button class="show-code">Code</button>
+const         <strong>THREE</strong> <a class="anchor-link"
+            href="#THREE"
+            title="Permalink to GameLoopKeyboard.THREE">#</a>
+        </h4>
+        <div class="doc">
+<p>The Three key.</p>
+<pre class="source">
+static const THREE = KeyCode.THREE;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="TILDE">
+<button class="show-code">Code</button>
+const         <strong>TILDE</strong> <a class="anchor-link"
+            href="#TILDE"
+            title="Permalink to GameLoopKeyboard.TILDE">#</a>
+        </h4>
+        <div class="doc">
+<p>The Tilde key.</p>
+<pre class="source">
+static const TILDE = KeyCode.TILDE;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="TWO">
+<button class="show-code">Code</button>
+const         <strong>TWO</strong> <a class="anchor-link"
+            href="#TWO"
+            title="Permalink to GameLoopKeyboard.TWO">#</a>
+        </h4>
+        <div class="doc">
+<p>The Two key.</p>
+<pre class="source">
+static const TWO = KeyCode.TWO;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="U">
+<button class="show-code">Code</button>
+const         <strong>U</strong> <a class="anchor-link"
+            href="#U"
+            title="Permalink to GameLoopKeyboard.U">#</a>
+        </h4>
+        <div class="doc">
+<p>The U key.</p>
+<pre class="source">
+static const U = KeyCode.U;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="UP">
+<button class="show-code">Code</button>
+const         <strong>UP</strong> <a class="anchor-link"
+            href="#UP"
+            title="Permalink to GameLoopKeyboard.UP">#</a>
+        </h4>
+        <div class="doc">
+<p>The Up key.</p>
+<pre class="source">
+static const UP = KeyCode.UP;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="V">
+<button class="show-code">Code</button>
+const         <strong>V</strong> <a class="anchor-link"
+            href="#V"
+            title="Permalink to GameLoopKeyboard.V">#</a>
+        </h4>
+        <div class="doc">
+<p>The V key.</p>
+<pre class="source">
+static const V = KeyCode.V;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="W">
+<button class="show-code">Code</button>
+const         <strong>W</strong> <a class="anchor-link"
+            href="#W"
+            title="Permalink to GameLoopKeyboard.W">#</a>
+        </h4>
+        <div class="doc">
+<p>The W key.</p>
+<pre class="source">
+static const W = KeyCode.W;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="X">
+<button class="show-code">Code</button>
+const         <strong>X</strong> <a class="anchor-link"
+            href="#X"
+            title="Permalink to GameLoopKeyboard.X">#</a>
+        </h4>
+        <div class="doc">
+<p>The X key.</p>
+<pre class="source">
+static const X = KeyCode.X;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="Y">
+<button class="show-code">Code</button>
+const         <strong>Y</strong> <a class="anchor-link"
+            href="#Y"
+            title="Permalink to GameLoopKeyboard.Y">#</a>
+        </h4>
+        <div class="doc">
+<p>The Y key.</p>
+<pre class="source">
+static const Y = KeyCode.Y;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="Z">
+<button class="show-code">Code</button>
+const         <strong>Z</strong> <a class="anchor-link"
+            href="#Z"
+            title="Permalink to GameLoopKeyboard.Z">#</a>
+        </h4>
+        <div class="doc">
+<p>The Z key.</p>
+<pre class="source">
+static const Z = KeyCode.Z;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="ZERO">
+<button class="show-code">Code</button>
+const         <strong>ZERO</strong> <a class="anchor-link"
+            href="#ZERO"
+            title="Permalink to GameLoopKeyboard.ZERO">#</a>
+        </h4>
+        <div class="doc">
+<p>The Zero key.</p>
+<pre class="source">
+static const ZERO = KeyCode.ZERO;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="GameLoopKeyboard">
+<button class="show-code">Code</button>
+new <strong>GameLoopKeyboard</strong>(gameLoop) <a class="anchor-link" href="#GameLoopKeyboard"
+              title="Permalink to GameLoopKeyboard.GameLoopKeyboard">#</a></h4>
+<div class="doc">
+<pre class="source">
+GameLoopKeyboard(gameLoop) : super(gameLoop, _buttonIds);
+</pre>
+</div>
+</div>
+</div>
+<div class="inherited">
+<h3>Properties</h3>
+<div class="field inherited"><h4 id="buttons">
+<button class="show-code">Code</button>
+final Map&lt;int, <a href="../game_loop/GameLoopDigitalButton.html">GameLoopDigitalButton</a>&gt;         <strong>buttons</strong> <a class="anchor-link"
+            href="#buttons"
+            title="Permalink to GameLoopKeyboard.buttons">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Buttons this digital input knows about</p>
+<pre class="source">
+final Map&lt;int, GameLoopDigitalButton&gt; buttons =
+   new Map&lt;int, GameLoopDigitalButton&gt;();
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="gameLoop">
+<button class="show-code">Code</button>
+final <a href="../game_loop/GameLoop.html">GameLoop</a>         <strong>gameLoop</strong> <a class="anchor-link"
+            href="#gameLoop"
+            title="Permalink to GameLoopKeyboard.gameLoop">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Game loop this digital input belongs to.</p>
+<pre class="source">
+final GameLoop gameLoop;
+</pre>
+</div>
+</div>
+</div>
+<div class="inherited">
+<h3>Methods</h3>
+<div class="method inherited"><h4 id="digitalButtonEvent">
+<button class="show-code">Code</button>
+void <strong>digitalButtonEvent</strong>(<a href="../game_loop/GameLoopDigitalButtonEvent.html">GameLoopDigitalButtonEvent</a> event) <a class="anchor-link" href="#digitalButtonEvent"
+              title="Permalink to GameLoopKeyboard.digitalButtonEvent">#</a></h4>
+<div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Deliver an input event</p>
+<pre class="source">
+void digitalButtonEvent(GameLoopDigitalButtonEvent event) {
+ GameLoopDigitalButton button = buttons[event.buttonId];
+ if (button == null) {
+   return;
+ }
+ if (event.down) {
+   button.framePressed = event.frame;
+   button.timePressed = event.time;
+ } else {
+   button.frameReleased = event.frame;
+   button.timeReleased = event.time;
+ }
+}
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="isDown">
+<button class="show-code">Code</button>
+bool <strong>isDown</strong>(int buttonId) <a class="anchor-link" href="#isDown"
+              title="Permalink to GameLoopKeyboard.isDown">#</a></h4>
+<div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Is 
+<span class="param">buttonId</span> down this frame?</p>
+<pre class="source">
+bool isDown(int buttonId) {
+ GameLoopDigitalButton button = buttons[buttonId];
+ if (button == null) {
+   return false;
+ }
+ return button.down;
+}
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="isUp">
+<button class="show-code">Code</button>
+bool <strong>isUp</strong>(int buttonId) <a class="anchor-link" href="#isUp"
+              title="Permalink to GameLoopKeyboard.isUp">#</a></h4>
+<div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Is 
+<span class="param">buttonId</span> up this frame?</p>
+<pre class="source">
+bool isUp(int buttonId) {
+ GameLoopDigitalButton button = buttons[buttonId];
+ if (button == null) {
+   return true;
+ }
+ return button.up;
+}
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="timePressed">
+<button class="show-code">Code</button>
+double <strong>timePressed</strong>(int buttonId) <a class="anchor-link" href="#timePressed"
+              title="Permalink to GameLoopKeyboard.timePressed">#</a></h4>
+<div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Time 
+<span class="param">buttonId</span> was pressed.</p>
+<pre class="source">
+double timePressed(int buttonId) {
+ GameLoopDigitalButton button = buttons[buttonId];
+ if (button == null) {
+   return 0.0;
+ }
+ return button.timePressed;
+}
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="timeReleased">
+<button class="show-code">Code</button>
+double <strong>timeReleased</strong>(int buttonId) <a class="anchor-link" href="#timeReleased"
+              title="Permalink to GameLoopKeyboard.timeReleased">#</a></h4>
+<div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Time 
+<span class="param">buttonId</span> was released.</p>
+<pre class="source">
+double timeReleased(int buttonId) {
+ GameLoopDigitalButton button = buttons[buttonId];
+ if (button == null) {
+   return 0.0;
+ }
+ return button.timeReleased;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        
+        <div class="footer">
+          <div>This page was generated at 2012-12-28 16:23:31.173</div>
+        </div>
+        <script async src="../client-static.js"></script>
+        </body></html>
+        

@@ -1,0 +1,408 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>GameLoopMouse class / game_loop Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="game_loop" data-type="GameLoopMouse">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopMouse.html">GameLoopMouse</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+<h2><div class="icon-library"></div><a href="../game_loop.html">game_loop</a></h2><ul class="icon">
+<li><a href="../game_loop/GameLoop.html"><div class="icon-class"></div>GameLoop</a></li>
+<li><a href="../game_loop/GameLoopAnalogButton.html"><div class="icon-class"></div>GameLoopAnalogButton</a></li>
+<li><a href="../game_loop/GameLoopAnalogInput.html"><div class="icon-class"></div>GameLoopAnalogInput</a></li>
+<li><a href="../game_loop/GameLoopDigitalButton.html"><div class="icon-class"></div>GameLoopDigitalButton</a></li>
+<li><a href="../game_loop/GameLoopDigitalButtonEvent.html"><div class="icon-class"></div>GameLoopDigitalButtonEvent</a></li>
+<li><a href="../game_loop/GameLoopDigitalInput.html"><div class="icon-class"></div>GameLoopDigitalInput</a></li>
+<li><a href="../game_loop/GameLoopFullscreenChangeFunction.html"><div class="icon-interface"></div>GameLoopFullscreenChangeFunction</a></li>
+<li><a href="../game_loop/GameLoopGamepad.html"><div class="icon-class"></div>GameLoopGamepad</a></li>
+<li><a href="../game_loop/GameLoopKeyboard.html"><div class="icon-class"></div>GameLoopKeyboard</a></li>
+<li><div class="icon-class"></div><strong>GameLoopMouse</strong></li>
+<li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
+<li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
+<li><a href="../game_loop/GameLoopResizeFunction.html"><div class="icon-interface"></div>GameLoopResizeFunction</a></li>
+<li><a href="../game_loop/GameLoopTimer.html"><div class="icon-class"></div>GameLoopTimer</a></li>
+<li><a href="../game_loop/GameLoopTimerFunction.html"><div class="icon-interface"></div>GameLoopTimerFunction</a></li>
+<li><a href="../game_loop/GameLoopUpdateFunction.html"><div class="icon-interface"></div>GameLoopUpdateFunction</a></li>
+</ul>
+</div>
+<div class="content">
+        <h2><strong>GameLoopMouse</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<p>A mouse input. Has digital buttons corresponding to mouse buttons:
+<a class="crossref" href="../game_loop/GameLoopMouse.html#LEFT">LEFT</a>, <a class="crossref" href="../game_loop/GameLoopMouse.html#MIDDLE">MIDDLE</a>, <a class="crossref" href="../game_loop/GameLoopMouse.html#RIGHT">RIGHT</a>. Also implements the <a class="crossref" href="../game_loop/GameLoopPositionInput.html">GameLoopPositionInput</a>
+interface.</p>
+<pre class="source">
+class GameLoopMouse extends GameLoopDigitalInput
+   implements GameLoopPositionInput {
+ /** Left mouse button */
+ static const LEFT = 0;
+ /** Middle mouse button */
+ static const MIDDLE = 1;
+ /** Right mouse button */
+ static const RIGHT = 2;
+ static final List&lt;int&gt; _buttonIds = [LEFT, MIDDLE, RIGHT];
+
+
+ int _dx = 0;
+ /** Mouse movement in x direction since previous frame. */
+ int get dx =&gt; _dx;
+
+ int _dy = 0;
+ /** Mouse movement in y direction since previous frame. */
+ int get dy =&gt; _dy;
+
+
+ int _x = 0;
+ /** Mouse position in x direction within element. */
+ int get x =&gt; _x;
+
+ int _y = 0;
+ /** Mouse position in y direction within element. */
+ int get y =&gt; _y;
+
+
+ double _time = 0.0;
+ /** Time at which mouse position was last updated. */
+ double get time =&gt; _time;
+
+
+ int _frame  = 0;
+ /** Frame at which mouse position was last updated. */
+ int get frame =&gt; _frame;
+
+ GameLoopMouse(gameLoop) : super(gameLoop, _buttonIds);
+
+ /** Process one [GameLoopMouseEvent]. */
+ void gameLoopMouseEvent(GameLoopMouseEvent event) {
+   _x = event.x;
+   _y = event.y;
+   _time = event.time;
+   _frame = event.frame;
+   _dx += event.dx;
+   _dy += event.dy;
+ }
+
+ void _resetAccumulators() {
+   _dx = 0;
+   _dy = 0;
+ }
+}
+</pre>
+</div>
+<h3>Extends</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a></span>&nbsp;&gt;&nbsp;<span class="type-box"><span class="icon-class"></span><strong>GameLoopMouse</strong></span></p>
+<h3>Implements</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../game_loop/GameLoopPositionInput.html">GameLoopPositionInput</a></span></p>
+<div>
+<h3>Static Properties</h3>
+<div class="field"><h4 id="LEFT">
+<button class="show-code">Code</button>
+const         <strong>LEFT</strong> <a class="anchor-link"
+            href="#LEFT"
+            title="Permalink to GameLoopMouse.LEFT">#</a>
+        </h4>
+        <div class="doc">
+<p>Left mouse button</p>
+<pre class="source">
+static const LEFT = 0;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="MIDDLE">
+<button class="show-code">Code</button>
+const         <strong>MIDDLE</strong> <a class="anchor-link"
+            href="#MIDDLE"
+            title="Permalink to GameLoopMouse.MIDDLE">#</a>
+        </h4>
+        <div class="doc">
+<p>Middle mouse button</p>
+<pre class="source">
+static const MIDDLE = 1;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="RIGHT">
+<button class="show-code">Code</button>
+const         <strong>RIGHT</strong> <a class="anchor-link"
+            href="#RIGHT"
+            title="Permalink to GameLoopMouse.RIGHT">#</a>
+        </h4>
+        <div class="doc">
+<p>Right mouse button</p>
+<pre class="source">
+static const RIGHT = 2;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="GameLoopMouse">
+<button class="show-code">Code</button>
+new <strong>GameLoopMouse</strong>(gameLoop) <a class="anchor-link" href="#GameLoopMouse"
+              title="Permalink to GameLoopMouse.GameLoopMouse">#</a></h4>
+<div class="doc">
+<pre class="source">
+GameLoopMouse(gameLoop) : super(gameLoop, _buttonIds);
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field inherited"><h4 id="buttons">
+<button class="show-code">Code</button>
+final Map&lt;int, <a href="../game_loop/GameLoopDigitalButton.html">GameLoopDigitalButton</a>&gt;         <strong>buttons</strong> <a class="anchor-link"
+            href="#buttons"
+            title="Permalink to GameLoopMouse.buttons">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Buttons this digital input knows about</p>
+<pre class="source">
+final Map&lt;int, GameLoopDigitalButton&gt; buttons =
+   new Map&lt;int, GameLoopDigitalButton&gt;();
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="dx">
+<button class="show-code">Code</button>
+final int         <strong>dx</strong> <a class="anchor-link"
+            href="#dx"
+            title="Permalink to GameLoopMouse.dx">#</a>
+        </h4>
+        <div class="doc">
+<p>Mouse movement in x direction since previous frame.</p>
+<pre class="source">
+int get dx =&gt; _dx;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="dy">
+<button class="show-code">Code</button>
+final int         <strong>dy</strong> <a class="anchor-link"
+            href="#dy"
+            title="Permalink to GameLoopMouse.dy">#</a>
+        </h4>
+        <div class="doc">
+<p>Mouse movement in y direction since previous frame.</p>
+<pre class="source">
+int get dy =&gt; _dy;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="frame">
+<button class="show-code">Code</button>
+final int         <strong>frame</strong> <a class="anchor-link"
+            href="#frame"
+            title="Permalink to GameLoopMouse.frame">#</a>
+        </h4>
+        <div class="doc">
+<p>Frame at which mouse position was last updated.</p>
+<pre class="source">
+int get frame =&gt; _frame;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="gameLoop">
+<button class="show-code">Code</button>
+final <a href="../game_loop/GameLoop.html">GameLoop</a>         <strong>gameLoop</strong> <a class="anchor-link"
+            href="#gameLoop"
+            title="Permalink to GameLoopMouse.gameLoop">#</a>
+        </h4>
+        <div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Game loop this digital input belongs to.</p>
+<pre class="source">
+final GameLoop gameLoop;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="time">
+<button class="show-code">Code</button>
+final double         <strong>time</strong> <a class="anchor-link"
+            href="#time"
+            title="Permalink to GameLoopMouse.time">#</a>
+        </h4>
+        <div class="doc">
+<p>Time at which mouse position was last updated.</p>
+<pre class="source">
+double get time =&gt; _time;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="x">
+<button class="show-code">Code</button>
+final int         <strong>x</strong> <a class="anchor-link"
+            href="#x"
+            title="Permalink to GameLoopMouse.x">#</a>
+        </h4>
+        <div class="doc">
+<p>Mouse position in x direction within element.</p>
+<pre class="source">
+int get x =&gt; _x;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="y">
+<button class="show-code">Code</button>
+final int         <strong>y</strong> <a class="anchor-link"
+            href="#y"
+            title="Permalink to GameLoopMouse.y">#</a>
+        </h4>
+        <div class="doc">
+<p>Mouse position in y direction within element.</p>
+<pre class="source">
+int get y =&gt; _y;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method inherited"><h4 id="digitalButtonEvent">
+<button class="show-code">Code</button>
+void <strong>digitalButtonEvent</strong>(<a href="../game_loop/GameLoopDigitalButtonEvent.html">GameLoopDigitalButtonEvent</a> event) <a class="anchor-link" href="#digitalButtonEvent"
+              title="Permalink to GameLoopMouse.digitalButtonEvent">#</a></h4>
+<div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Deliver an input event</p>
+<pre class="source">
+void digitalButtonEvent(GameLoopDigitalButtonEvent event) {
+ GameLoopDigitalButton button = buttons[event.buttonId];
+ if (button == null) {
+   return;
+ }
+ if (event.down) {
+   button.framePressed = event.frame;
+   button.timePressed = event.time;
+ } else {
+   button.frameReleased = event.frame;
+   button.timeReleased = event.time;
+ }
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="gameLoopMouseEvent">
+<button class="show-code">Code</button>
+void <strong>gameLoopMouseEvent</strong>(<a href="../game_loop/GameLoopMouseEvent.html">GameLoopMouseEvent</a> event) <a class="anchor-link" href="#gameLoopMouseEvent"
+              title="Permalink to GameLoopMouse.gameLoopMouseEvent">#</a></h4>
+<div class="doc">
+<p>Process one <a class="crossref" href="../game_loop/GameLoopMouseEvent.html">GameLoopMouseEvent</a>.</p>
+<pre class="source">
+void gameLoopMouseEvent(GameLoopMouseEvent event) {
+ _x = event.x;
+ _y = event.y;
+ _time = event.time;
+ _frame = event.frame;
+ _dx += event.dx;
+ _dy += event.dy;
+}
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="isDown">
+<button class="show-code">Code</button>
+bool <strong>isDown</strong>(int buttonId) <a class="anchor-link" href="#isDown"
+              title="Permalink to GameLoopMouse.isDown">#</a></h4>
+<div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Is 
+<span class="param">buttonId</span> down this frame?</p>
+<pre class="source">
+bool isDown(int buttonId) {
+ GameLoopDigitalButton button = buttons[buttonId];
+ if (button == null) {
+   return false;
+ }
+ return button.down;
+}
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="isUp">
+<button class="show-code">Code</button>
+bool <strong>isUp</strong>(int buttonId) <a class="anchor-link" href="#isUp"
+              title="Permalink to GameLoopMouse.isUp">#</a></h4>
+<div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Is 
+<span class="param">buttonId</span> up this frame?</p>
+<pre class="source">
+bool isUp(int buttonId) {
+ GameLoopDigitalButton button = buttons[buttonId];
+ if (button == null) {
+   return true;
+ }
+ return button.up;
+}
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="timePressed">
+<button class="show-code">Code</button>
+double <strong>timePressed</strong>(int buttonId) <a class="anchor-link" href="#timePressed"
+              title="Permalink to GameLoopMouse.timePressed">#</a></h4>
+<div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Time 
+<span class="param">buttonId</span> was pressed.</p>
+<pre class="source">
+double timePressed(int buttonId) {
+ GameLoopDigitalButton button = buttons[buttonId];
+ if (button == null) {
+   return 0.0;
+ }
+ return button.timePressed;
+}
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="timeReleased">
+<button class="show-code">Code</button>
+double <strong>timeReleased</strong>(int buttonId) <a class="anchor-link" href="#timeReleased"
+              title="Permalink to GameLoopMouse.timeReleased">#</a></h4>
+<div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Time 
+<span class="param">buttonId</span> was released.</p>
+<pre class="source">
+double timeReleased(int buttonId) {
+ GameLoopDigitalButton button = buttons[buttonId];
+ if (button == null) {
+   return 0.0;
+ }
+ return button.timeReleased;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        
+        <div class="footer">
+          <div>This page was generated at 2012-12-28 16:23:31.140</div>
+        </div>
+        <script async src="../client-static.js"></script>
+        </body></html>
+        

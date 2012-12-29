@@ -1,0 +1,206 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>GameLoopAnalogInput class / game_loop Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="game_loop" data-type="GameLoopAnalogInput">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopAnalogInput.html">GameLoopAnalogInput</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+<h2><div class="icon-library"></div><a href="../game_loop.html">game_loop</a></h2><ul class="icon">
+<li><a href="../game_loop/GameLoop.html"><div class="icon-class"></div>GameLoop</a></li>
+<li><a href="../game_loop/GameLoopAnalogButton.html"><div class="icon-class"></div>GameLoopAnalogButton</a></li>
+<li><div class="icon-class"></div><strong>GameLoopAnalogInput</strong></li>
+<li><a href="../game_loop/GameLoopDigitalButton.html"><div class="icon-class"></div>GameLoopDigitalButton</a></li>
+<li><a href="../game_loop/GameLoopDigitalButtonEvent.html"><div class="icon-class"></div>GameLoopDigitalButtonEvent</a></li>
+<li><a href="../game_loop/GameLoopDigitalInput.html"><div class="icon-class"></div>GameLoopDigitalInput</a></li>
+<li><a href="../game_loop/GameLoopFullscreenChangeFunction.html"><div class="icon-interface"></div>GameLoopFullscreenChangeFunction</a></li>
+<li><a href="../game_loop/GameLoopGamepad.html"><div class="icon-class"></div>GameLoopGamepad</a></li>
+<li><a href="../game_loop/GameLoopKeyboard.html"><div class="icon-class"></div>GameLoopKeyboard</a></li>
+<li><a href="../game_loop/GameLoopMouse.html"><div class="icon-class"></div>GameLoopMouse</a></li>
+<li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
+<li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
+<li><a href="../game_loop/GameLoopResizeFunction.html"><div class="icon-interface"></div>GameLoopResizeFunction</a></li>
+<li><a href="../game_loop/GameLoopTimer.html"><div class="icon-class"></div>GameLoopTimer</a></li>
+<li><a href="../game_loop/GameLoopTimerFunction.html"><div class="icon-interface"></div>GameLoopTimerFunction</a></li>
+<li><a href="../game_loop/GameLoopUpdateFunction.html"><div class="icon-interface"></div>GameLoopUpdateFunction</a></li>
+</ul>
+</div>
+<div class="content">
+        <h2><strong>GameLoopAnalogInput</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<p>A collection of analog input buttons</p>
+<pre class="source">
+class GameLoopAnalogInput {
+ final GameLoop gameLoop;
+ final Map&lt;int, GameLoopAnalogButton&gt; buttons =
+     new Map&lt;int, GameLoopAnalogButton&gt;();
+
+ /** Create a digital input that supports all buttons in buttonIds. */
+ GameLoopAnalogInput(this.gameLoop, List&lt;int&gt; buttonIds) {
+   for (int buttonId in buttonIds) {
+     buttons[buttonId] = new GameLoopAnalogButton(buttonId);
+   }
+ }
+
+ /** The time the button was updated. */
+ double timeUpdated(int buttonId) {
+   GameLoopAnalogButton button = buttons[buttonId];
+   if (button == null) {
+     return 0.0;
+   }
+   return button.time;
+ }
+
+ /** The frame the button was updated. */
+ int frameUpdated(int buttonId) {
+   GameLoopAnalogButton button = buttons[buttonId];
+   if (button == null) {
+     return 0;
+   }
+   return button.frame;
+ }
+
+ /** The value of [buttonId]. */
+ double value(int buttonId) {
+   GameLoopAnalogButton button = buttons[buttonId];
+   if (button == null) {
+     return 0.0;
+   }
+   return button.value;
+ }
+}
+</pre>
+</div>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="GameLoopAnalogInput">
+<button class="show-code">Code</button>
+new <strong>GameLoopAnalogInput</strong>(<a href="../game_loop/GameLoop.html">GameLoop</a> gameLoop, List&lt;int&gt; buttonIds) <a class="anchor-link" href="#GameLoopAnalogInput"
+              title="Permalink to GameLoopAnalogInput.GameLoopAnalogInput">#</a></h4>
+<div class="doc">
+<p>Create a digital input that supports all buttons in buttonIds.</p>
+<pre class="source">
+GameLoopAnalogInput(this.gameLoop, List&lt;int&gt; buttonIds) {
+ for (int buttonId in buttonIds) {
+   buttons[buttonId] = new GameLoopAnalogButton(buttonId);
+ }
+}
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="buttons">
+<button class="show-code">Code</button>
+final Map&lt;int, <a href="../game_loop/GameLoopAnalogButton.html">GameLoopAnalogButton</a>&gt;         <strong>buttons</strong> <a class="anchor-link"
+            href="#buttons"
+            title="Permalink to GameLoopAnalogInput.buttons">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+final Map&lt;int, GameLoopAnalogButton&gt; buttons =
+   new Map&lt;int, GameLoopAnalogButton&gt;();
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="gameLoop">
+<button class="show-code">Code</button>
+final <a href="../game_loop/GameLoop.html">GameLoop</a>         <strong>gameLoop</strong> <a class="anchor-link"
+            href="#gameLoop"
+            title="Permalink to GameLoopAnalogInput.gameLoop">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+final GameLoop gameLoop;
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="frameUpdated">
+<button class="show-code">Code</button>
+int <strong>frameUpdated</strong>(int buttonId) <a class="anchor-link" href="#frameUpdated"
+              title="Permalink to GameLoopAnalogInput.frameUpdated">#</a></h4>
+<div class="doc">
+<p>The frame the button was updated.</p>
+<pre class="source">
+int frameUpdated(int buttonId) {
+ GameLoopAnalogButton button = buttons[buttonId];
+ if (button == null) {
+   return 0;
+ }
+ return button.frame;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="timeUpdated">
+<button class="show-code">Code</button>
+double <strong>timeUpdated</strong>(int buttonId) <a class="anchor-link" href="#timeUpdated"
+              title="Permalink to GameLoopAnalogInput.timeUpdated">#</a></h4>
+<div class="doc">
+<p>The time the button was updated.</p>
+<pre class="source">
+double timeUpdated(int buttonId) {
+ GameLoopAnalogButton button = buttons[buttonId];
+ if (button == null) {
+   return 0.0;
+ }
+ return button.time;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="value">
+<button class="show-code">Code</button>
+double <strong>value</strong>(int buttonId) <a class="anchor-link" href="#value"
+              title="Permalink to GameLoopAnalogInput.value">#</a></h4>
+<div class="doc">
+<p>The value of 
+<span class="param">buttonId</span>.</p>
+<pre class="source">
+double value(int buttonId) {
+ GameLoopAnalogButton button = buttons[buttonId];
+ if (button == null) {
+   return 0.0;
+ }
+ return button.value;
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        
+        <div class="footer">
+          <div>This page was generated at 2012-12-28 16:23:31.183</div>
+        </div>
+        <script async src="../client-static.js"></script>
+        </body></html>
+        

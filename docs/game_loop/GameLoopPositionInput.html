@@ -1,0 +1,153 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>GameLoopPositionInput abstract class / game_loop Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="game_loop" data-type="GameLoopPositionInput">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopPositionInput.html">GameLoopPositionInput</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+<h2><div class="icon-library"></div><a href="../game_loop.html">game_loop</a></h2><ul class="icon">
+<li><a href="../game_loop/GameLoop.html"><div class="icon-class"></div>GameLoop</a></li>
+<li><a href="../game_loop/GameLoopAnalogButton.html"><div class="icon-class"></div>GameLoopAnalogButton</a></li>
+<li><a href="../game_loop/GameLoopAnalogInput.html"><div class="icon-class"></div>GameLoopAnalogInput</a></li>
+<li><a href="../game_loop/GameLoopDigitalButton.html"><div class="icon-class"></div>GameLoopDigitalButton</a></li>
+<li><a href="../game_loop/GameLoopDigitalButtonEvent.html"><div class="icon-class"></div>GameLoopDigitalButtonEvent</a></li>
+<li><a href="../game_loop/GameLoopDigitalInput.html"><div class="icon-class"></div>GameLoopDigitalInput</a></li>
+<li><a href="../game_loop/GameLoopFullscreenChangeFunction.html"><div class="icon-interface"></div>GameLoopFullscreenChangeFunction</a></li>
+<li><a href="../game_loop/GameLoopGamepad.html"><div class="icon-class"></div>GameLoopGamepad</a></li>
+<li><a href="../game_loop/GameLoopKeyboard.html"><div class="icon-class"></div>GameLoopKeyboard</a></li>
+<li><a href="../game_loop/GameLoopMouse.html"><div class="icon-class"></div>GameLoopMouse</a></li>
+<li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
+<li><div class="icon-class"></div><strong>GameLoopPositionInput</strong></li>
+<li><a href="../game_loop/GameLoopResizeFunction.html"><div class="icon-interface"></div>GameLoopResizeFunction</a></li>
+<li><a href="../game_loop/GameLoopTimer.html"><div class="icon-class"></div>GameLoopTimer</a></li>
+<li><a href="../game_loop/GameLoopTimerFunction.html"><div class="icon-interface"></div>GameLoopTimerFunction</a></li>
+<li><a href="../game_loop/GameLoopUpdateFunction.html"><div class="icon-interface"></div>GameLoopUpdateFunction</a></li>
+</ul>
+</div>
+<div class="content">
+        <h2><strong>GameLoopPositionInput</strong>
+          abstract class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<p>An input which has a position will implement this interface. For example,
+<a class="crossref" href="../game_loop/GameLoopMouse.html">GameLoopMouse</a>.</p>
+<pre class="source">
+abstract class GameLoopPositionInput {
+ int get x;
+ int get y;
+ int get dx;
+ int get dy;
+ double get time;
+ int get frame;
+}
+</pre>
+</div>
+<h3>Subclasses</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../game_loop/GameLoopMouse.html">GameLoopMouse</a></span></p>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="dx">
+<button class="show-code">Code</button>
+final int         <strong>dx</strong> <a class="anchor-link"
+            href="#dx"
+            title="Permalink to GameLoopPositionInput.dx">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+int get dx;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="dy">
+<button class="show-code">Code</button>
+final int         <strong>dy</strong> <a class="anchor-link"
+            href="#dy"
+            title="Permalink to GameLoopPositionInput.dy">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+int get dy;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="frame">
+<button class="show-code">Code</button>
+final int         <strong>frame</strong> <a class="anchor-link"
+            href="#frame"
+            title="Permalink to GameLoopPositionInput.frame">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+int get frame;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="time">
+<button class="show-code">Code</button>
+final double         <strong>time</strong> <a class="anchor-link"
+            href="#time"
+            title="Permalink to GameLoopPositionInput.time">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+double get time;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="x">
+<button class="show-code">Code</button>
+final int         <strong>x</strong> <a class="anchor-link"
+            href="#x"
+            title="Permalink to GameLoopPositionInput.x">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+int get x;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="y">
+<button class="show-code">Code</button>
+final int         <strong>y</strong> <a class="anchor-link"
+            href="#y"
+            title="Permalink to GameLoopPositionInput.y">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+int get y;
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        
+        <div class="footer">
+          <div>This page was generated at 2012-12-28 16:23:31.197</div>
+        </div>
+        <script async src="../client-static.js"></script>
+        </body></html>
+        
