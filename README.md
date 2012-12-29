@@ -63,7 +63,7 @@ main() {
 }
 ```
 
-2\. Hook your game update function up:
+2\. Hook your game update function up and start the main loop:
 
 ```dart
 main() {
@@ -72,5 +72,21 @@ main() {
   gameLoop.onUpdate = ((gameLoop) {
     print('${gameLoop.frame}: ${gameLoop.frameTime} [dt = ${gameLoop.dt}].');
   });
+  gameLoop.start();
+}
+```
+
+3\. Add a timer to your game loop:
+
+```dart
+main() {
+  // Construct a game loop.
+  GameLoop gameLoop = new GameLoop();
+  gameLoop.onUpdate = ((gameLoop) {
+    print('${gameLoop.frame}: ${gameLoop.frameTime} [dt = ${gameLoop.dt}].');
+  });
+  gameLoop.start();
+  // Add a timer which fires in half a second.
+  var timer = gameLoop.addTimer((timer) => print('timer fired.', 0.5);
 }
 ```
