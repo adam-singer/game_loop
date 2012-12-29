@@ -34,36 +34,47 @@ class GameLoopMouseEvent {
  * [LEFT], [MIDDLE], [RIGHT]. Also implements the [GameLoopPositionInput]
  * interface.
  */
-class GameLoopMouse extends GameLoopDigitalInput implements GameLoopPositionInput {
+class GameLoopMouse extends GameLoopDigitalInput
+    implements GameLoopPositionInput {
+  /** Left mouse button */
   static const LEFT = 0;
+  /** Middle mouse button */
   static const MIDDLE = 1;
+  /** Right mouse button */
   static const RIGHT = 2;
-  static final List<int> buttonIds = [LEFT, MIDDLE, RIGHT];
+  static final List<int> _buttonIds = [LEFT, MIDDLE, RIGHT];
 
-  /** Mouse movement in x direction since previous frame. */
+
   int _dx = 0;
+  /** Mouse movement in x direction since previous frame. */
   int get dx => _dx;
-  /** Mouse movement in y direction since previous frame. */
+
   int _dy = 0;
+  /** Mouse movement in y direction since previous frame. */
   int get dy => _dy;
 
-  /** Mouse position in x direction within element. */
+
   int _x = 0;
+  /** Mouse position in x direction within element. */
   int get x => _x;
-  /** Mouse position in y direction within element. */
+
   int _y = 0;
+  /** Mouse position in y direction within element. */
   int get y => _y;
 
-  /** Time at which mouse position was last updated. */
+
   double _time = 0.0;
+  /** Time at which mouse position was last updated. */
   double get time => _time;
 
-  /** Frame at which mouse position was last updated. */
+
   int _frame  = 0;
+  /** Frame at which mouse position was last updated. */
   int get frame => _frame;
 
-  GameLoopMouse(gameLoop) : super(gameLoop, buttonIds);
+  GameLoopMouse(gameLoop) : super(gameLoop, _buttonIds);
 
+  /** Process one [GameLoopMouseEvent]. */
   void gameLoopMouseEvent(GameLoopMouseEvent event) {
     _x = event.x;
     _y = event.y;

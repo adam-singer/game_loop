@@ -55,7 +55,9 @@ class GameLoopDigitalButtonEvent {
 
 /** A collection of digital input buttons */
 class GameLoopDigitalInput {
+  /** Game loop this digital input belongs to. */
   final GameLoop gameLoop;
+  /** Buttons this digital input knows about */
   final Map<int, GameLoopDigitalButton> buttons =
       new Map<int, GameLoopDigitalButton>();
 
