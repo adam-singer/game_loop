@@ -18,15 +18,17 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-library game_loop;
-import 'dart:html';
-import 'dart:json';
+part of game_loop;
 
-part 'src/game_loop/game_loop.dart';
-part 'src/game_loop/game_loop_digital_input.dart';
-part 'src/game_loop/game_loop_position_input.dart';
-part 'src/game_loop/game_loop_analog_input.dart';
-part 'src/game_loop/game_loop_keyboard.dart';
-part 'src/game_loop/game_loop_mouse.dart';
-part 'src/game_loop/game_loop_gamepad.dart';
-part 'src/game_loop/game_loop_timer.dart';
+/** An input which has a position will implement this interface. For example,
+ * [GameLoopMouse].
+ */
+abstract class GameLoopPositionInput {
+  int get x;
+  int get y;
+  int get dx;
+  int get dy;
+  double get time;
+  int get frame;
+}
+

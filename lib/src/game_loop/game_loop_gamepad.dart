@@ -19,3 +19,12 @@
 */
 
 part of game_loop;
+
+class GameLoopGamepad {
+  final GameLoop gameLoop;
+
+  GameLoopDigitalInput _digitalButtons;
+  GameLoopAnalogInput _analogButtons;
+
+  GameLoopGamepad(this.gameLoop);
+}

@@ -19,3 +19,101 @@
 */
 
 part of game_loop;
+
+/** The state of a digital button: frame and time when button was
+ * last pressed and released.
+ */
+class GameLoopDigitalButton {
+  /** buttonId */
+  final int buttonId;
+  /** Frame when button was last pressed. */
+  int framePressed = 0;
+  /** Frame when button was last released. */
+  int frameReleased = 0;
+  /** Time when button was last pressed. */
+  double timePressed = 0.0;
+  /** Time when button was last released. */
+  double timeReleased = 0.0;
+  GameLoopDigitalButton(this.buttonId);
+
+  /** Is button down in this frame? */
+  bool get down => framePressed > frameReleased;
+  /** Is button up in this frame? */
+  bool get up => frameReleased >= framePressed;
+}
+
+class GameLoopDigitalButtonEvent {
+  final bool down;
+  final int frame;
+  final int buttonId;
+  final double time;
+
+  GameLoopDigitalButtonEvent(this.buttonId, this.down, this.frame, this.time);
+
+  String toString() => 'Button: $buttonId DOWN: $down [$frame@$time]';
+}
+
+/** A collection of digital input buttons */
+class GameLoopDigitalInput {
+  final GameLoop gameLoop;
+  final Map<int, GameLoopDigitalButton> buttons =
+      new Map<int, GameLoopDigitalButton>();
+
+  /** Create a digital input that supports all buttons in buttonIds. */
+  GameLoopDigitalInput(this.gameLoop, List<int> buttonIds) {
+    for (int buttonId in buttonIds) {
+      buttons[buttonId] = new GameLoopDigitalButton(buttonId);
+    }
+  }
+
+  /** Deliver an input event */
+  void digitalButtonEvent(GameLoopDigitalButtonEvent event) {
+    GameLoopDigitalButton button = buttons[event.buttonId];
+    if (button == null) {
+      return;
+    }
+    if (event.down) {
+      button.framePressed = event.frame;
+      button.timePressed = event.time;
+    } else {
+      button.frameReleased = event.frame;
+      button.timeReleased = event.time;
+    }
+  }
+
+  /** Is [buttonId] down this frame? */
+  bool isDown(int buttonId) {
+    GameLoopDigitalButton button = buttons[buttonId];
+    if (button == null) {
+      return false;
+    }
+    return button.down;
+  }
+
+  /** Is [buttonId] up this frame? */
+  bool isUp(int buttonId) {
+    GameLoopDigitalButton button = buttons[buttonId];
+    if (button == null) {
+      return true;
+    }
+    return button.up;
+  }
+
+  /** Time [buttonId] was pressed. */
+  double timePressed(int buttonId) {
+    GameLoopDigitalButton button = buttons[buttonId];
+    if (button == null) {
+      return 0.0;
+    }
+    return button.timePressed;
+  }
+
+  /** Time [buttonId] was released. */
+  double timeReleased(int buttonId) {
+    GameLoopDigitalButton button = buttons[buttonId];
+    if (button == null) {
+      return 0.0;
+    }
+    return button.timeReleased;
+  }
+}

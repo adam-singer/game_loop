@@ -19,3 +19,224 @@
 */
 
 part of game_loop;
+
+/** Called once per frame when it is time to update and render. */
+typedef void GameLoopUpdateFunction(GameLoop gameLoop);
+/** Called whenever the element is resized. */
+typedef void GameLoopResizeFunction(GameLoop gameLoop);
+/** Called whenever the element moves between fullscreen and non-fullscreen
+ * mode.
+ */
+typedef void GameLoopFullscreenChangeFunction(GameLoop gameLoop);
+
+/** The game loop */
+class GameLoop {
+  final Element element;
+  bool _initialized = false;
+  bool _interrupt = false;
+  int _frameCounter = 0;
+  double _previousFrameTime;
+  double _frameTime = 0.0;
+  double _dt;
+
+  /** Width of game display [Element] */
+  int get width => element.width;
+  /** Height of game display [Element] */
+  int get height => element.height;
+
+  /** Frame counter value. Incremented once per frame. */
+  int get frame => _frameCounter;
+  /** Frame time value in seconds. */
+  double get frameTime => _frameTime;
+  /** Time elapsed since previous frame */
+  double get dt => _dt;
+
+  static double timeStampToSeconds(timeStamp) => timeStamp / 1000.0;
+  static double milliseconds(int x) => x / 1000.0;
+  static double seconds(int x) => x.toDouble();
+  static double minutes(int x) => x.toDouble() * 60.0;
+
+  /** Current time. */
+  double get time => timeStampToSeconds(new Date.now().millisecondsSinceEpoch);
+
+  GameLoopKeyboard _keyboard;
+  /** Keyboard. */
+  GameLoopKeyboard get keyboard => _keyboard;
+  GameLoopMouse _mouse;
+  /** Mouse. */
+  GameLoopMouse get mouse => _mouse;
+  GameLoopGamepad _gamepad0;
+  /** Gamepad #0. */
+  GameLoopGamepad get gamepad0 => _gamepad0;
+
+  /** Construct a new game loop attaching it to [element] */
+  GameLoop(this.element) {
+    _keyboard = new GameLoopKeyboard(this);
+    _mouse = new GameLoopMouse(this);
+    _gamepad0 = new GameLoopGamepad(this);
+  }
+
+  void _processInputEvents() {
+    for (KeyboardEvent keyboardEvent in _keyboardEvents) {
+      GameLoopDigitalButtonEvent event;
+      bool down = keyboardEvent.type == "keydown";
+      double time = timeStampToSeconds(keyboardEvent.timeStamp);
+      int buttonId = keyboardEvent.keyCode;
+      event = new GameLoopDigitalButtonEvent(buttonId, down, frame, time);
+      _keyboard.digitalButtonEvent(event);
+    }
+    _keyboardEvents.clear();
+    mouse._resetAccumulators();
+    for (MouseEvent mouseEvent in _mouseEvents) {
+      bool moveEvent = mouseEvent.type == 'mousemove';
+      bool down = mouseEvent.type == 'mousedown';
+      double time = timeStampToSeconds(mouseEvent.timeStamp);
+      if (moveEvent) {
+        int x = mouseEvent.offsetX;
+        int y = mouseEvent.offsetY;
+        int dx = mouseEvent.webkitMovementX;
+        int dy = mouseEvent.webkitMovementY;
+        GameLoopMouseEvent event = new GameLoopMouseEvent(x, y, dx, dy,
+                                                          time, frame);
+        _mouse.gameLoopMouseEvent(event);
+      } else {
+        GameLoopDigitalButtonEvent event;
+        int buttonId = mouseEvent.button;
+        event = new GameLoopDigitalButtonEvent(buttonId, down, frame, time);
+        _mouse.digitalButtonEvent(event);
+      }
+    }
+    _mouseEvents.clear();
+  }
+
+  void _processTimers() {
+    for (GameLoopTimer timer in _timers) {
+      timer._update(_dt);
+    }
+    for (int i = _timers.length-1; i >= 0; i--) {
+      int lastElement = _timers.length-1;
+      if (_timers[i]._dead) {
+        if (i != lastElement) {
+          // Swap into i's place.
+          _timers[i] = _timers[lastElement];
+        }
+        _timers.removeLast();
+      }
+    }
+  }
+
+  void _requestAnimationFrame(num _) {
+    if (_previousFrameTime == null) {
+      _frameTime = time;
+      _previousFrameTime = _frameTime;
+      _processInputEvents();
+      window.requestAnimationFrame(_requestAnimationFrame);
+      return;
+    }
+    if (_interrupt == true) {
+      return;
+    }
+    window.requestAnimationFrame(_requestAnimationFrame);
+    _frameCounter++;
+    _previousFrameTime = _frameTime;
+    _frameTime = time;
+    _dt = _frameTime - _previousFrameTime;
+    _processInputEvents();
+    _processTimers();
+    if (onUpdate != null) {
+      onUpdate(this);
+    }
+  }
+
+  void _fullscreenChange(Event _) {
+    if (onFullscreenChange == null) {
+      return;
+    }
+    if (onFullscreenChange == null) {
+      return;
+    }
+  }
+
+  void _fullscreenError(Event _) {
+    if (onFullscreenChange == null) {
+      return;
+    }
+    onFullscreenChange(this);
+  }
+
+  final List<KeyboardEvent> _keyboardEvents = new List<KeyboardEvent>();
+  void _keyDown(KeyboardEvent event) {
+    _keyboardEvents.add(event);
+  }
+
+  void _keyUp(KeyboardEvent event) {
+    _keyboardEvents.add(event);
+  }
+
+  final List<MouseEvent> _mouseEvents = new List<MouseEvent>();
+  void _mouseDown(MouseEvent event) {
+    _mouseEvents.add(event);
+  }
+
+  void _mouseUp(MouseEvent event) {
+    _mouseEvents.add(event);
+  }
+
+  void _mouseMove(MouseEvent event) {
+    _mouseEvents.add(event);
+  }
+
+  /** Start the game loop. */
+  void start() {
+    if (_initialized == false) {
+      document.on.fullscreenError.add(_fullscreenError);
+      document.on.fullscreenChange.add(_fullscreenChange);
+      window.on.keyDown.add(_keyDown);
+      window.on.keyUp.add(_keyUp);
+      element.on.mouseMove.add(_mouseMove);
+      element.on.mouseDown.add(_mouseDown);
+      element.on.mouseUp.add(_mouseUp);
+      _initialized = true;
+    }
+    _interrupt = false;
+    window.requestAnimationFrame(_requestAnimationFrame);
+  }
+
+  /** Stop the game loop. */
+  void stop() {
+    _interrupt = true;
+  }
+
+  /** Is the element being displayed full screen? */
+  bool get isFullscreen => document.webkitFullscreenElement == element;
+
+  /** Enable or disable fullscreen display of the element. */
+  void enableFullscreen(bool enable) {
+    if (enable) {
+      element.webkitRequestFullscreen();
+      return;
+    }
+    element.webkitCancelFullScreen();
+  }
+
+  final List<GameLoopTimer> _timers = new List<GameLoopTimer>();
+
+  /** Add a new timer which calls [callback] in [delay] seconds. */
+  GameLoopTimer addTimer(GameLoopTimerFunction callback, double delay) {
+    GameLoopTimer timer = new GameLoopTimer._internal(this, delay, callback);
+    _timers.add(timer);
+    return timer;
+  }
+
+  /** Clear all existing timers. */
+  void clearTimers() {
+    _timers.clear();
+  }
+
+  /** Called once per frame. */
+  GameLoopUpdateFunction onUpdate = null;
+  /** Called when element is resized. */
+  GameLoopResizeFunction onResize = null;
+  /** Called when element moves between fullscreen and non-fullscreen mode. */
+  GameLoopFullscreenChangeFunction onFullscreenChange = null;
+}

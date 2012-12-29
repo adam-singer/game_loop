@@ -18,15 +18,36 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-library game_loop;
-import 'dart:html';
-import 'dart:json';
+part of game_loop;
 
-part 'src/game_loop/game_loop.dart';
-part 'src/game_loop/game_loop_digital_input.dart';
-part 'src/game_loop/game_loop_position_input.dart';
-part 'src/game_loop/game_loop_analog_input.dart';
-part 'src/game_loop/game_loop_keyboard.dart';
-part 'src/game_loop/game_loop_mouse.dart';
-part 'src/game_loop/game_loop_gamepad.dart';
-part 'src/game_loop/game_loop_timer.dart';
+/** Called when the timer fires. */
+typedef GameLoopTimerFunction(GameLoopTimer gameLoop);
+
+/** A cancellable timer that calls a [GameLoopTimerFunction] when it fires.
+ */
+class GameLoopTimer {
+  final GameLoop gameLoop;
+  final GameLoopTimerFunction onTimer;
+  double _timeToFire = 0.0;
+  double get timeToFire => _timeToFire;
+  GameLoopTimer._internal(this.gameLoop, this._timeToFire, this.onTimer);
+  void _update(double dt) {
+    if (_timeToFire <= 0.0) {
+      // Dead.
+      return;
+    }
+    _timeToFire -= dt;
+    if (_timeToFire <= 0.0) {
+      if (onTimer != null) {
+        onTimer(this);
+      }
+    }
+  }
+
+  bool get _dead => _timeToFire <= 0.0;
+
+  /** Cancel the timer. */
+  void cancel() {
+    _timeToFire = -1.0;
+  }
+}
