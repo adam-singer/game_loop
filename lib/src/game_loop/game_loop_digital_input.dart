@@ -75,8 +75,11 @@ class GameLoopDigitalInput {
       return;
     }
     if (event.down) {
-      button.framePressed = event.frame;
-      button.timePressed = event.time;
+      if (button.down == false) {
+        // Ignore repeated downs.
+        button.framePressed = event.frame;
+        button.timePressed = event.time;
+      }
     } else {
       button.frameReleased = event.frame;
       button.timeReleased = event.time;
@@ -90,6 +93,24 @@ class GameLoopDigitalInput {
       return false;
     }
     return button.down;
+  }
+
+  /** Was [buttonId] just pressed down? */
+  bool pressed(int buttonId) {
+    GameLoopDigitalButton button = buttons[buttonId];
+    if (button == null) {
+      return false;
+    }
+    return button.framePressed == gameLoop.frame;
+  }
+
+  /** Was [buttonId] just released? */
+  bool released(int buttonId) {
+    GameLoopDigitalButton button = buttons[buttonId];
+    if (button == null) {
+      return false;
+    }
+    return button.frameReleased == gameLoop.frame;
   }
 
   /** Is [buttonId] up this frame? */
