@@ -3,11 +3,11 @@
 
 ## Introduction ##
 
-Games require a main loop to drive the game forward. This main loop is primarily responsible
-for three things: first, processing inputs from keyboards, mice, gamepads, and time. 
-Secondly, managing pointer lock and fullscreen state. The final main loop responsibility,
-is running the game specific update and rendering code. The `game_loop` library
-provides a main loop for games with a powerful input subsystem.
+All games require a main loop to drive the game forward. This main loop is responsible for
+processing inputs from keyboards, mice, gamepads, and time. Also, the main loop
+manages browser state, e.g., pointer lock and fullscreen. Finally, the main loop
+calls the game specific update routine. The `game_loop` library
+provides a main loop designed for games along with a powerful input subsystem.
 
 If you are familiar with GLUT, game_loop provides that and more.
 
