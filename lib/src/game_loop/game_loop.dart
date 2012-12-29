@@ -186,6 +186,12 @@ class GameLoop {
     _mouseEvents.add(event);
   }
 
+  void _resize(Event _) {
+    if (onResize != null) {
+      onResize(this);
+    }
+  }
+
   /** Start the game loop. */
   void start() {
     if (_initialized == false) {
@@ -193,6 +199,7 @@ class GameLoop {
       document.on.fullscreenChange.add(_fullscreenChange);
       window.on.keyDown.add(_keyDown);
       window.on.keyUp.add(_keyUp);
+      window.on.resize.add(_resize);
       element.on.mouseMove.add(_mouseMove);
       element.on.mouseDown.add(_mouseDown);
       element.on.mouseUp.add(_mouseUp);
