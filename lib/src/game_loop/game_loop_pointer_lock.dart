@@ -18,16 +18,36 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-library game_loop;
-import 'dart:html';
-import 'dart:json';
+part of game_loop;
 
-part 'src/game_loop/game_loop.dart';
-part 'src/game_loop/game_loop_digital_input.dart';
-part 'src/game_loop/game_loop_position_input.dart';
-part 'src/game_loop/game_loop_analog_input.dart';
-part 'src/game_loop/game_loop_keyboard.dart';
-part 'src/game_loop/game_loop_mouse.dart';
-part 'src/game_loop/game_loop_gamepad.dart';
-part 'src/game_loop/game_loop_timer.dart';
-part 'src/game_loop/game_loop_pointer_lock.dart';
+class GameLoopPointerLock {
+  final GameLoop gameLoop;
+
+  GameLoopPointerLock(this.gameLoop) {
+    gameLoop.element.on.click.add(_onClick);
+    document.on.pointerLockChange.add(_onPointerLockChange);
+  }
+
+  void requestLock() {
+    gameLoop.element.webkitRequestPointerLock();
+  }
+
+  void _onClick(Event event) {
+    if (lockOnClick) {
+      requestLock();
+    }
+  }
+
+  // Does clicking on the element trigger a pointer lock?
+  bool lockOnClick = true;
+
+  bool get locked => document.webkitPointerLockElement == gameLoop.element;
+
+  void _onPointerLockChange(Event event) {
+    if (locked) {
+      print('locked.');
+    } else {
+      print('unlocked.');
+    }
+  }
+}

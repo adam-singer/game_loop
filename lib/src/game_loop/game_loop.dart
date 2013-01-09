@@ -59,6 +59,9 @@ class GameLoop {
   /** Current time. */
   double get time => timeStampToSeconds(new Date.now().millisecondsSinceEpoch);
 
+  GameLoopPointerLock _pointerLock;
+  GameLoopPointerLock get pointerLock => _pointerLock;
+
   GameLoopKeyboard _keyboard;
   /** Keyboard. */
   GameLoopKeyboard get keyboard => _keyboard;
@@ -74,6 +77,7 @@ class GameLoop {
     _keyboard = new GameLoopKeyboard(this);
     _mouse = new GameLoopMouse(this);
     _gamepad0 = new GameLoopGamepad(this);
+    _pointerLock = new GameLoopPointerLock(this);
   }
 
   void _processInputEvents() {
