@@ -335,14 +335,14 @@ $$.IllegalJSRegExpException = {"":"Object;_pattern,_errmsg",
 
 $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_numberOfDeleted",
  _probeForAdding$1: function(key) {
-  var t1, hash, insertionIndex, numberOfProbes, existingKey, numberOfProbes0;
+  var t1, hash, numberOfProbes, insertionIndex, existingKey, numberOfProbes0;
   if (key == null)
     throw $.$$throw($.ArgumentError$(null));
   t1 = $.getInterceptor(key).get$hashCode(key);
   if (t1 !== (t1 | 0))
     return this._probeForAdding$1$bailout(1, key, t1);
   hash = (t1 & this._keys.length - 1) >>> 0;
-  for (insertionIndex = -1, numberOfProbes = 1; true; numberOfProbes = numberOfProbes0) {
+  for (numberOfProbes = 1, insertionIndex = -1; true; numberOfProbes = numberOfProbes0) {
     t1 = this._keys;
     if (hash < 0 || hash >= t1.length)
       throw $.ioore(hash);
@@ -382,10 +382,10 @@ $$._HashMapImpl = {"":"Object;_keys>,_values,_loadLimit,_numberOfEntries,_number
     case 1:
       state0 = 0;
       hash = $.and(t1, this._keys.length - 1);
-      insertionIndex = -1;
       numberOfProbes = 1;
+      insertionIndex = -1;
     case 2:
-      var t1, key, hash, insertionIndex, numberOfProbes, existingKey, numberOfProbes0;
+      var t1, key, hash, numberOfProbes, insertionIndex, existingKey, numberOfProbes0;
       L0:
         while (true)
           switch (state0) {
@@ -1500,8 +1500,8 @@ $$.JSString = {"":"Object;",
   return receiver;
 },
  get$hashCode: function(receiver) {
-  var i, hash, hash0, hash1;
-  for (i = 0, hash = 0; i < receiver.length; ++i, hash = hash1) {
+  var hash, i, hash0, hash1;
+  for (hash = 0, i = 0; i < receiver.length; ++i, hash = hash1) {
     hash0 = 536870911 & hash + receiver.charCodeAt(i);
     hash1 = 536870911 & hash0 + ((524287 & hash0) << 10 >>> 0);
     hash1 = hash1 ^ (hash1 >> 6);
@@ -4355,15 +4355,15 @@ $$.invokeClosure_anon = {"":"Closure;closure_0",
 }
 };
 
-$$.invokeClosure_anon0 = {"":"Closure;arg1_1,closure_2",
+$$.invokeClosure_anon0 = {"":"Closure;closure_1,arg1_2",
  call$0: function() {
-  return this.closure_2.call$1(this.arg1_1);
+  return this.closure_1.call$1(this.arg1_2);
 }
 };
 
-$$.invokeClosure_anon1 = {"":"Closure;arg1_3,closure_4,arg2_5",
+$$.invokeClosure_anon1 = {"":"Closure;closure_3,arg2_4,arg1_5",
  call$0: function() {
-  return this.closure_4.call$2(this.arg1_3, this.arg2_5);
+  return this.closure_3.call$2(this.arg1_5, this.arg2_4);
 }
 };
 
@@ -4381,8 +4381,78 @@ $$.BoundClosure0 = {"":"Closure;self,target", call$1: function(p0) {
   return this.self[this.target](p0);
 }
 };
-$._Device_userAgent = function() {
-  return $.window().get$navigator().get$userAgent();
+$.Collections_forEach = function(iterable, f) {
+  var t1;
+  for (t1 = $.getInterceptor$JSArray(iterable).iterator$0(iterable); t1.get$hasNext() === true;)
+    f.call$1(t1.next$0());
+};
+
+$.Collections_filter = function(source, destination, f) {
+  var t1, t2;
+  for (t1 = $.getInterceptor$JSArray(source).iterator$0(source); t1.get$hasNext() === true;) {
+    t2 = t1.next$0();
+    if (f.call$1(t2) === true)
+      destination.push(t2);
+  }
+  return destination;
+};
+
+$.Collections_collectionToString = function(c) {
+  var result = $.StringBuffer_StringBuffer("");
+  $.Collections__emitCollection(c, result, $.List_List(null));
+  return $.getInterceptor(result).toString$0(result);
+};
+
+$.Collections__emitCollection = function(c, result, visiting) {
+  var t1, isList, t2, t3, first, t4;
+  t1 = $.getInterceptor$JSArray(visiting);
+  t1.add$1(visiting, c);
+  isList = typeof c === 'object' && c !== null && (c.constructor === Array || c.is$List());
+  t2 = $.getInterceptor$JSArray(result);
+  t2.add$1(result, isList ? "[" : "{");
+  for (t3 = $.getInterceptor$JSArray(c).iterator$0(c), first = true; t3.get$hasNext() === true; first = false) {
+    t4 = t3.next$0();
+    if (!first)
+      t2.add$1(result, ", ");
+    $.Collections__emitObject(t4, result, visiting);
+  }
+  t2.add$1(result, isList ? "]" : "}");
+  t1.removeLast$0(visiting);
+};
+
+$.Collections__emitObject = function(o, result, visiting) {
+  var t1;
+  if (typeof o === 'object' && o !== null && (o.constructor === Array || o.is$Collection()))
+    if ($.Collections__containsRef(visiting, o)) {
+      t1 = $.getInterceptor$JSArray(result);
+      t1.add$1(result, typeof o === 'object' && o !== null && (o.constructor === Array || o.is$List()) ? "[...]" : "{...}");
+    } else
+      $.Collections__emitCollection(o, result, visiting);
+  else if (typeof o === 'object' && o !== null && o.is$Map())
+    if ($.Collections__containsRef(visiting, o))
+      $.getInterceptor$JSArray(result).add$1(result, "{...}");
+    else
+      $.Maps__emitMap(o, result, visiting);
+  else
+    $.getInterceptor$JSArray(result).add$1(result, o);
+};
+
+$.Collections__containsRef = function(c, ref) {
+  var t1, t2;
+  for (t1 = $.getInterceptor$JSArray(c).iterator$0(c); t1.get$hasNext() === true;) {
+    t2 = t1.next$0();
+    if (t2 == null ? ref == null : t2 === ref)
+      return true;
+  }
+  return false;
+};
+
+$.Collections_contains = function(iterable, element) {
+  var t1;
+  for (t1 = $.getInterceptor$JSArray(iterable).iterator$0(iterable); t1.get$hasNext() === true;)
+    if (element === t1.next$0())
+      return true;
+  return false;
 };
 
 $._Device_isOpera = function() {
@@ -4419,63 +4489,30 @@ $._DoubleLinkedQueueIterator$ = function(_sentinel) {
   return t1;
 };
 
-$.Collections_filter = function(source, destination, f) {
-  var t1, t2;
-  for (t1 = $.getInterceptor$JSArray(source).iterator$0(source); t1.get$hasNext() === true;) {
-    t2 = t1.next$0();
-    if (f.call$1(t2) === true)
-      destination.push(t2);
-  }
-  return destination;
-};
-
 $.DoubleLinkedQueueEntry$ = function(e) {
   var t1 = new $.DoubleLinkedQueueEntry(null, null, null);
   t1.DoubleLinkedQueueEntry$1(e);
   return t1;
 };
 
-$.Collections__emitCollection = function(c, result, visiting) {
-  var t1, isList, t2, t3, first, t4;
-  t1 = $.getInterceptor$JSArray(visiting);
-  t1.add$1(visiting, c);
-  isList = typeof c === 'object' && c !== null && (c.constructor === Array || c.is$List());
-  t2 = $.getInterceptor$JSArray(result);
-  t2.add$1(result, isList ? "[" : "{");
-  for (t3 = $.getInterceptor$JSArray(c).iterator$0(c), first = true; t3.get$hasNext() === true; first = false) {
-    t4 = t3.next$0();
-    if (!first)
-      t2.add$1(result, ", ");
-    $.Collections__emitObject(t4, result, visiting);
-  }
-  t2.add$1(result, isList ? "]" : "}");
-  t1.removeLast$0(visiting);
-};
-
-$._LocationWrapper__set = function(p, m, v) {
-  return p[m] = v;
+$._Device_userAgent = function() {
+  return $.window().get$navigator().get$userAgent();
 };
 
 $._ElementAttributeMap$ = function(element) {
   return new $._ElementAttributeMap(element);
 };
 
-$._LocationWrapper$ = function(_ptr) {
-  return new $._LocationWrapper(_ptr);
+$._LocationWrapper__set = function(p, m, v) {
+  return p[m] = v;
 };
 
 $._FrozenCssClassSet$ = function() {
   return new $._FrozenCssClassSet();
 };
 
-$.Collections_forEach = function(iterable, f) {
-  var t1;
-  for (t1 = $.getInterceptor$JSArray(iterable).iterator$0(iterable); t1.get$hasNext() === true;)
-    f.call$1(t1.next$0());
-};
-
-$.MetaInfo$ = function(_tag, _tags, _set) {
-  return new $.MetaInfo(_tag, _tags, _set);
+$._LocationWrapper$ = function(_ptr) {
+  return new $._LocationWrapper(_ptr);
 };
 
 $.ElementEvents$ = function(_ptr) {
@@ -4636,6 +4673,10 @@ $.classify = function(token) {
 
 $.LocalWindowEvents$ = function(_ptr) {
   return new $.LocalWindowEvents(_ptr);
+};
+
+$.MetaInfo$ = function(_tag, _tags, _set) {
+  return new $.MetaInfo(_tag, _tags, _set);
 };
 
 $.Events$ = function(_ptr) {
@@ -4826,6 +4867,10 @@ $.eqB = function(a, b) {
   return a === b;
 };
 
+$._ExceptionImplementation$ = function(message) {
+  return new $._ExceptionImplementation(message);
+};
+
 $.gt$slow = function(a, b) {
   if ($.checkNumbers(a, b))
     return a > b;
@@ -4844,8 +4889,16 @@ $.lt$slow = function(a, b) {
   return a.operator$lt$1(b);
 };
 
-$.StackOverflowError$ = function() {
-  return new $.StackOverflowError();
+$.le$slow = function(a, b) {
+  if ($.checkNumbers(a, b))
+    return a <= b;
+  return a.operator$le$1(b);
+};
+
+$.and = function(a, b) {
+  if ($.checkNumbers(a, b))
+    return (a & b) >>> 0;
+  return a.operator$and$1(b);
 };
 
 $.shr = function(a, b) {
@@ -4864,14 +4917,8 @@ $.shr = function(a, b) {
   return a.operator$shr$1(b);
 };
 
-$.and = function(a, b) {
-  if ($.checkNumbers(a, b))
-    return (a & b) >>> 0;
-  return a.operator$and$1(b);
-};
-
-$._ExceptionImplementation$ = function(message) {
-  return new $._ExceptionImplementation(message);
+$.StringMatch$ = function(start, str, pattern) {
+  return new $.StringMatch(start, str, pattern);
 };
 
 $.index$slow = function(a, index) {
@@ -4924,16 +4971,6 @@ $.S = function(value) {
   return res;
 };
 
-$.StringMatch$ = function(start, str, pattern) {
-  return new $.StringMatch(start, str, pattern);
-};
-
-$.le$slow = function(a, b) {
-  if ($.checkNumbers(a, b))
-    return a <= b;
-  return a.operator$le$1(b);
-};
-
 $.iae = function(argument) {
   throw $.$$throw($.ArgumentError$(argument));
 };
@@ -4979,6 +5016,10 @@ $.$$throw = function(ex) {
 $.toStringWrapper = function() {
   var t1 = this.dartException;
   return $.getInterceptor(t1).toString$0(t1);
+};
+
+$.StackOverflowError$ = function() {
+  return new $.StackOverflowError();
 };
 
 $.unwrapException = function(ex) {
@@ -5036,9 +5077,9 @@ $.invokeClosure = function(closure, isolate, numberOfArguments, arg1, arg2) {
   if ($.eqB(numberOfArguments, 0))
     return new $.invokeClosure_anon(closure).call$0();
   else if ($.eqB(numberOfArguments, 1))
-    return new $.invokeClosure_anon0(arg1, closure).call$0();
+    return new $.invokeClosure_anon0(closure, arg1).call$0();
   else if ($.eqB(numberOfArguments, 2))
-    return new $.invokeClosure_anon1(arg1, closure, arg2).call$0();
+    return new $.invokeClosure_anon1(closure, arg2, arg1).call$0();
   else
     throw $.$$throw($.Exception_Exception("Unsupported number of arguments for wrapped closure"));
 };
@@ -5837,16 +5878,6 @@ $.ListIterator$ = function(list) {
   return new $.ListIterator(0, list);
 };
 
-$.shortcutHandler = function(event$) {
-  if ($.eqB(event$.get$keyCode(), 51) && event$.get$ctrlKey() === true) {
-    $.searchInput.focus$0();
-    event$.preventDefault$0();
-  } else if (!$.eqB(event$.get$target(), $.searchInput) && $.eqB(event$.get$keyCode(), 83)) {
-    $.searchInput.focus$0();
-    event$.preventDefault$0();
-  }
-};
-
 $.setupSearch = function(libraries) {
   var t1;
   $.libraryList = libraries;
@@ -5866,8 +5897,36 @@ $.setupSearch = function(libraries) {
   $.getInterceptor$JSArray(t1).add$1(t1, new $.setupSearch_anon0());
 };
 
+$.compareBools = function(a, b) {
+  if ($.eqB(a, b))
+    return 0;
+  return a === true ? -1 : 1;
+};
+
+$.shortcutHandler = function(event$) {
+  if ($.eqB(event$.get$keyCode(), 51) && event$.get$ctrlKey() === true) {
+    $.searchInput.focus$0();
+    event$.preventDefault$0();
+  } else if (!$.eqB(event$.get$target(), $.searchInput) && $.eqB(event$.get$keyCode(), 83)) {
+    $.searchInput.focus$0();
+    event$.preventDefault$0();
+  }
+};
+
 $._DataAttributeMap$ = function($$dom_attributes) {
   return new $._DataAttributeMap($$dom_attributes);
+};
+
+$.obtainMatch = function(searchText, text) {
+  var t1, t2, offset;
+  t1 = $.getInterceptor$JSStringJSArray(searchText);
+  if (t1.get$isEmpty(searchText) === true)
+    return $.StringMatch$0(searchText, text, 0, 0);
+  t2 = $.getInterceptor$JSString(text).toLowerCase$0(text);
+  offset = $.getInterceptor$JSStringJSArray(t2).indexOf$1(t2, searchText.lowerCase);
+  if (!$.eqB(offset, -1))
+    return $.StringMatch$0(searchText, text, offset, $.add(offset, t1.get$length(searchText)));
+  return;
 };
 
 $.resultComparator = function(a, b) {
@@ -5927,26 +5986,8 @@ $.resultComparator = function(a, b) {
   return t2.compareTo$1(t1, $.getInterceptor$JSString(t3).toLowerCase$0(t3));
 };
 
-$.obtainMatch = function(searchText, text) {
-  var t1, t2, offset;
-  t1 = $.getInterceptor$JSStringJSArray(searchText);
-  if (t1.get$isEmpty(searchText) === true)
-    return $.StringMatch$0(searchText, text, 0, 0);
-  t2 = $.getInterceptor$JSString(text).toLowerCase$0(text);
-  offset = $.getInterceptor$JSStringJSArray(t2).indexOf$1(t2, searchText.lowerCase);
-  if (!$.eqB(offset, -1))
-    return $.StringMatch$0(searchText, text, offset, $.add(offset, t1.get$length(searchText)));
-  return;
-};
-
 $._ChildNodeListLazy$ = function(_this) {
   return new $._ChildNodeListLazy(_this);
-};
-
-$.compareBools = function(a, b) {
-  if ($.eqB(a, b))
-    return 0;
-  return a === true ? -1 : 1;
 };
 
 $.kindToString = function(kind) {
@@ -6001,14 +6042,6 @@ $.enableShowHideInherited = function() {
   $.getInterceptor$JSArray(t1).add$1(t1, new $.enableShowHideInherited_anon0(showInherited));
 };
 
-$.getLibraryMemberUrl = function(libraryName, memberInfo) {
-  var t1, t2, t3;
-  t1 = $.S($.prefix);
-  t2 = $.getInterceptor$JSString(libraryName).replaceAll$2(libraryName, ":", "_");
-  t3 = t1 + $.S($.getInterceptor$JSString(t2).replaceAll$2(t2, "/", "_")) + ".html#";
-  return t3 + $.S(memberInfo.containsKey$1("link_name") === true ? $.index(memberInfo, "link_name") : $.index(memberInfo, "name"));
-};
-
 $.getTypeMemberUrl = function(libraryName, typeName, memberInfo) {
   var t1, t2, t3, t4, t5;
   t1 = $.S($.prefix);
@@ -6020,7 +6053,7 @@ $.getTypeMemberUrl = function(libraryName, typeName, memberInfo) {
 };
 
 $.json = function() {
-  return [$.makeLiteralMap(["name", "game_loop", "types", [$.makeLiteralMap(["name", "GameLoop", "kind", "class", "members", [$.makeLiteralMap(["kind", "method", "name", "addTimer"]), $.makeLiteralMap(["kind", "method", "noparams", true, "name", "clearTimers"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "dt"]), $.makeLiteralMap(["kind", "field", "name", "element"]), $.makeLiteralMap(["kind", "method", "name", "enableFullscreen"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "frame"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "frameTime"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoop"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "gamepad0"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "height"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "isFullscreen"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "keyboard"]), $.makeLiteralMap(["kind", "method", "name", "milliseconds"]), $.makeLiteralMap(["kind", "method", "name", "minutes"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "mouse"]), $.makeLiteralMap(["kind", "field", "name", "onFullscreenChange"]), $.makeLiteralMap(["kind", "field", "name", "onResize"]), $.makeLiteralMap(["kind", "field", "name", "onUpdate"]), $.makeLiteralMap(["kind", "method", "name", "seconds"]), $.makeLiteralMap(["kind", "method", "noparams", true, "name", "start"]), $.makeLiteralMap(["kind", "method", "noparams", true, "name", "stop"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "time"]), $.makeLiteralMap(["kind", "method", "name", "timeStampToSeconds"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "width"])]]), $.makeLiteralMap(["name", "GameLoopAnalogButton", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "buttonId"]), $.makeLiteralMap(["kind", "field", "name", "frame"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopAnalogButton"]), $.makeLiteralMap(["kind", "field", "name", "time"]), $.makeLiteralMap(["kind", "field", "name", "value"])]]), $.makeLiteralMap(["name", "GameLoopAnalogInput", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "buttons"]), $.makeLiteralMap(["kind", "method", "name", "frameUpdated"]), $.makeLiteralMap(["kind", "field", "name", "gameLoop"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopAnalogInput"]), $.makeLiteralMap(["kind", "method", "name", "timeUpdated"]), $.makeLiteralMap(["kind", "method", "name", "value"])]]), $.makeLiteralMap(["name", "GameLoopDigitalButton", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "buttonId"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "down"]), $.makeLiteralMap(["kind", "field", "name", "framePressed"]), $.makeLiteralMap(["kind", "field", "name", "frameReleased"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopDigitalButton"]), $.makeLiteralMap(["kind", "field", "name", "timePressed"]), $.makeLiteralMap(["kind", "field", "name", "timeReleased"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "up"])]]), $.makeLiteralMap(["name", "GameLoopDigitalButtonEvent", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "buttonId"]), $.makeLiteralMap(["kind", "field", "name", "down"]), $.makeLiteralMap(["kind", "field", "name", "frame"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopDigitalButtonEvent"]), $.makeLiteralMap(["kind", "field", "name", "time"]), $.makeLiteralMap(["kind", "method", "noparams", true, "name", "toString"])]]), $.makeLiteralMap(["name", "GameLoopDigitalInput", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "buttons"]), $.makeLiteralMap(["kind", "method", "name", "digitalButtonEvent"]), $.makeLiteralMap(["kind", "field", "name", "gameLoop"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopDigitalInput"]), $.makeLiteralMap(["kind", "method", "name", "isDown"]), $.makeLiteralMap(["kind", "method", "name", "isUp"]), $.makeLiteralMap(["kind", "method", "name", "timePressed"]), $.makeLiteralMap(["kind", "method", "name", "timeReleased"])]]), $.makeLiteralMap(["name", "GameLoopFullscreenChangeFunction", "kind", "typedef"]), $.makeLiteralMap(["name", "GameLoopGamepad", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "BUTTON0"]), $.makeLiteralMap(["kind", "field", "name", "BUTTON1"]), $.makeLiteralMap(["kind", "field", "name", "BUTTON2"]), $.makeLiteralMap(["kind", "field", "name", "BUTTON3"]), $.makeLiteralMap(["kind", "field", "name", "BUTTON4"]), $.makeLiteralMap(["kind", "field", "name", "BUTTON5"]), $.makeLiteralMap(["kind", "field", "name", "BUTTON6"]), $.makeLiteralMap(["kind", "field", "name", "buttons"]), $.makeLiteralMap(["kind", "field", "name", "gameLoop"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopGamepad"]), $.makeLiteralMap(["kind", "field", "name", "sticks"])]]), $.makeLiteralMap(["name", "GameLoopKeyboard", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "A"]), $.makeLiteralMap(["kind", "field", "name", "ALT"]), $.makeLiteralMap(["kind", "field", "name", "B"]), $.makeLiteralMap(["kind", "field", "name", "C"]), $.makeLiteralMap(["kind", "field", "name", "CTRL"]), $.makeLiteralMap(["kind", "field", "name", "D"]), $.makeLiteralMap(["kind", "field", "name", "DOWN"]), $.makeLiteralMap(["kind", "field", "name", "E"]), $.makeLiteralMap(["kind", "field", "name", "EIGHT"]), $.makeLiteralMap(["kind", "field", "name", "ENTER"]), $.makeLiteralMap(["kind", "field", "name", "F"]), $.makeLiteralMap(["kind", "field", "name", "FIVE"]), $.makeLiteralMap(["kind", "field", "name", "FOUR"]), $.makeLiteralMap(["kind", "field", "name", "G"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopKeyboard"]), $.makeLiteralMap(["kind", "field", "name", "H"]), $.makeLiteralMap(["kind", "field", "name", "I"]), $.makeLiteralMap(["kind", "field", "name", "J"]), $.makeLiteralMap(["kind", "field", "name", "K"]), $.makeLiteralMap(["kind", "field", "name", "L"]), $.makeLiteralMap(["kind", "field", "name", "LEFT"]), $.makeLiteralMap(["kind", "field", "name", "M"]), $.makeLiteralMap(["kind", "field", "name", "N"]), $.makeLiteralMap(["kind", "field", "name", "NINE"]), $.makeLiteralMap(["kind", "field", "name", "O"]), $.makeLiteralMap(["kind", "field", "name", "ONE"]), $.makeLiteralMap(["kind", "field", "name", "P"]), $.makeLiteralMap(["kind", "field", "name", "Q"]), $.makeLiteralMap(["kind", "field", "name", "R"]), $.makeLiteralMap(["kind", "field", "name", "RIGHT"]), $.makeLiteralMap(["kind", "field", "name", "S"]), $.makeLiteralMap(["kind", "field", "name", "SEVEN"]), $.makeLiteralMap(["kind", "field", "name", "SHIFT"]), $.makeLiteralMap(["kind", "field", "name", "SIX"]), $.makeLiteralMap(["kind", "field", "name", "SPACE"]), $.makeLiteralMap(["kind", "field", "name", "T"]), $.makeLiteralMap(["kind", "field", "name", "THREE"]), $.makeLiteralMap(["kind", "field", "name", "TILDE"]), $.makeLiteralMap(["kind", "field", "name", "TWO"]), $.makeLiteralMap(["kind", "field", "name", "U"]), $.makeLiteralMap(["kind", "field", "name", "UP"]), $.makeLiteralMap(["kind", "field", "name", "V"]), $.makeLiteralMap(["kind", "field", "name", "W"]), $.makeLiteralMap(["kind", "field", "name", "X"]), $.makeLiteralMap(["kind", "field", "name", "Y"]), $.makeLiteralMap(["kind", "field", "name", "Z"]), $.makeLiteralMap(["kind", "field", "name", "ZERO"])]]), $.makeLiteralMap(["name", "GameLoopMouse", "kind", "class", "members", [$.makeLiteralMap(["kind", "getter", "noparams", true, "name", "dx"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "dy"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "frame"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopMouse"]), $.makeLiteralMap(["kind", "method", "name", "gameLoopMouseEvent"]), $.makeLiteralMap(["kind", "field", "name", "LEFT"]), $.makeLiteralMap(["kind", "field", "name", "MIDDLE"]), $.makeLiteralMap(["kind", "field", "name", "RIGHT"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "time"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "x"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "y"])]]), $.makeLiteralMap(["name", "GameLoopMouseEvent", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "dx"]), $.makeLiteralMap(["kind", "field", "name", "dy"]), $.makeLiteralMap(["kind", "field", "name", "frame"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopMouseEvent"]), $.makeLiteralMap(["kind", "field", "name", "time"]), $.makeLiteralMap(["kind", "field", "name", "x"]), $.makeLiteralMap(["kind", "field", "name", "y"])]]), $.makeLiteralMap(["name", "GameLoopPositionInput", "kind", "class", "members", [$.makeLiteralMap(["kind", "getter", "noparams", true, "name", "dx"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "dy"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "frame"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "time"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "x"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "y"])]]), $.makeLiteralMap(["name", "GameLoopResizeFunction", "kind", "typedef"]), $.makeLiteralMap(["name", "GameLoopTimer", "kind", "class", "members", [$.makeLiteralMap(["kind", "method", "noparams", true, "name", "cancel"]), $.makeLiteralMap(["kind", "field", "name", "gameLoop"]), $.makeLiteralMap(["kind", "field", "name", "onTimer"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "timeToFire"])]]), $.makeLiteralMap(["name", "GameLoopTimerFunction", "kind", "typedef"]), $.makeLiteralMap(["name", "GameLoopUpdateFunction", "kind", "typedef"])]])];
+  return [$.makeLiteralMap(["name", "game_loop", "types", [$.makeLiteralMap(["name", "GameLoop", "kind", "class", "members", [$.makeLiteralMap(["kind", "method", "name", "addTimer"]), $.makeLiteralMap(["kind", "method", "noparams", true, "name", "clearTimers"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "dt"]), $.makeLiteralMap(["kind", "field", "name", "element"]), $.makeLiteralMap(["kind", "method", "name", "enableFullscreen"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "frame"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "frameTime"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoop"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "gamepad0"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "height"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "isFullscreen"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "keyboard"]), $.makeLiteralMap(["kind", "method", "name", "milliseconds"]), $.makeLiteralMap(["kind", "method", "name", "minutes"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "mouse"]), $.makeLiteralMap(["kind", "field", "name", "onFullscreenChange"]), $.makeLiteralMap(["kind", "field", "name", "onResize"]), $.makeLiteralMap(["kind", "field", "name", "onUpdate"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "pointerLock"]), $.makeLiteralMap(["kind", "method", "name", "seconds"]), $.makeLiteralMap(["kind", "method", "noparams", true, "name", "start"]), $.makeLiteralMap(["kind", "method", "noparams", true, "name", "stop"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "time"]), $.makeLiteralMap(["kind", "method", "name", "timeStampToSeconds"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "width"])]]), $.makeLiteralMap(["name", "GameLoopAnalogButton", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "buttonId"]), $.makeLiteralMap(["kind", "field", "name", "frame"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopAnalogButton"]), $.makeLiteralMap(["kind", "field", "name", "time"]), $.makeLiteralMap(["kind", "field", "name", "value"])]]), $.makeLiteralMap(["name", "GameLoopAnalogInput", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "buttons"]), $.makeLiteralMap(["kind", "method", "name", "frameUpdated"]), $.makeLiteralMap(["kind", "field", "name", "gameLoop"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopAnalogInput"]), $.makeLiteralMap(["kind", "method", "name", "timeUpdated"]), $.makeLiteralMap(["kind", "method", "name", "value"])]]), $.makeLiteralMap(["name", "GameLoopDigitalButton", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "buttonId"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "down"]), $.makeLiteralMap(["kind", "field", "name", "framePressed"]), $.makeLiteralMap(["kind", "field", "name", "frameReleased"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopDigitalButton"]), $.makeLiteralMap(["kind", "field", "name", "timePressed"]), $.makeLiteralMap(["kind", "field", "name", "timeReleased"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "up"])]]), $.makeLiteralMap(["name", "GameLoopDigitalButtonEvent", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "buttonId"]), $.makeLiteralMap(["kind", "field", "name", "down"]), $.makeLiteralMap(["kind", "field", "name", "frame"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopDigitalButtonEvent"]), $.makeLiteralMap(["kind", "field", "name", "time"]), $.makeLiteralMap(["kind", "method", "noparams", true, "name", "toString"])]]), $.makeLiteralMap(["name", "GameLoopDigitalInput", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "buttons"]), $.makeLiteralMap(["kind", "method", "name", "digitalButtonEvent"]), $.makeLiteralMap(["kind", "field", "name", "gameLoop"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopDigitalInput"]), $.makeLiteralMap(["kind", "method", "name", "isDown"]), $.makeLiteralMap(["kind", "method", "name", "isUp"]), $.makeLiteralMap(["kind", "method", "name", "pressed"]), $.makeLiteralMap(["kind", "method", "name", "released"]), $.makeLiteralMap(["kind", "method", "name", "timePressed"]), $.makeLiteralMap(["kind", "method", "name", "timeReleased"])]]), $.makeLiteralMap(["name", "GameLoopFullscreenChangeFunction", "kind", "typedef"]), $.makeLiteralMap(["name", "GameLoopGamepad", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "BUTTON0"]), $.makeLiteralMap(["kind", "field", "name", "BUTTON1"]), $.makeLiteralMap(["kind", "field", "name", "BUTTON2"]), $.makeLiteralMap(["kind", "field", "name", "BUTTON3"]), $.makeLiteralMap(["kind", "field", "name", "BUTTON4"]), $.makeLiteralMap(["kind", "field", "name", "BUTTON5"]), $.makeLiteralMap(["kind", "field", "name", "BUTTON6"]), $.makeLiteralMap(["kind", "field", "name", "buttons"]), $.makeLiteralMap(["kind", "field", "name", "gameLoop"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopGamepad"]), $.makeLiteralMap(["kind", "field", "name", "sticks"])]]), $.makeLiteralMap(["name", "GameLoopKeyboard", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "A"]), $.makeLiteralMap(["kind", "field", "name", "ALT"]), $.makeLiteralMap(["kind", "field", "name", "B"]), $.makeLiteralMap(["kind", "field", "name", "C"]), $.makeLiteralMap(["kind", "field", "name", "CTRL"]), $.makeLiteralMap(["kind", "field", "name", "D"]), $.makeLiteralMap(["kind", "field", "name", "DOWN"]), $.makeLiteralMap(["kind", "field", "name", "E"]), $.makeLiteralMap(["kind", "field", "name", "EIGHT"]), $.makeLiteralMap(["kind", "field", "name", "ENTER"]), $.makeLiteralMap(["kind", "field", "name", "F"]), $.makeLiteralMap(["kind", "field", "name", "FIVE"]), $.makeLiteralMap(["kind", "field", "name", "FOUR"]), $.makeLiteralMap(["kind", "field", "name", "G"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopKeyboard"]), $.makeLiteralMap(["kind", "field", "name", "H"]), $.makeLiteralMap(["kind", "field", "name", "I"]), $.makeLiteralMap(["kind", "field", "name", "J"]), $.makeLiteralMap(["kind", "field", "name", "K"]), $.makeLiteralMap(["kind", "field", "name", "L"]), $.makeLiteralMap(["kind", "field", "name", "LEFT"]), $.makeLiteralMap(["kind", "field", "name", "M"]), $.makeLiteralMap(["kind", "field", "name", "N"]), $.makeLiteralMap(["kind", "field", "name", "NINE"]), $.makeLiteralMap(["kind", "field", "name", "O"]), $.makeLiteralMap(["kind", "field", "name", "ONE"]), $.makeLiteralMap(["kind", "field", "name", "P"]), $.makeLiteralMap(["kind", "field", "name", "Q"]), $.makeLiteralMap(["kind", "field", "name", "R"]), $.makeLiteralMap(["kind", "field", "name", "RIGHT"]), $.makeLiteralMap(["kind", "field", "name", "S"]), $.makeLiteralMap(["kind", "field", "name", "SEVEN"]), $.makeLiteralMap(["kind", "field", "name", "SHIFT"]), $.makeLiteralMap(["kind", "field", "name", "SIX"]), $.makeLiteralMap(["kind", "field", "name", "SPACE"]), $.makeLiteralMap(["kind", "field", "name", "T"]), $.makeLiteralMap(["kind", "field", "name", "THREE"]), $.makeLiteralMap(["kind", "field", "name", "TILDE"]), $.makeLiteralMap(["kind", "field", "name", "TWO"]), $.makeLiteralMap(["kind", "field", "name", "U"]), $.makeLiteralMap(["kind", "field", "name", "UP"]), $.makeLiteralMap(["kind", "field", "name", "V"]), $.makeLiteralMap(["kind", "field", "name", "W"]), $.makeLiteralMap(["kind", "field", "name", "X"]), $.makeLiteralMap(["kind", "field", "name", "Y"]), $.makeLiteralMap(["kind", "field", "name", "Z"]), $.makeLiteralMap(["kind", "field", "name", "ZERO"])]]), $.makeLiteralMap(["name", "GameLoopMouse", "kind", "class", "members", [$.makeLiteralMap(["kind", "getter", "noparams", true, "name", "dx"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "dy"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "frame"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopMouse"]), $.makeLiteralMap(["kind", "method", "name", "gameLoopMouseEvent"]), $.makeLiteralMap(["kind", "field", "name", "LEFT"]), $.makeLiteralMap(["kind", "field", "name", "MIDDLE"]), $.makeLiteralMap(["kind", "field", "name", "RIGHT"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "time"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "x"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "y"])]]), $.makeLiteralMap(["name", "GameLoopMouseEvent", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "dx"]), $.makeLiteralMap(["kind", "field", "name", "dy"]), $.makeLiteralMap(["kind", "field", "name", "frame"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopMouseEvent"]), $.makeLiteralMap(["kind", "field", "name", "time"]), $.makeLiteralMap(["kind", "field", "name", "x"]), $.makeLiteralMap(["kind", "field", "name", "y"])]]), $.makeLiteralMap(["name", "GameLoopPointerLock", "kind", "class", "members", [$.makeLiteralMap(["kind", "field", "name", "gameLoop"]), $.makeLiteralMap(["kind", "constructor", "name", "GameLoopPointerLock"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "locked"]), $.makeLiteralMap(["kind", "field", "name", "lockOnClick"]), $.makeLiteralMap(["kind", "method", "noparams", true, "name", "requestLock"])]]), $.makeLiteralMap(["name", "GameLoopPositionInput", "kind", "class", "members", [$.makeLiteralMap(["kind", "getter", "noparams", true, "name", "dx"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "dy"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "frame"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "time"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "x"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "y"])]]), $.makeLiteralMap(["name", "GameLoopResizeFunction", "kind", "typedef"]), $.makeLiteralMap(["name", "GameLoopTimer", "kind", "class", "members", [$.makeLiteralMap(["kind", "method", "noparams", true, "name", "cancel"]), $.makeLiteralMap(["kind", "field", "name", "gameLoop"]), $.makeLiteralMap(["kind", "field", "name", "onTimer"]), $.makeLiteralMap(["kind", "getter", "noparams", true, "name", "timeToFire"])]]), $.makeLiteralMap(["name", "GameLoopTimerFunction", "kind", "typedef"]), $.makeLiteralMap(["name", "GameLoopUpdateFunction", "kind", "typedef"])]])];
 };
 
 $.window = function() {
@@ -6033,6 +6066,14 @@ $.document = function() {
 
 $.query = function(selector) {
   return $.document().query$1(selector);
+};
+
+$.getLibraryMemberUrl = function(libraryName, memberInfo) {
+  var t1, t2, t3;
+  t1 = $.S($.prefix);
+  t2 = $.getInterceptor$JSString(libraryName).replaceAll$2(libraryName, ":", "_");
+  t3 = t1 + $.S($.getInterceptor$JSString(t2).replaceAll$2(t2, "/", "_")) + ".html#";
+  return t3 + $.S(memberInfo.containsKey$1("link_name") === true ? $.index(memberInfo, "link_name") : $.index(memberInfo, "name"));
 };
 
 $.StringScanner$ = function(string, includeComments) {
@@ -6131,9 +6172,9 @@ $._Sort__dualPivotQuicksort = function(a, left, right, compare) {
     el1 = t0;
   }
   if ($.gtB(compare.call$2(el4, el5), 0)) {
-    t0 = el4;
-    el4 = el5;
-    el5 = t0;
+    t0 = el5;
+    el5 = el4;
+    el4 = t0;
   }
   if ($.gtB(compare.call$2(el1, el3), 0)) {
     t0 = el3;
@@ -6156,9 +6197,9 @@ $._Sort__dualPivotQuicksort = function(a, left, right, compare) {
     el3 = t0;
   }
   if ($.gtB(compare.call$2(el2, el5), 0)) {
-    t0 = el2;
-    el2 = el5;
-    el5 = t0;
+    t0 = el5;
+    el5 = el2;
+    el2 = t0;
   }
   if ($.gtB(compare.call$2(el2, el3), 0)) {
     t0 = el3;
@@ -6166,9 +6207,9 @@ $._Sort__dualPivotQuicksort = function(a, left, right, compare) {
     el2 = t0;
   }
   if ($.gtB(compare.call$2(el4, el5), 0)) {
-    t0 = el4;
-    el4 = el5;
-    el5 = t0;
+    t0 = el5;
+    el5 = el4;
+    el4 = t0;
   }
   t1 = a.length;
   if (index1 >= t1)
@@ -6380,8 +6421,8 @@ $._Sort__dualPivotQuicksort = function(a, left, right, compare) {
             if (great >= a.length)
               throw $.ioore(great);
             t1 = $.ltB(compare.call$2(a[great], el2), 0);
-            t2 = a.length;
             great0 = great - 1;
+            t2 = a.length;
             if (t1) {
               if (less >= t2)
                 throw $.ioore(less);
@@ -6720,18 +6761,18 @@ $.KeywordState_computeKeywordStateTable = function(start, strings, offset, lengt
     t3 = strings[i];
     t3 = $.getInterceptor$JSStringJSArray(t3).get$length(t3);
     if (typeof t3 !== 'number')
-      return $.KeywordState_computeKeywordStateTable$bailout(1, start, strings, offset, length$, t3, result, t1, i, chunk, chunkStart, isLeaf, t2);
+      return $.KeywordState_computeKeywordStateTable$bailout(1, start, strings, offset, length$, t3, result, t1, chunk, chunkStart, isLeaf, i, t2);
     if (t3 === start)
       isLeaf = true;
     t3 = strings[i];
     t3 = $.getInterceptor$JSStringJSArray(t3).get$length(t3);
     if (typeof t3 !== 'number')
-      return $.KeywordState_computeKeywordStateTable$bailout(2, start, strings, offset, length$, result, isLeaf, t1, t3, i, chunk, chunkStart, t2);
+      return $.KeywordState_computeKeywordStateTable$bailout(2, start, strings, offset, length$, result, isLeaf, t1, t3, chunk, chunkStart, t2, i);
     if (t3 > start) {
       t3 = strings[i];
       c = $.getInterceptor$JSString(t3).charCodeAt$1(t3, start);
       if (c !== (c | 0))
-        return $.KeywordState_computeKeywordStateTable$bailout(3, start, strings, offset, length$, result, isLeaf, t1, i, chunk, chunkStart, c, t2);
+        return $.KeywordState_computeKeywordStateTable$bailout(3, start, strings, offset, length$, result, isLeaf, t1, chunk, chunkStart, t2, i, c);
       if (chunk !== c) {
         if (chunkStart !== -1) {
           t3 = chunk - 97;
@@ -6926,47 +6967,6 @@ $.Set_Set = function() {
   return $._HashSetImpl$();
 };
 
-$.Collections_contains = function(iterable, element) {
-  var t1;
-  for (t1 = $.getInterceptor$JSArray(iterable).iterator$0(iterable); t1.get$hasNext() === true;)
-    if (element === t1.next$0())
-      return true;
-  return false;
-};
-
-$.Collections_collectionToString = function(c) {
-  var result = $.StringBuffer_StringBuffer("");
-  $.Collections__emitCollection(c, result, $.List_List(null));
-  return $.getInterceptor(result).toString$0(result);
-};
-
-$.Collections__emitObject = function(o, result, visiting) {
-  var t1;
-  if (typeof o === 'object' && o !== null && (o.constructor === Array || o.is$Collection()))
-    if ($.Collections__containsRef(visiting, o)) {
-      t1 = $.getInterceptor$JSArray(result);
-      t1.add$1(result, typeof o === 'object' && o !== null && (o.constructor === Array || o.is$List()) ? "[...]" : "{...}");
-    } else
-      $.Collections__emitCollection(o, result, visiting);
-  else if (typeof o === 'object' && o !== null && o.is$Map())
-    if ($.Collections__containsRef(visiting, o))
-      $.getInterceptor$JSArray(result).add$1(result, "{...}");
-    else
-      $.Maps__emitMap(o, result, visiting);
-  else
-    $.getInterceptor$JSArray(result).add$1(result, o);
-};
-
-$.Collections__containsRef = function(c, ref) {
-  var t1, t2;
-  for (t1 = $.getInterceptor$JSArray(c).iterator$0(c); t1.get$hasNext() === true;) {
-    t2 = t1.next$0();
-    if (t2 == null ? ref == null : t2 === ref)
-      return true;
-  }
-  return false;
-};
-
 $.Strings__toJsStringArray$bailout = function(state0, env0, env1, env2) {
   switch (state0) {
     case 1:
@@ -7134,9 +7134,9 @@ $._Sort__dualPivotQuicksort$bailout = function(state0, a, left, right, compare) 
     el1 = t0;
   }
   if ($.gtB(compare.call$2(el4, el5), 0)) {
-    t0 = el4;
-    el4 = el5;
-    el5 = t0;
+    t0 = el5;
+    el5 = el4;
+    el4 = t0;
   }
   if ($.gtB(compare.call$2(el1, el3), 0)) {
     t0 = el3;
@@ -7159,9 +7159,9 @@ $._Sort__dualPivotQuicksort$bailout = function(state0, a, left, right, compare) 
     el3 = t0;
   }
   if ($.gtB(compare.call$2(el2, el5), 0)) {
-    t0 = el2;
-    el2 = el5;
-    el5 = t0;
+    t0 = el5;
+    el5 = el2;
+    el2 = t0;
   }
   if ($.gtB(compare.call$2(el2, el3), 0)) {
     t0 = el3;
@@ -7169,9 +7169,9 @@ $._Sort__dualPivotQuicksort$bailout = function(state0, a, left, right, compare) 
     el2 = t0;
   }
   if ($.gtB(compare.call$2(el4, el5), 0)) {
-    t0 = el4;
-    el4 = el5;
-    el5 = t0;
+    t0 = el5;
+    el5 = el4;
+    el4 = t0;
   }
   $.indexSet(a, index1, el1);
   $.indexSet(a, index3, el3);
@@ -7340,8 +7340,8 @@ $._Sort__dualPivotQuicksort$bailout = function(state0, a, left, right, compare) 
             if (great >= a.length)
               throw $.ioore(great);
             t1 = $.ltB(compare.call$2(a[great], el2), 0);
-            t2 = a.length;
             great0 = great - 1;
+            t2 = a.length;
             if (t1) {
               if (less >= t2)
                 throw $.ioore(less);
@@ -7373,10 +7373,10 @@ $.KeywordState_computeKeywordStateTable$bailout = function(state0, env0, env1, e
   switch (state0) {
     case 1:
       t2 = env11;
-      isLeaf = env10;
-      chunkStart = env9;
-      chunk = env8;
-      i = env7;
+      i = env10;
+      isLeaf = env9;
+      chunkStart = env8;
+      chunk = env7;
       t1 = env6;
       result = env5;
       t3 = env4;
@@ -7386,10 +7386,10 @@ $.KeywordState_computeKeywordStateTable$bailout = function(state0, env0, env1, e
       start = env0;
       break;
     case 2:
-      t2 = env11;
-      chunkStart = env10;
-      chunk = env9;
-      i = env8;
+      i = env11;
+      t2 = env10;
+      chunkStart = env9;
+      chunk = env8;
       t3 = env7;
       t1 = env6;
       isLeaf = env5;
@@ -7400,11 +7400,11 @@ $.KeywordState_computeKeywordStateTable$bailout = function(state0, env0, env1, e
       start = env0;
       break;
     case 3:
-      t2 = env11;
-      c = env10;
-      chunkStart = env9;
-      chunk = env8;
-      i = env7;
+      c = env11;
+      i = env10;
+      t2 = env9;
+      chunkStart = env8;
+      chunk = env7;
       t1 = env6;
       isLeaf = env5;
       result = env4;
@@ -7490,8 +7490,6 @@ $.KeywordState_computeKeywordStateTable$bailout = function(state0, env0, env1, e
   }
 };
 
-$.handleUpDown.call$1 = $.handleUpDown;
-$.handleUpDown.$name = "handleUpDown";
 $.shortcutHandler.call$1 = $.shortcutHandler;
 $.shortcutHandler.$name = "shortcutHandler";
 $.toStringWrapper.call$0 = $.toStringWrapper;
@@ -7518,6 +7516,8 @@ $.constructorNameFallback.call$1 = $.constructorNameFallback;
 $.constructorNameFallback.$name = "constructorNameFallback";
 $.Comparable_compare.call$2 = $.Comparable_compare;
 $.Comparable_compare.$name = "Comparable_compare";
+$.handleUpDown.call$1 = $.handleUpDown;
+$.handleUpDown.$name = "handleUpDown";
 Isolate.$finishClasses($$);
 $$ = {};
 $.CONSTANT81 = new Isolate.$isolateProperties.StringWrapper("||");
@@ -7733,6 +7733,28 @@ $.CONSTANT19 = new Isolate.$isolateProperties.PrecedenceInfo(Isolate.$isolatePro
 $.CONSTANT22 = new Isolate.$isolateProperties.PrecedenceInfo(Isolate.$isolateProperties.CONSTANT145, 0, 100);
 $.CONSTANT45 = new Isolate.$isolateProperties.PrecedenceInfo(Isolate.$isolateProperties.CONSTANT86, 6, 124);
 $.CONSTANT64 = new Isolate.$isolateProperties.PrecedenceInfo(Isolate.$isolateProperties.CONSTANT199, 0, 130);
+$.$$LF = 10;
+$.hideDropDownSuspend = false;
+$.$$CR = 13;
+$.$$SPACE = 32;
+$.$$BANG = 33;
+$.$$DQ = 34;
+$.$$HASH = 35;
+$.LIBRARY = "library";
+$.$$$ = 36;
+$.CLASS = "class";
+$.$$PERCENT = 37;
+$.INTERFACE = "interface";
+$.$$AMPERSAND = 38;
+$.TYPEDEF = "typedef";
+$.$$SQ = 39;
+$.MEMBERS = "members";
+$.$$OPEN_PAREN = 40;
+$.TYPES = "types";
+$.$$CLOSE_PAREN = 41;
+$.ARGS = "args";
+$.$$STAR = 42;
+$.NAME = "name";
 $.$$PLUS = 43;
 $.KIND = "kind";
 $.$$COMMA = 44;
@@ -7758,7 +7780,7 @@ $.Classification_OPERATOR = "o";
 $.prefix = "";
 $.Classification_STRING = "s";
 $.Classification_NUMBER = "n";
-$.$$5 = 53;
+$.$$8 = 56;
 $.Classification_PUNCTUATION = "p";
 $.$$6 = 54;
 $.Classification_TYPE_IDENTIFIER = "t";
@@ -7771,12 +7793,12 @@ $.Classification_STRING_INTERPOLATION = "si";
 $.$$EQ = 61;
 $.NO_PARAMS = "noparams";
 $.$$GT = 62;
-$.$$7 = 55;
 $.$$QUESTION = 63;
-$.$$8 = 56;
+$.$$5 = 53;
 $.$$AT = 64;
 $.$$9 = 57;
 $.$$A = 65;
+$.$$7 = 55;
 $.SETTER = "setter";
 $.$$D = 68;
 $.LINK_NAME = "link_name";
@@ -7975,28 +7997,6 @@ $._currentResultIndex = null;
 $.$$EOF = 0;
 $.$$STX = 2;
 $.$$TAB = 9;
-$.$$LF = 10;
-$.hideDropDownSuspend = false;
-$.$$CR = 13;
-$.$$SPACE = 32;
-$.$$BANG = 33;
-$.$$DQ = 34;
-$.$$HASH = 35;
-$.LIBRARY = "library";
-$.$$$ = 36;
-$.CLASS = "class";
-$.$$PERCENT = 37;
-$.INTERFACE = "interface";
-$.$$AMPERSAND = 38;
-$.TYPEDEF = "typedef";
-$.$$SQ = 39;
-$.MEMBERS = "members";
-$.$$OPEN_PAREN = 40;
-$.TYPES = "types";
-$.$$CLOSE_PAREN = 41;
-$.ARGS = "args";
-$.$$STAR = 42;
-$.NAME = "name";
 $.getInterceptor$JSStringJSArray = function(receiver) {
   if (typeof receiver == 'string') return $.JSString.prototype;
   if (receiver != null && receiver.constructor == Array) return $.JSArray.prototype;

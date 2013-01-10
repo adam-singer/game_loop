@@ -36,6 +36,7 @@
 <li><a href="../game_loop/GameLoopKeyboard.html"><div class="icon-class"></div>GameLoopKeyboard</a></li>
 <li><div class="icon-class"></div><strong>GameLoopMouse</strong></li>
 <li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
+<li><a href="../game_loop/GameLoopPointerLock.html"><div class="icon-class"></div>GameLoopPointerLock</a></li>
 <li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
 <li><a href="../game_loop/GameLoopResizeFunction.html"><div class="icon-interface"></div>GameLoopResizeFunction</a></li>
 <li><a href="../game_loop/GameLoopTimer.html"><div class="icon-class"></div>GameLoopTimer</a></li>
@@ -295,8 +296,11 @@ void digitalButtonEvent(GameLoopDigitalButtonEvent event) {
    return;
  }
  if (event.down) {
-   button.framePressed = event.frame;
-   button.timePressed = event.time;
+   if (button.down == false) {
+     // Ignore repeated downs.
+     button.framePressed = event.frame;
+     button.timePressed = event.time;
+   }
  } else {
    button.frameReleased = event.frame;
    button.timeReleased = event.time;
@@ -359,6 +363,42 @@ bool isUp(int buttonId) {
 </pre>
 </div>
 </div>
+<div class="method inherited"><h4 id="pressed">
+<button class="show-code">Code</button>
+bool <strong>pressed</strong>(int buttonId) <a class="anchor-link" href="#pressed"
+              title="Permalink to GameLoopMouse.pressed">#</a></h4>
+<div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Was 
+<span class="param">buttonId</span> just pressed down?</p>
+<pre class="source">
+bool pressed(int buttonId) {
+ GameLoopDigitalButton button = buttons[buttonId];
+ if (button == null) {
+   return false;
+ }
+ return button.framePressed == gameLoop.frame;
+}
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="released">
+<button class="show-code">Code</button>
+bool <strong>released</strong>(int buttonId) <a class="anchor-link" href="#released"
+              title="Permalink to GameLoopMouse.released">#</a></h4>
+<div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
+<p>Was 
+<span class="param">buttonId</span> just released?</p>
+<pre class="source">
+bool released(int buttonId) {
+ GameLoopDigitalButton button = buttons[buttonId];
+ if (button == null) {
+   return false;
+ }
+ return button.frameReleased == gameLoop.frame;
+}
+</pre>
+</div>
+</div>
 <div class="method inherited"><h4 id="timePressed">
 <button class="show-code">Code</button>
 double <strong>timePressed</strong>(int buttonId) <a class="anchor-link" href="#timePressed"
@@ -401,7 +441,7 @@ double timeReleased(int buttonId) {
         </div>
         
         <div class="footer">
-          <div>This page was generated at 2012-12-28 16:23:31.140</div>
+          <div>This page was generated at 2013-01-10 11:22:02.048</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>

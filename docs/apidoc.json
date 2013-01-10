@@ -10,7 +10,143 @@
           "refId": "Object"
         },
         "kind": "class",
-        "comment": "A cancellable timer that calls a [GameLoopTimerFunction] when it fires.\n\n",
+        "name": "GameLoopPointerLock",
+        "children": [
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "method",
+            "name": "GameLoopPointerLock",
+            "children": [
+              {
+                "ref": {
+                  "name": "GameLoop",
+                  "refId": "GameLoop"
+                },
+                "kind": "param",
+                "name": "gameLoop",
+                "id": "gameLoop"
+              }
+            ],
+            "id": "GameLoopPointerLock1()"
+          },
+          {
+            "returnType": {
+              "name": "void",
+              "refId": "void"
+            },
+            "kind": "method",
+            "name": "requestLock",
+            "id": "requestLock0()"
+          },
+          {
+            "returnType": {
+              "name": "void",
+              "refId": "void"
+            },
+            "kind": "method",
+            "name": "_onClick",
+            "children": [
+              {
+                "ref": {
+                  "name": "Event",
+                  "refId": "Event"
+                },
+                "kind": "param",
+                "name": "event",
+                "id": "event"
+              }
+            ],
+            "id": "_onClick1()"
+          },
+          {
+            "returnType": {
+              "name": "bool",
+              "refId": "bool"
+            },
+            "kind": "method",
+            "name": "locked",
+            "id": "locked0()"
+          },
+          {
+            "returnType": {
+              "name": "void",
+              "refId": "void"
+            },
+            "kind": "method",
+            "name": "_onPointerLockChange",
+            "children": [
+              {
+                "ref": {
+                  "name": "Event",
+                  "refId": "Event"
+                },
+                "kind": "param",
+                "name": "event",
+                "id": "event"
+              }
+            ],
+            "id": "_onPointerLockChange1()"
+          },
+          {
+            "ref": {
+              "name": "bool",
+              "refId": "bool"
+            },
+            "kind": "property",
+            "name": "locked",
+            "id": "locked"
+          },
+          {
+            "ref": {
+              "name": "GameLoop",
+              "refId": "GameLoop"
+            },
+            "kind": "property",
+            "name": "gameLoop",
+            "id": "gameLoop"
+          },
+          {
+            "ref": {
+              "name": "bool",
+              "refId": "bool"
+            },
+            "kind": "property",
+            "name": "lockOnClick",
+            "id": "lockOnClick"
+          },
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "constructor",
+            "name": "GameLoopPointerLock",
+            "children": [
+              {
+                "ref": {
+                  "name": "GameLoop",
+                  "refId": "GameLoop"
+                },
+                "kind": "param",
+                "name": "gameLoop",
+                "id": "gameLoop"
+              }
+            ],
+            "id": "GameLoopPointerLock1()"
+          }
+        ],
+        "id": "GameLoopPointerLock"
+      },
+      {
+        "superclass": {
+          "name": "Object",
+          "refId": "Object"
+        },
+        "kind": "class",
+        "comment": "A cancellable timer that calls a [GameLoopTimerFunction] when it fires.\nA timer can only fire once, afterwards it is dead.\n\n",
         "name": "GameLoopTimer",
         "children": [
           {
@@ -1849,6 +1985,48 @@
               "refId": "bool"
             },
             "kind": "method",
+            "comment": "Was [buttonId] just pressed down?\n",
+            "name": "pressed",
+            "children": [
+              {
+                "ref": {
+                  "name": "int",
+                  "refId": "int"
+                },
+                "kind": "param",
+                "name": "buttonId",
+                "id": "buttonId"
+              }
+            ],
+            "id": "pressed1()"
+          },
+          {
+            "returnType": {
+              "name": "bool",
+              "refId": "bool"
+            },
+            "kind": "method",
+            "comment": "Was [buttonId] just released?\n",
+            "name": "released",
+            "children": [
+              {
+                "ref": {
+                  "name": "int",
+                  "refId": "int"
+                },
+                "kind": "param",
+                "name": "buttonId",
+                "id": "buttonId"
+              }
+            ],
+            "id": "released1()"
+          },
+          {
+            "returnType": {
+              "name": "bool",
+              "refId": "bool"
+            },
+            "kind": "method",
             "comment": "Is [buttonId] up this frame?\n",
             "name": "isUp",
             "children": [
@@ -2415,6 +2593,15 @@
           },
           {
             "returnType": {
+              "name": "GameLoopPointerLock",
+              "refId": "GameLoopPointerLock"
+            },
+            "kind": "method",
+            "name": "pointerLock",
+            "id": "pointerLock0()"
+          },
+          {
+            "returnType": {
               "name": "GameLoopKeyboard",
               "refId": "GameLoopKeyboard"
             },
@@ -2648,6 +2835,26 @@
               "refId": "void"
             },
             "kind": "method",
+            "name": "_resize",
+            "children": [
+              {
+                "ref": {
+                  "name": "Event",
+                  "refId": "Event"
+                },
+                "kind": "param",
+                "name": "_",
+                "id": "_"
+              }
+            ],
+            "id": "_resize1()"
+          },
+          {
+            "returnType": {
+              "name": "void",
+              "refId": "void"
+            },
+            "kind": "method",
             "comment": "Start the game loop.\n",
             "name": "start",
             "id": "start0()"
@@ -2795,6 +3002,15 @@
           },
           {
             "ref": {
+              "name": "GameLoopPointerLock",
+              "refId": "GameLoopPointerLock"
+            },
+            "kind": "property",
+            "name": "pointerLock",
+            "id": "pointerLock"
+          },
+          {
+            "ref": {
               "name": "GameLoopKeyboard",
               "refId": "GameLoopKeyboard"
             },
@@ -2895,6 +3111,15 @@
             "kind": "property",
             "name": "_dt",
             "id": "_dt"
+          },
+          {
+            "ref": {
+              "name": "GameLoopPointerLock",
+              "refId": "GameLoopPointerLock"
+            },
+            "kind": "property",
+            "name": "_pointerLock",
+            "id": "_pointerLock"
           },
           {
             "ref": {
