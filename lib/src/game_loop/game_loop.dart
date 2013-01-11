@@ -20,14 +20,24 @@
 
 part of game_loop;
 
-/** Called once per frame when it is time to update and render. */
+/** Called once per draw frame. Draw in here. */
+typedef void GameLoopRenderFunction(GameLoop gameLoop);
+
+/** Called once per update frame. Update game state here. */
 typedef void GameLoopUpdateFunction(GameLoop gameLoop);
+
 /** Called whenever the element is resized. */
 typedef void GameLoopResizeFunction(GameLoop gameLoop);
+
 /** Called whenever the element moves between fullscreen and non-fullscreen
  * mode.
  */
 typedef void GameLoopFullscreenChangeFunction(GameLoop gameLoop);
+
+/** Called whenever the element moves between locking the pointer and
+ * not locking the pointer.
+ */
+typedef void GameLoopPointerLockChangeFunction(GameLoop gameLoop);
 
 /** The game loop */
 class GameLoop {
@@ -38,6 +48,12 @@ class GameLoop {
   double _previousFrameTime;
   double _frameTime = 0.0;
   double _dt;
+
+  /** Any wall time in excess of maxTimeDelta is dropped. */
+  double maxTimeDelta = 1.0 / 30.0;
+
+  /** The time between onUpdate calls */
+  double gameUpdateTimeDelta = 1.0 / 60.0;
 
   /** Width of game display [Element] */
   int get width => element.width;
@@ -144,11 +160,24 @@ class GameLoop {
     _frameCounter++;
     _previousFrameTime = _frameTime;
     _frameTime = time;
-    _dt = _frameTime - _previousFrameTime;
+    double timeDelta = _frameTime - _previousFrameTime;
+    if (timeDelta > maxTimeDelta) {
+      // If the animation frame callback was paused we may end up with
+      // a huge time delta. Clamp it to something reasonable.
+      timeDelta = maxTimeDelta;
+    }
+    // TODO(johnmccutchan): Process input events in update loop.
     _processInputEvents();
-    _processTimers();
-    if (onUpdate != null) {
-      onUpdate(this);
+    while (timeDelta > gameUpdateTimeDelta) {
+      _dt = gameUpdateTimeDelta;
+      _processTimers();
+      if (onUpdate != null) {
+        onUpdate(this);
+      }
+      timeDelta -= gameUpdateTimeDelta;
+    }
+    if (onRender != null) {
+      onRender(this);
     }
   }
 
@@ -156,9 +185,7 @@ class GameLoop {
     if (onFullscreenChange == null) {
       return;
     }
-    if (onFullscreenChange == null) {
-      return;
-    }
+    onFullscreenChange(this);
   }
 
   void _fullscreenError(Event _) {
@@ -244,10 +271,16 @@ class GameLoop {
     _timers.clear();
   }
 
-  /** Called once per frame. */
-  GameLoopUpdateFunction onUpdate = null;
+  /** Called once per game logic frame. */
+  GameLoopUpdateFunction onUpdate;
+  /** Called per draw frame. */
+  GameLoopRenderFunction onRender;
   /** Called when element is resized. */
-  GameLoopResizeFunction onResize = null;
+  GameLoopResizeFunction onResize;
   /** Called when element moves between fullscreen and non-fullscreen mode. */
-  GameLoopFullscreenChangeFunction onFullscreenChange = null;
+  GameLoopFullscreenChangeFunction onFullscreenChange;
+  /** Called when the element moves between locking the pointer and not
+   *  locking the pointer.
+   */
+  GameLoopPointerLockChangeFunction onPointerLockChange;
 }
