@@ -58,6 +58,8 @@ class GameLoop {
    */
   double maxAccumulatedTime = 0.03;
   double _accumulatedTime = 0.0;
+  /** Seconds of accumulated time. */
+  double get accumulatedTime => _accumulatedTime;
   /** Width of game display [Element] */
   int get width => element.width;
   /** Height of game display [Element] */
