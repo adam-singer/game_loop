@@ -20,10 +20,11 @@
 
 part of game_loop;
 
-/** Called once per draw frame. Draw in here. */
+/** Called when it is time to draw. */
 typedef void GameLoopRenderFunction(GameLoop gameLoop);
 
-/** Called once per update frame. Update game state here. */
+/** Called once per game logic frame. See [updateTimeStep] and
+ * [maxAccumulatedTime] */
 typedef void GameLoopUpdateFunction(GameLoop gameLoop);
 
 /** Called whenever the element is resized. */
@@ -47,14 +48,16 @@ class GameLoop {
   int _frameCounter = 0;
   double _previousFrameTime;
   double _frameTime = 0.0;
-  double _dt;
 
-  /** Any wall time in excess of maxTimeDelta is dropped. */
-  double maxTimeDelta = 1.0 / 30.0;
+  /** The time step used for game updates. */
+  double updateTimeStep = 0.015;
 
-  /** The time between onUpdate calls */
-  double gameUpdateTimeDelta = 1.0 / 60.0;
-
+  /** Maximum amount of time between subsequent request animation frame
+   * calls that is accumulated. Accumulated time is used to drive onUpdate
+   * calls.
+   */
+  double maxAccumulatedTime = 0.03;
+  double _accumulatedTime = 0.0;
   /** Width of game display [Element] */
   int get width => element.width;
   /** Height of game display [Element] */
@@ -62,11 +65,13 @@ class GameLoop {
 
   /** Frame counter value. Incremented once per frame. */
   int get frame => _frameCounter;
-  /** Frame time value in seconds. */
-  double get frameTime => _frameTime;
-  /** Time elapsed since previous frame */
-  double get dt => _dt;
-
+  /** Seconds between requestAnimationFrameTime calls. */
+  double get requestAnimationFrameTime => _frameTime;
+  /** Time elapsed in current frame. */
+  double get dt => updateTimeStep;
+  double _renderInterpolationFactor = 0.0;
+  /** Interpolation value between 0.0 and 1.0 */
+  double get renderInterpolationFactor => _renderInterpolationFactor;
   static double timeStampToSeconds(timeStamp) => timeStamp / 1000.0;
   static double milliseconds(int x) => x / 1000.0;
   static double seconds(int x) => x.toDouble();
@@ -131,7 +136,7 @@ class GameLoop {
 
   void _processTimers() {
     for (GameLoopTimer timer in _timers) {
-      timer._update(_dt);
+      timer._update(dt);
     }
     for (int i = _timers.length-1; i >= 0; i--) {
       int lastElement = _timers.length-1;
@@ -161,22 +166,23 @@ class GameLoop {
     _previousFrameTime = _frameTime;
     _frameTime = time;
     double timeDelta = _frameTime - _previousFrameTime;
-    if (timeDelta > maxTimeDelta) {
+    _accumulatedTime += timeDelta;
+    if (_accumulatedTime > maxAccumulatedTime) {
       // If the animation frame callback was paused we may end up with
       // a huge time delta. Clamp it to something reasonable.
-      timeDelta = maxTimeDelta;
+      _accumulatedTime = maxAccumulatedTime;
     }
     // TODO(johnmccutchan): Process input events in update loop.
     _processInputEvents();
-    while (timeDelta > gameUpdateTimeDelta) {
-      _dt = gameUpdateTimeDelta;
+    while (_accumulatedTime >= updateTimeStep) {
       _processTimers();
       if (onUpdate != null) {
         onUpdate(this);
       }
-      timeDelta -= gameUpdateTimeDelta;
+      _accumulatedTime -= updateTimeStep;
     }
     if (onRender != null) {
+      double interpolationValue = _accumulatedTime/updateTimeStep;
       onRender(this);
     }
   }
@@ -273,14 +279,14 @@ class GameLoop {
 
   /** Called once per game logic frame. */
   GameLoopUpdateFunction onUpdate;
-  /** Called per draw frame. */
+  /** Called when it is time to draw. */
   GameLoopRenderFunction onRender;
   /** Called when element is resized. */
   GameLoopResizeFunction onResize;
-  /** Called when element moves between fullscreen and non-fullscreen mode. */
+  /** Called when element enters or exits fullscreen mode. */
   GameLoopFullscreenChangeFunction onFullscreenChange;
-  /** Called when the element moves between locking the pointer and not
-   *  locking the pointer.
+  /** Called when the element moves between owning and not
+   *  owning the pointer.
    */
   GameLoopPointerLockChangeFunction onPointerLockChange;
 }
