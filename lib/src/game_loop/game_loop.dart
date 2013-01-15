@@ -67,6 +67,9 @@ class GameLoop {
 
   /** Frame counter value. Incremented once per frame. */
   int get frame => _frameCounter;
+  /** Current time as seen by onUpdate calls. */
+  double get gameTime => _gameTime;
+  double _gameTime = 0.0;
   /** Seconds between requestAnimationFrameTime calls. */
   double get requestAnimationFrameTime => _frameTime;
   /** Time elapsed in current frame. */
@@ -178,6 +181,7 @@ class GameLoop {
     _processInputEvents();
     while (_accumulatedTime >= updateTimeStep) {
       _processTimers();
+      _gameTime += updateTimeStep;
       if (onUpdate != null) {
         onUpdate(this);
       }
