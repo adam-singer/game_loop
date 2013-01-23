@@ -61,9 +61,9 @@ class GameLoop {
   /** Seconds of accumulated time. */
   double get accumulatedTime => _accumulatedTime;
   /** Width of game display [Element] */
-  int get width => element.width;
+  int get width => element.clientWidth;
   /** Height of game display [Element] */
-  int get height => element.height;
+  int get height => element.clientHeight;
 
   /** Frame counter value. Incremented once per frame. */
   int get frame => _frameCounter;
@@ -266,7 +266,7 @@ class GameLoop {
       element.webkitRequestFullscreen();
       return;
     }
-    element.webkitCancelFullScreen();
+    document.webkitExitFullscreen();
   }
 
   final List<GameLoopTimer> _timers = new List<GameLoopTimer>();
