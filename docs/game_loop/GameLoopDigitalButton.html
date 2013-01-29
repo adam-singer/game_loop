@@ -37,13 +37,15 @@
 <li><a href="../game_loop/GameLoopMouse.html"><div class="icon-class"></div>GameLoopMouse</a></li>
 <li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
 <li><a href="../game_loop/GameLoopPointerLock.html"><div class="icon-class"></div>GameLoopPointerLock</a></li>
+<li><a href="../game_loop/GameLoopPointerLockChangeFunction.html"><div class="icon-interface"></div>GameLoopPointerLockChangeFunction</a></li>
 <li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
+<li><a href="../game_loop/GameLoopRenderFunction.html"><div class="icon-interface"></div>GameLoopRenderFunction</a></li>
 <li><a href="../game_loop/GameLoopResizeFunction.html"><div class="icon-interface"></div>GameLoopResizeFunction</a></li>
 <li><a href="../game_loop/GameLoopTimer.html"><div class="icon-class"></div>GameLoopTimer</a></li>
 <li><a href="../game_loop/GameLoopTimerFunction.html"><div class="icon-interface"></div>GameLoopTimerFunction</a></li>
 <li><a href="../game_loop/GameLoopUpdateFunction.html"><div class="icon-interface"></div>GameLoopUpdateFunction</a></li>
 </ul>
-</div>
+<h2><div class="icon-library"></div><a href="../metadata.html">metadata</a></h2></div>
 <div class="content">
         <h2><strong>GameLoopDigitalButton</strong>
           class
@@ -96,9 +98,8 @@ final int         <strong>buttonId</strong> <a class="anchor-link"
             title="Permalink to GameLoopDigitalButton.buttonId">#</a>
         </h4>
         <div class="doc">
-<p>buttonId</p>
 <pre class="source">
-final int buttonId;
+buttonId
 </pre>
 </div>
 </div>
@@ -109,7 +110,7 @@ final bool         <strong>down</strong> <a class="anchor-link"
             title="Permalink to GameLoopDigitalButton.down">#</a>
         </h4>
         <div class="doc">
-<p>Is button down in this frame?</p>
+<p>Is button down in this frame? </p>
 <pre class="source">
 bool get down =&gt; framePressed &gt; frameReleased;
 </pre>
@@ -122,9 +123,8 @@ int         <strong>framePressed</strong> <a class="anchor-link"
             title="Permalink to GameLoopDigitalButton.framePressed">#</a>
         </h4>
         <div class="doc">
-<p>Frame when button was last pressed.</p>
 <pre class="source">
-int framePressed = 0;
+framePressed = 0
 </pre>
 </div>
 </div>
@@ -135,9 +135,8 @@ int         <strong>frameReleased</strong> <a class="anchor-link"
             title="Permalink to GameLoopDigitalButton.frameReleased">#</a>
         </h4>
         <div class="doc">
-<p>Frame when button was last released.</p>
 <pre class="source">
-int frameReleased = 0;
+frameReleased = 0
 </pre>
 </div>
 </div>
@@ -148,9 +147,8 @@ double         <strong>timePressed</strong> <a class="anchor-link"
             title="Permalink to GameLoopDigitalButton.timePressed">#</a>
         </h4>
         <div class="doc">
-<p>Time when button was last pressed.</p>
 <pre class="source">
-double timePressed = 0.0;
+timePressed = 0.0
 </pre>
 </div>
 </div>
@@ -161,9 +159,8 @@ double         <strong>timeReleased</strong> <a class="anchor-link"
             title="Permalink to GameLoopDigitalButton.timeReleased">#</a>
         </h4>
         <div class="doc">
-<p>Time when button was last released.</p>
 <pre class="source">
-double timeReleased = 0.0;
+timeReleased = 0.0
 </pre>
 </div>
 </div>
@@ -174,7 +171,7 @@ final bool         <strong>up</strong> <a class="anchor-link"
             title="Permalink to GameLoopDigitalButton.up">#</a>
         </h4>
         <div class="doc">
-<p>Is button up in this frame?</p>
+<p>Is button up in this frame? </p>
 <pre class="source">
 bool get up =&gt; frameReleased &gt;= framePressed;
 </pre>
@@ -186,7 +183,7 @@ bool get up =&gt; frameReleased &gt;= framePressed;
         </div>
         
         <div class="footer">
-          <div>This page was generated at 2013-01-10 11:22:02.097</div>
+          <div>This page was generated at 2013-01-29 07:40:57.803</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>

@@ -37,13 +37,15 @@
 <li><div class="icon-class"></div><strong>GameLoopMouse</strong></li>
 <li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
 <li><a href="../game_loop/GameLoopPointerLock.html"><div class="icon-class"></div>GameLoopPointerLock</a></li>
+<li><a href="../game_loop/GameLoopPointerLockChangeFunction.html"><div class="icon-interface"></div>GameLoopPointerLockChangeFunction</a></li>
 <li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
+<li><a href="../game_loop/GameLoopRenderFunction.html"><div class="icon-interface"></div>GameLoopRenderFunction</a></li>
 <li><a href="../game_loop/GameLoopResizeFunction.html"><div class="icon-interface"></div>GameLoopResizeFunction</a></li>
 <li><a href="../game_loop/GameLoopTimer.html"><div class="icon-class"></div>GameLoopTimer</a></li>
 <li><a href="../game_loop/GameLoopTimerFunction.html"><div class="icon-interface"></div>GameLoopTimerFunction</a></li>
 <li><a href="../game_loop/GameLoopUpdateFunction.html"><div class="icon-interface"></div>GameLoopUpdateFunction</a></li>
 </ul>
-</div>
+<h2><div class="icon-library"></div><a href="../metadata.html">metadata</a></h2></div>
 <div class="content">
         <h2><strong>GameLoopMouse</strong>
           class
@@ -127,9 +129,8 @@ const         <strong>LEFT</strong> <a class="anchor-link"
             title="Permalink to GameLoopMouse.LEFT">#</a>
         </h4>
         <div class="doc">
-<p>Left mouse button</p>
 <pre class="source">
-static const LEFT = 0;
+LEFT = 0
 </pre>
 </div>
 </div>
@@ -140,9 +141,8 @@ const         <strong>MIDDLE</strong> <a class="anchor-link"
             title="Permalink to GameLoopMouse.MIDDLE">#</a>
         </h4>
         <div class="doc">
-<p>Middle mouse button</p>
 <pre class="source">
-static const MIDDLE = 1;
+MIDDLE = 1
 </pre>
 </div>
 </div>
@@ -153,9 +153,8 @@ const         <strong>RIGHT</strong> <a class="anchor-link"
             title="Permalink to GameLoopMouse.RIGHT">#</a>
         </h4>
         <div class="doc">
-<p>Right mouse button</p>
 <pre class="source">
-static const RIGHT = 2;
+RIGHT = 2
 </pre>
 </div>
 </div>
@@ -182,10 +181,9 @@ final Map&lt;int, <a href="../game_loop/GameLoopDigitalButton.html">GameLoopDigi
             title="Permalink to GameLoopMouse.buttons">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
-<p>Buttons this digital input knows about</p>
 <pre class="source">
-final Map&lt;int, GameLoopDigitalButton&gt; buttons =
-   new Map&lt;int, GameLoopDigitalButton&gt;();
+buttons =
+new Map&lt;int, GameLoopDigitalButton&gt;()
 </pre>
 </div>
 </div>
@@ -196,7 +194,7 @@ final int         <strong>dx</strong> <a class="anchor-link"
             title="Permalink to GameLoopMouse.dx">#</a>
         </h4>
         <div class="doc">
-<p>Mouse movement in x direction since previous frame.</p>
+<p>Mouse movement in x direction since previous frame. </p>
 <pre class="source">
 int get dx =&gt; _dx;
 </pre>
@@ -209,7 +207,7 @@ final int         <strong>dy</strong> <a class="anchor-link"
             title="Permalink to GameLoopMouse.dy">#</a>
         </h4>
         <div class="doc">
-<p>Mouse movement in y direction since previous frame.</p>
+<p>Mouse movement in y direction since previous frame. </p>
 <pre class="source">
 int get dy =&gt; _dy;
 </pre>
@@ -222,7 +220,7 @@ final int         <strong>frame</strong> <a class="anchor-link"
             title="Permalink to GameLoopMouse.frame">#</a>
         </h4>
         <div class="doc">
-<p>Frame at which mouse position was last updated.</p>
+<p>Frame at which mouse position was last updated. </p>
 <pre class="source">
 int get frame =&gt; _frame;
 </pre>
@@ -235,9 +233,8 @@ final <a href="../game_loop/GameLoop.html">GameLoop</a>         <strong>gameLoop
             title="Permalink to GameLoopMouse.gameLoop">#</a>
         </h4>
         <div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
-<p>Game loop this digital input belongs to.</p>
 <pre class="source">
-final GameLoop gameLoop;
+gameLoop
 </pre>
 </div>
 </div>
@@ -248,7 +245,7 @@ final double         <strong>time</strong> <a class="anchor-link"
             title="Permalink to GameLoopMouse.time">#</a>
         </h4>
         <div class="doc">
-<p>Time at which mouse position was last updated.</p>
+<p>Time at which mouse position was last updated. </p>
 <pre class="source">
 double get time =&gt; _time;
 </pre>
@@ -261,7 +258,7 @@ final int         <strong>x</strong> <a class="anchor-link"
             title="Permalink to GameLoopMouse.x">#</a>
         </h4>
         <div class="doc">
-<p>Mouse position in x direction within element.</p>
+<p>Mouse position in x direction within element. </p>
 <pre class="source">
 int get x =&gt; _x;
 </pre>
@@ -274,7 +271,7 @@ final int         <strong>y</strong> <a class="anchor-link"
             title="Permalink to GameLoopMouse.y">#</a>
         </h4>
         <div class="doc">
-<p>Mouse position in y direction within element.</p>
+<p>Mouse position in y direction within element. </p>
 <pre class="source">
 int get y =&gt; _y;
 </pre>
@@ -288,7 +285,7 @@ int get y =&gt; _y;
 void <strong>digitalButtonEvent</strong>(<a href="../game_loop/GameLoopDigitalButtonEvent.html">GameLoopDigitalButtonEvent</a> event) <a class="anchor-link" href="#digitalButtonEvent"
               title="Permalink to GameLoopMouse.digitalButtonEvent">#</a></h4>
 <div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
-<p>Deliver an input event</p>
+<p>Deliver an input event </p>
 <pre class="source">
 void digitalButtonEvent(GameLoopDigitalButtonEvent event) {
  GameLoopDigitalButton button = buttons[event.buttonId];
@@ -314,7 +311,7 @@ void digitalButtonEvent(GameLoopDigitalButtonEvent event) {
 void <strong>gameLoopMouseEvent</strong>(<a href="../game_loop/GameLoopMouseEvent.html">GameLoopMouseEvent</a> event) <a class="anchor-link" href="#gameLoopMouseEvent"
               title="Permalink to GameLoopMouse.gameLoopMouseEvent">#</a></h4>
 <div class="doc">
-<p>Process one <a class="crossref" href="../game_loop/GameLoopMouseEvent.html">GameLoopMouseEvent</a>.</p>
+<p>Process one <a class="crossref" href="../game_loop/GameLoopMouseEvent.html">GameLoopMouseEvent</a>. </p>
 <pre class="source">
 void gameLoopMouseEvent(GameLoopMouseEvent event) {
  _x = event.x;
@@ -333,7 +330,7 @@ bool <strong>isDown</strong>(int buttonId) <a class="anchor-link" href="#isDown"
               title="Permalink to GameLoopMouse.isDown">#</a></h4>
 <div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
 <p>Is 
-<span class="param">buttonId</span> down this frame?</p>
+<span class="param">buttonId</span> down this frame? </p>
 <pre class="source">
 bool isDown(int buttonId) {
  GameLoopDigitalButton button = buttons[buttonId];
@@ -351,7 +348,7 @@ bool <strong>isUp</strong>(int buttonId) <a class="anchor-link" href="#isUp"
               title="Permalink to GameLoopMouse.isUp">#</a></h4>
 <div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
 <p>Is 
-<span class="param">buttonId</span> up this frame?</p>
+<span class="param">buttonId</span> up this frame? </p>
 <pre class="source">
 bool isUp(int buttonId) {
  GameLoopDigitalButton button = buttons[buttonId];
@@ -369,7 +366,7 @@ bool <strong>pressed</strong>(int buttonId) <a class="anchor-link" href="#presse
               title="Permalink to GameLoopMouse.pressed">#</a></h4>
 <div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
 <p>Was 
-<span class="param">buttonId</span> just pressed down?</p>
+<span class="param">buttonId</span> just pressed down? </p>
 <pre class="source">
 bool pressed(int buttonId) {
  GameLoopDigitalButton button = buttons[buttonId];
@@ -387,7 +384,7 @@ bool <strong>released</strong>(int buttonId) <a class="anchor-link" href="#relea
               title="Permalink to GameLoopMouse.released">#</a></h4>
 <div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
 <p>Was 
-<span class="param">buttonId</span> just released?</p>
+<span class="param">buttonId</span> just released? </p>
 <pre class="source">
 bool released(int buttonId) {
  GameLoopDigitalButton button = buttons[buttonId];
@@ -405,7 +402,7 @@ double <strong>timePressed</strong>(int buttonId) <a class="anchor-link" href="#
               title="Permalink to GameLoopMouse.timePressed">#</a></h4>
 <div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
 <p>Time 
-<span class="param">buttonId</span> was pressed.</p>
+<span class="param">buttonId</span> was pressed. </p>
 <pre class="source">
 double timePressed(int buttonId) {
  GameLoopDigitalButton button = buttons[buttonId];
@@ -423,7 +420,7 @@ double <strong>timeReleased</strong>(int buttonId) <a class="anchor-link" href="
               title="Permalink to GameLoopMouse.timeReleased">#</a></h4>
 <div class="inherited-from">inherited from <a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a> </div><div class="doc">
 <p>Time 
-<span class="param">buttonId</span> was released.</p>
+<span class="param">buttonId</span> was released. </p>
 <pre class="source">
 double timeReleased(int buttonId) {
  GameLoopDigitalButton button = buttons[buttonId];
@@ -441,7 +438,7 @@ double timeReleased(int buttonId) {
         </div>
         
         <div class="footer">
-          <div>This page was generated at 2013-01-10 11:22:02.048</div>
+          <div>This page was generated at 2013-01-29 07:40:57.702</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>

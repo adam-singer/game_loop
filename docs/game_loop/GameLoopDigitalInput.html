@@ -37,13 +37,15 @@
 <li><a href="../game_loop/GameLoopMouse.html"><div class="icon-class"></div>GameLoopMouse</a></li>
 <li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
 <li><a href="../game_loop/GameLoopPointerLock.html"><div class="icon-class"></div>GameLoopPointerLock</a></li>
+<li><a href="../game_loop/GameLoopPointerLockChangeFunction.html"><div class="icon-interface"></div>GameLoopPointerLockChangeFunction</a></li>
 <li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
+<li><a href="../game_loop/GameLoopRenderFunction.html"><div class="icon-interface"></div>GameLoopRenderFunction</a></li>
 <li><a href="../game_loop/GameLoopResizeFunction.html"><div class="icon-interface"></div>GameLoopResizeFunction</a></li>
 <li><a href="../game_loop/GameLoopTimer.html"><div class="icon-class"></div>GameLoopTimer</a></li>
 <li><a href="../game_loop/GameLoopTimerFunction.html"><div class="icon-interface"></div>GameLoopTimerFunction</a></li>
 <li><a href="../game_loop/GameLoopUpdateFunction.html"><div class="icon-interface"></div>GameLoopUpdateFunction</a></li>
 </ul>
-</div>
+<h2><div class="icon-library"></div><a href="../metadata.html">metadata</a></h2></div>
 <div class="content">
         <h2><strong>GameLoopDigitalInput</strong>
           class
@@ -51,7 +53,7 @@
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
-<p>A collection of digital input buttons</p>
+<p>A collection of digital input buttons </p>
 <pre class="source">
 class GameLoopDigitalInput {
  /** Game loop this digital input belongs to. */
@@ -151,7 +153,7 @@ class GameLoopDigitalInput {
 new <strong>GameLoopDigitalInput</strong>(<a href="../game_loop/GameLoop.html">GameLoop</a> gameLoop, List&lt;int&gt; buttonIds) <a class="anchor-link" href="#GameLoopDigitalInput"
               title="Permalink to GameLoopDigitalInput.GameLoopDigitalInput">#</a></h4>
 <div class="doc">
-<p>Create a digital input that supports all buttons in buttonIds.</p>
+<p>Create a digital input that supports all buttons in buttonIds. </p>
 <pre class="source">
 GameLoopDigitalInput(this.gameLoop, List&lt;int&gt; buttonIds) {
  for (int buttonId in buttonIds) {
@@ -171,10 +173,9 @@ final Map&lt;int, <a href="../game_loop/GameLoopDigitalButton.html">GameLoopDigi
             title="Permalink to GameLoopDigitalInput.buttons">#</a>
         </h4>
         <div class="doc">
-<p>Buttons this digital input knows about</p>
 <pre class="source">
-final Map&lt;int, GameLoopDigitalButton&gt; buttons =
-   new Map&lt;int, GameLoopDigitalButton&gt;();
+buttons =
+new Map&lt;int, GameLoopDigitalButton&gt;()
 </pre>
 </div>
 </div>
@@ -185,9 +186,8 @@ final <a href="../game_loop/GameLoop.html">GameLoop</a>         <strong>gameLoop
             title="Permalink to GameLoopDigitalInput.gameLoop">#</a>
         </h4>
         <div class="doc">
-<p>Game loop this digital input belongs to.</p>
 <pre class="source">
-final GameLoop gameLoop;
+gameLoop
 </pre>
 </div>
 </div>
@@ -199,7 +199,7 @@ final GameLoop gameLoop;
 void <strong>digitalButtonEvent</strong>(<a href="../game_loop/GameLoopDigitalButtonEvent.html">GameLoopDigitalButtonEvent</a> event) <a class="anchor-link" href="#digitalButtonEvent"
               title="Permalink to GameLoopDigitalInput.digitalButtonEvent">#</a></h4>
 <div class="doc">
-<p>Deliver an input event</p>
+<p>Deliver an input event </p>
 <pre class="source">
 void digitalButtonEvent(GameLoopDigitalButtonEvent event) {
  GameLoopDigitalButton button = buttons[event.buttonId];
@@ -226,7 +226,7 @@ bool <strong>isDown</strong>(int buttonId) <a class="anchor-link" href="#isDown"
               title="Permalink to GameLoopDigitalInput.isDown">#</a></h4>
 <div class="doc">
 <p>Is 
-<span class="param">buttonId</span> down this frame?</p>
+<span class="param">buttonId</span> down this frame? </p>
 <pre class="source">
 bool isDown(int buttonId) {
  GameLoopDigitalButton button = buttons[buttonId];
@@ -244,7 +244,7 @@ bool <strong>isUp</strong>(int buttonId) <a class="anchor-link" href="#isUp"
               title="Permalink to GameLoopDigitalInput.isUp">#</a></h4>
 <div class="doc">
 <p>Is 
-<span class="param">buttonId</span> up this frame?</p>
+<span class="param">buttonId</span> up this frame? </p>
 <pre class="source">
 bool isUp(int buttonId) {
  GameLoopDigitalButton button = buttons[buttonId];
@@ -262,7 +262,7 @@ bool <strong>pressed</strong>(int buttonId) <a class="anchor-link" href="#presse
               title="Permalink to GameLoopDigitalInput.pressed">#</a></h4>
 <div class="doc">
 <p>Was 
-<span class="param">buttonId</span> just pressed down?</p>
+<span class="param">buttonId</span> just pressed down? </p>
 <pre class="source">
 bool pressed(int buttonId) {
  GameLoopDigitalButton button = buttons[buttonId];
@@ -280,7 +280,7 @@ bool <strong>released</strong>(int buttonId) <a class="anchor-link" href="#relea
               title="Permalink to GameLoopDigitalInput.released">#</a></h4>
 <div class="doc">
 <p>Was 
-<span class="param">buttonId</span> just released?</p>
+<span class="param">buttonId</span> just released? </p>
 <pre class="source">
 bool released(int buttonId) {
  GameLoopDigitalButton button = buttons[buttonId];
@@ -298,7 +298,7 @@ double <strong>timePressed</strong>(int buttonId) <a class="anchor-link" href="#
               title="Permalink to GameLoopDigitalInput.timePressed">#</a></h4>
 <div class="doc">
 <p>Time 
-<span class="param">buttonId</span> was pressed.</p>
+<span class="param">buttonId</span> was pressed. </p>
 <pre class="source">
 double timePressed(int buttonId) {
  GameLoopDigitalButton button = buttons[buttonId];
@@ -316,7 +316,7 @@ double <strong>timeReleased</strong>(int buttonId) <a class="anchor-link" href="
               title="Permalink to GameLoopDigitalInput.timeReleased">#</a></h4>
 <div class="doc">
 <p>Time 
-<span class="param">buttonId</span> was released.</p>
+<span class="param">buttonId</span> was released. </p>
 <pre class="source">
 double timeReleased(int buttonId) {
  GameLoopDigitalButton button = buttons[buttonId];
@@ -334,7 +334,7 @@ double timeReleased(int buttonId) {
         </div>
         
         <div class="footer">
-          <div>This page was generated at 2013-01-10 11:22:02.086</div>
+          <div>This page was generated at 2013-01-29 07:40:57.790</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>

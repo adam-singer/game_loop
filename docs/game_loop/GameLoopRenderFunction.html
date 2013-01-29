@@ -2,19 +2,19 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>GameLoopTimerFunction typedef / game_loop Library / Dart Documentation</title>
+        <title>GameLoopRenderFunction typedef / game_loop Library / Dart Documentation</title>
         <link rel="stylesheet" type="text/css"
             href="../styles.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="../favicon.ico">
         
         </head>
-        <body data-library="game_loop" data-type="GameLoopTimerFunction">
+        <body data-library="game_loop" data-type="GameLoopRenderFunction">
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
           <a href="../index.html">Dart Documentation</a>
-         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopTimerFunction.html">GameLoopTimerFunction</a>        <div id="search-box">
+         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopRenderFunction.html">GameLoopRenderFunction</a>        <div id="search-box">
           <input type="search" name="q" id="q" autocomplete="off"
               class="search-input" placeholder="Search API">
         </div>
@@ -39,32 +39,32 @@
 <li><a href="../game_loop/GameLoopPointerLock.html"><div class="icon-class"></div>GameLoopPointerLock</a></li>
 <li><a href="../game_loop/GameLoopPointerLockChangeFunction.html"><div class="icon-interface"></div>GameLoopPointerLockChangeFunction</a></li>
 <li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
-<li><a href="../game_loop/GameLoopRenderFunction.html"><div class="icon-interface"></div>GameLoopRenderFunction</a></li>
+<li><div class="icon-interface"></div><strong>GameLoopRenderFunction</strong></li>
 <li><a href="../game_loop/GameLoopResizeFunction.html"><div class="icon-interface"></div>GameLoopResizeFunction</a></li>
 <li><a href="../game_loop/GameLoopTimer.html"><div class="icon-class"></div>GameLoopTimer</a></li>
-<li><div class="icon-interface"></div><strong>GameLoopTimerFunction</strong></li>
+<li><a href="../game_loop/GameLoopTimerFunction.html"><div class="icon-interface"></div>GameLoopTimerFunction</a></li>
 <li><a href="../game_loop/GameLoopUpdateFunction.html"><div class="icon-interface"></div>GameLoopUpdateFunction</a></li>
 </ul>
 <h2><div class="icon-library"></div><a href="../metadata.html">metadata</a></h2></div>
 <div class="content">
-        <h2><strong>GameLoopTimerFunction</strong>
+        <h2><strong>GameLoopRenderFunction</strong>
           typedef
         </h2>
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
-<p>Called when the timer fires. </p>
+<p>Called when it is time to draw. </p>
 <pre class="source">
-typedef GameLoopTimerFunction(GameLoopTimer gameLoop);
+typedef void GameLoopRenderFunction(GameLoop gameLoop);
 </pre>
 </div>
-<div class="method"><h4 id="GameLoopTimerFunction">
+<div class="method"><h4 id="GameLoopRenderFunction">
 <button class="show-code">Code</button>
-typedef GameLoopTimerFunction(<a href="../game_loop/GameLoopTimer.html">GameLoopTimer</a> gameLoop) <a class="anchor-link" href="#GameLoopTimerFunction"
-              title="Permalink to GameLoopTimerFunction">#</a></h4>
+typedef void GameLoopRenderFunction(<a href="../game_loop/GameLoop.html">GameLoop</a> gameLoop) <a class="anchor-link" href="#GameLoopRenderFunction"
+              title="Permalink to GameLoopRenderFunction">#</a></h4>
 <div class="doc">
 <pre class="source">
-typedef GameLoopTimerFunction(GameLoopTimer gameLoop);
+typedef void GameLoopRenderFunction(GameLoop gameLoop);
 </pre>
 </div>
 </div>
@@ -73,7 +73,7 @@ typedef GameLoopTimerFunction(GameLoopTimer gameLoop);
         </div>
         
         <div class="footer">
-          <div>This page was generated at 2013-01-29 07:40:57.667</div>
+          <div>This page was generated at 2013-01-29 07:40:57.837</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>

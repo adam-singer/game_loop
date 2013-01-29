@@ -37,13 +37,15 @@
 <li><a href="../game_loop/GameLoopMouse.html"><div class="icon-class"></div>GameLoopMouse</a></li>
 <li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
 <li><a href="../game_loop/GameLoopPointerLock.html"><div class="icon-class"></div>GameLoopPointerLock</a></li>
+<li><a href="../game_loop/GameLoopPointerLockChangeFunction.html"><div class="icon-interface"></div>GameLoopPointerLockChangeFunction</a></li>
 <li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
+<li><a href="../game_loop/GameLoopRenderFunction.html"><div class="icon-interface"></div>GameLoopRenderFunction</a></li>
 <li><a href="../game_loop/GameLoopResizeFunction.html"><div class="icon-interface"></div>GameLoopResizeFunction</a></li>
 <li><a href="../game_loop/GameLoopTimer.html"><div class="icon-class"></div>GameLoopTimer</a></li>
 <li><a href="../game_loop/GameLoopTimerFunction.html"><div class="icon-interface"></div>GameLoopTimerFunction</a></li>
 <li><a href="../game_loop/GameLoopUpdateFunction.html"><div class="icon-interface"></div>GameLoopUpdateFunction</a></li>
 </ul>
-</div>
+<h2><div class="icon-library"></div><a href="../metadata.html">metadata</a></h2></div>
 <div class="content">
         <h2><strong>GameLoopAnalogInput</strong>
           class
@@ -51,7 +53,7 @@
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
-<p>A collection of analog input buttons</p>
+<p>A collection of analog input buttons </p>
 <pre class="source">
 class GameLoopAnalogInput {
  final GameLoop gameLoop;
@@ -101,7 +103,7 @@ class GameLoopAnalogInput {
 new <strong>GameLoopAnalogInput</strong>(<a href="../game_loop/GameLoop.html">GameLoop</a> gameLoop, List&lt;int&gt; buttonIds) <a class="anchor-link" href="#GameLoopAnalogInput"
               title="Permalink to GameLoopAnalogInput.GameLoopAnalogInput">#</a></h4>
 <div class="doc">
-<p>Create a digital input that supports all buttons in buttonIds.</p>
+<p>Create a digital input that supports all buttons in buttonIds. </p>
 <pre class="source">
 GameLoopAnalogInput(this.gameLoop, List&lt;int&gt; buttonIds) {
  for (int buttonId in buttonIds) {
@@ -122,8 +124,8 @@ final Map&lt;int, <a href="../game_loop/GameLoopAnalogButton.html">GameLoopAnalo
         </h4>
         <div class="doc">
 <pre class="source">
-final Map&lt;int, GameLoopAnalogButton&gt; buttons =
-   new Map&lt;int, GameLoopAnalogButton&gt;();
+buttons =
+new Map&lt;int, GameLoopAnalogButton&gt;()
 </pre>
 </div>
 </div>
@@ -135,7 +137,7 @@ final <a href="../game_loop/GameLoop.html">GameLoop</a>         <strong>gameLoop
         </h4>
         <div class="doc">
 <pre class="source">
-final GameLoop gameLoop;
+gameLoop
 </pre>
 </div>
 </div>
@@ -147,7 +149,7 @@ final GameLoop gameLoop;
 int <strong>frameUpdated</strong>(int buttonId) <a class="anchor-link" href="#frameUpdated"
               title="Permalink to GameLoopAnalogInput.frameUpdated">#</a></h4>
 <div class="doc">
-<p>The frame the button was updated.</p>
+<p>The frame the button was updated. </p>
 <pre class="source">
 int frameUpdated(int buttonId) {
  GameLoopAnalogButton button = buttons[buttonId];
@@ -164,7 +166,7 @@ int frameUpdated(int buttonId) {
 double <strong>timeUpdated</strong>(int buttonId) <a class="anchor-link" href="#timeUpdated"
               title="Permalink to GameLoopAnalogInput.timeUpdated">#</a></h4>
 <div class="doc">
-<p>The time the button was updated.</p>
+<p>The time the button was updated. </p>
 <pre class="source">
 double timeUpdated(int buttonId) {
  GameLoopAnalogButton button = buttons[buttonId];
@@ -182,7 +184,7 @@ double <strong>value</strong>(int buttonId) <a class="anchor-link" href="#value"
               title="Permalink to GameLoopAnalogInput.value">#</a></h4>
 <div class="doc">
 <p>The value of 
-<span class="param">buttonId</span>.</p>
+<span class="param">buttonId</span>. </p>
 <pre class="source">
 double value(int buttonId) {
  GameLoopAnalogButton button = buttons[buttonId];
@@ -200,7 +202,7 @@ double value(int buttonId) {
         </div>
         
         <div class="footer">
-          <div>This page was generated at 2013-01-10 11:22:02.074</div>
+          <div>This page was generated at 2013-01-29 07:40:57.771</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>

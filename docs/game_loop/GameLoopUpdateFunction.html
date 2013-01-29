@@ -37,13 +37,15 @@
 <li><a href="../game_loop/GameLoopMouse.html"><div class="icon-class"></div>GameLoopMouse</a></li>
 <li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
 <li><a href="../game_loop/GameLoopPointerLock.html"><div class="icon-class"></div>GameLoopPointerLock</a></li>
+<li><a href="../game_loop/GameLoopPointerLockChangeFunction.html"><div class="icon-interface"></div>GameLoopPointerLockChangeFunction</a></li>
 <li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
+<li><a href="../game_loop/GameLoopRenderFunction.html"><div class="icon-interface"></div>GameLoopRenderFunction</a></li>
 <li><a href="../game_loop/GameLoopResizeFunction.html"><div class="icon-interface"></div>GameLoopResizeFunction</a></li>
 <li><a href="../game_loop/GameLoopTimer.html"><div class="icon-class"></div>GameLoopTimer</a></li>
 <li><a href="../game_loop/GameLoopTimerFunction.html"><div class="icon-interface"></div>GameLoopTimerFunction</a></li>
 <li><div class="icon-interface"></div><strong>GameLoopUpdateFunction</strong></li>
 </ul>
-</div>
+<h2><div class="icon-library"></div><a href="../metadata.html">metadata</a></h2></div>
 <div class="content">
         <h2><strong>GameLoopUpdateFunction</strong>
           typedef
@@ -51,7 +53,8 @@
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
-<p>Called once per frame when it is time to update and render.</p>
+<p>Called once per game logic frame. See <code>updateTimeStep</code> and
+<code>maxAccumulatedTime</code> </p>
 <pre class="source">
 typedef void GameLoopUpdateFunction(GameLoop gameLoop);
 </pre>
@@ -71,7 +74,7 @@ typedef void GameLoopUpdateFunction(GameLoop gameLoop);
         </div>
         
         <div class="footer">
-          <div>This page was generated at 2013-01-10 11:22:02.116</div>
+          <div>This page was generated at 2013-01-29 07:40:57.834</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>

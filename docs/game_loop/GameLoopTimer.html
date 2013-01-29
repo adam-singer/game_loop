@@ -37,13 +37,15 @@
 <li><a href="../game_loop/GameLoopMouse.html"><div class="icon-class"></div>GameLoopMouse</a></li>
 <li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
 <li><a href="../game_loop/GameLoopPointerLock.html"><div class="icon-class"></div>GameLoopPointerLock</a></li>
+<li><a href="../game_loop/GameLoopPointerLockChangeFunction.html"><div class="icon-interface"></div>GameLoopPointerLockChangeFunction</a></li>
 <li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
+<li><a href="../game_loop/GameLoopRenderFunction.html"><div class="icon-interface"></div>GameLoopRenderFunction</a></li>
 <li><a href="../game_loop/GameLoopResizeFunction.html"><div class="icon-interface"></div>GameLoopResizeFunction</a></li>
 <li><div class="icon-class"></div><strong>GameLoopTimer</strong></li>
 <li><a href="../game_loop/GameLoopTimerFunction.html"><div class="icon-interface"></div>GameLoopTimerFunction</a></li>
 <li><a href="../game_loop/GameLoopUpdateFunction.html"><div class="icon-interface"></div>GameLoopUpdateFunction</a></li>
 </ul>
-</div>
+<h2><div class="icon-library"></div><a href="../metadata.html">metadata</a></h2></div>
 <div class="content">
         <h2><strong>GameLoopTimer</strong>
           class
@@ -94,9 +96,8 @@ final <a href="../game_loop/GameLoop.html">GameLoop</a>         <strong>gameLoop
             title="Permalink to GameLoopTimer.gameLoop">#</a>
         </h4>
         <div class="doc">
-<p>Game loop timer was created by</p>
 <pre class="source">
-final GameLoop gameLoop;
+gameLoop
 </pre>
 </div>
 </div>
@@ -107,9 +108,8 @@ final <a href="../game_loop/GameLoopTimerFunction.html">GameLoopTimerFunction</a
             title="Permalink to GameLoopTimer.onTimer">#</a>
         </h4>
         <div class="doc">
-<p>Callback function that will be call when timer fires.</p>
 <pre class="source">
-final GameLoopTimerFunction onTimer;
+onTimer
 </pre>
 </div>
 </div>
@@ -120,7 +120,7 @@ final double         <strong>timeToFire</strong> <a class="anchor-link"
             title="Permalink to GameLoopTimer.timeToFire">#</a>
         </h4>
         <div class="doc">
-<p>Time until timer fires.</p>
+<p>Time until timer fires. </p>
 <pre class="source">
 double get timeToFire =&gt; _timeToFire;
 </pre>
@@ -134,7 +134,7 @@ double get timeToFire =&gt; _timeToFire;
 void <strong>cancel</strong>() <a class="anchor-link" href="#cancel"
               title="Permalink to GameLoopTimer.cancel">#</a></h4>
 <div class="doc">
-<p>Cancel the timer.</p>
+<p>Cancel the timer. </p>
 <pre class="source">
 void cancel() {
  _timeToFire = -1.0;
@@ -148,7 +148,7 @@ void cancel() {
         </div>
         
         <div class="footer">
-          <div>This page was generated at 2013-01-10 11:22:02.024</div>
+          <div>This page was generated at 2013-01-29 07:40:57.660</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>

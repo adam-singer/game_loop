@@ -146,7 +146,7 @@
           "refId": "Object"
         },
         "kind": "class",
-        "comment": "A cancellable timer that calls a [GameLoopTimerFunction] when it fires.\nA timer can only fire once, afterwards it is dead.\n\n",
+        "comment": "A cancellable timer that calls a [GameLoopTimerFunction] when it fires.\nA timer can only fire once, afterwards it is dead.\n",
         "name": "GameLoopTimer",
         "children": [
           {
@@ -155,7 +155,7 @@
               "refId": "double"
             },
             "kind": "method",
-            "comment": "Time until timer fires.\n",
+            "comment": "Time until timer fires. ",
             "name": "timeToFire",
             "id": "timeToFire0()"
           },
@@ -232,7 +232,7 @@
               "refId": "void"
             },
             "kind": "method",
-            "comment": "Cancel the timer.\n",
+            "comment": "Cancel the timer. ",
             "name": "cancel",
             "id": "cancel0()"
           },
@@ -242,7 +242,7 @@
               "refId": "double"
             },
             "kind": "property",
-            "comment": "Time until timer fires.\n",
+            "comment": "Time until timer fires. ",
             "name": "timeToFire",
             "id": "timeToFire"
           },
@@ -325,7 +325,7 @@
       },
       {
         "kind": "typedef",
-        "comment": "Called when the timer fires.\n",
+        "comment": "Called when the timer fires. ",
         "name": "GameLoopTimerFunction",
         "id": "GameLoopTimerFunction"
       },
@@ -335,7 +335,7 @@
           "refId": "Object"
         },
         "kind": "class",
-        "comment": "A gamepad\n",
+        "comment": "A gamepad ",
         "name": "GameLoopGamepad",
         "children": [
           {
@@ -490,7 +490,7 @@
           "refId": "GameLoopDigitalInput"
         },
         "kind": "class",
-        "comment": "A mouse input. Has digital buttons corresponding to mouse buttons:\n[LEFT], [MIDDLE], [RIGHT]. Also implements the [GameLoopPositionInput]\ninterface.\n\n",
+        "comment": "A mouse input. Has digital buttons corresponding to mouse buttons:\n[LEFT], [MIDDLE], [RIGHT]. Also implements the [GameLoopPositionInput]\ninterface.\n",
         "name": "GameLoopMouse",
         "children": [
           {
@@ -499,7 +499,7 @@
               "refId": "int"
             },
             "kind": "method",
-            "comment": "Mouse movement in x direction since previous frame.\n",
+            "comment": "Mouse movement in x direction since previous frame. ",
             "name": "dx",
             "id": "dx0()"
           },
@@ -509,7 +509,7 @@
               "refId": "int"
             },
             "kind": "method",
-            "comment": "Mouse movement in y direction since previous frame.\n",
+            "comment": "Mouse movement in y direction since previous frame. ",
             "name": "dy",
             "id": "dy0()"
           },
@@ -519,7 +519,7 @@
               "refId": "int"
             },
             "kind": "method",
-            "comment": "Mouse position in x direction within element.\n",
+            "comment": "Mouse position in x direction within element. ",
             "name": "x",
             "id": "x0()"
           },
@@ -529,7 +529,7 @@
               "refId": "int"
             },
             "kind": "method",
-            "comment": "Mouse position in y direction within element.\n",
+            "comment": "Mouse position in y direction within element. ",
             "name": "y",
             "id": "y0()"
           },
@@ -539,7 +539,7 @@
               "refId": "double"
             },
             "kind": "method",
-            "comment": "Time at which mouse position was last updated.\n",
+            "comment": "Time at which mouse position was last updated. ",
             "name": "time",
             "id": "time0()"
           },
@@ -549,7 +549,7 @@
               "refId": "int"
             },
             "kind": "method",
-            "comment": "Frame at which mouse position was last updated.\n",
+            "comment": "Frame at which mouse position was last updated. ",
             "name": "frame",
             "id": "frame0()"
           },
@@ -579,7 +579,7 @@
               "refId": "void"
             },
             "kind": "method",
-            "comment": "Process one [GameLoopMouseEvent].\n",
+            "comment": "Process one [GameLoopMouseEvent]. ",
             "name": "gameLoopMouseEvent",
             "children": [
               {
@@ -609,7 +609,7 @@
               "refId": "int"
             },
             "kind": "property",
-            "comment": "Mouse movement in x direction since previous frame.\n",
+            "comment": "Mouse movement in x direction since previous frame. ",
             "name": "dx",
             "id": "dx"
           },
@@ -619,7 +619,7 @@
               "refId": "int"
             },
             "kind": "property",
-            "comment": "Mouse movement in y direction since previous frame.\n",
+            "comment": "Mouse movement in y direction since previous frame. ",
             "name": "dy",
             "id": "dy"
           },
@@ -629,7 +629,7 @@
               "refId": "int"
             },
             "kind": "property",
-            "comment": "Mouse position in x direction within element.\n",
+            "comment": "Mouse position in x direction within element. ",
             "name": "x",
             "id": "x"
           },
@@ -639,7 +639,7 @@
               "refId": "int"
             },
             "kind": "property",
-            "comment": "Mouse position in y direction within element.\n",
+            "comment": "Mouse position in y direction within element. ",
             "name": "y",
             "id": "y"
           },
@@ -649,7 +649,7 @@
               "refId": "double"
             },
             "kind": "property",
-            "comment": "Time at which mouse position was last updated.\n",
+            "comment": "Time at which mouse position was last updated. ",
             "name": "time",
             "id": "time"
           },
@@ -659,7 +659,7 @@
               "refId": "int"
             },
             "kind": "property",
-            "comment": "Frame at which mouse position was last updated.\n",
+            "comment": "Frame at which mouse position was last updated. ",
             "name": "frame",
             "id": "frame"
           },
@@ -987,7 +987,7 @@
           "refId": "GameLoopDigitalInput"
         },
         "kind": "class",
-        "comment": "A keyboard input. Has digital buttons corresponding to keyboard keys.\n\n",
+        "comment": "A keyboard input. Has digital buttons corresponding to keyboard keys.\n",
         "name": "GameLoopKeyboard",
         "children": [
           {
@@ -1515,7 +1515,7 @@
           "refId": "Object"
         },
         "kind": "class",
-        "comment": "A collection of analog input buttons\n",
+        "comment": "A collection of analog input buttons ",
         "name": "GameLoopAnalogInput",
         "children": [
           {
@@ -1524,7 +1524,7 @@
               "refId": "dynamic"
             },
             "kind": "method",
-            "comment": "Create a digital input that supports all buttons in buttonIds.\n",
+            "comment": "Create a digital input that supports all buttons in buttonIds. ",
             "name": "GameLoopAnalogInput",
             "children": [
               {
@@ -1560,7 +1560,7 @@
               "refId": "double"
             },
             "kind": "method",
-            "comment": "The time the button was updated.\n",
+            "comment": "The time the button was updated. ",
             "name": "timeUpdated",
             "children": [
               {
@@ -1581,7 +1581,7 @@
               "refId": "int"
             },
             "kind": "method",
-            "comment": "The frame the button was updated.\n",
+            "comment": "The frame the button was updated. ",
             "name": "frameUpdated",
             "children": [
               {
@@ -1602,7 +1602,7 @@
               "refId": "double"
             },
             "kind": "method",
-            "comment": "The value of [buttonId].\n",
+            "comment": "The value of [buttonId]. ",
             "name": "value",
             "children": [
               {
@@ -1651,7 +1651,7 @@
               "refId": "dynamic"
             },
             "kind": "constructor",
-            "comment": "Create a digital input that supports all buttons in buttonIds.\n",
+            "comment": "Create a digital input that supports all buttons in buttonIds. ",
             "name": "GameLoopAnalogInput",
             "children": [
               {
@@ -1690,7 +1690,7 @@
           "refId": "Object"
         },
         "kind": "class",
-        "comment": "The state of an analog input button\n",
+        "comment": "The state of an analog input button ",
         "name": "GameLoopAnalogButton",
         "children": [
           {
@@ -1778,7 +1778,7 @@
           "refId": "Object"
         },
         "kind": "class",
-        "comment": "An input which has a position will implement this interface. For example,\n[GameLoopMouse].\n\n",
+        "comment": "An input which has a position will implement this interface. For example,\n[GameLoopMouse].\n",
         "name": "GameLoopPositionInput",
         "children": [
           {
@@ -1898,7 +1898,7 @@
           "refId": "Object"
         },
         "kind": "class",
-        "comment": "A collection of digital input buttons\n",
+        "comment": "A collection of digital input buttons ",
         "name": "GameLoopDigitalInput",
         "children": [
           {
@@ -1907,7 +1907,7 @@
               "refId": "dynamic"
             },
             "kind": "method",
-            "comment": "Create a digital input that supports all buttons in buttonIds.\n",
+            "comment": "Create a digital input that supports all buttons in buttonIds. ",
             "name": "GameLoopDigitalInput",
             "children": [
               {
@@ -1943,7 +1943,7 @@
               "refId": "void"
             },
             "kind": "method",
-            "comment": "Deliver an input event\n",
+            "comment": "Deliver an input event ",
             "name": "digitalButtonEvent",
             "children": [
               {
@@ -1964,7 +1964,7 @@
               "refId": "bool"
             },
             "kind": "method",
-            "comment": "Is [buttonId] down this frame?\n",
+            "comment": "Is [buttonId] down this frame? ",
             "name": "isDown",
             "children": [
               {
@@ -1985,7 +1985,7 @@
               "refId": "bool"
             },
             "kind": "method",
-            "comment": "Was [buttonId] just pressed down?\n",
+            "comment": "Was [buttonId] just pressed down? ",
             "name": "pressed",
             "children": [
               {
@@ -2006,7 +2006,7 @@
               "refId": "bool"
             },
             "kind": "method",
-            "comment": "Was [buttonId] just released?\n",
+            "comment": "Was [buttonId] just released? ",
             "name": "released",
             "children": [
               {
@@ -2027,7 +2027,7 @@
               "refId": "bool"
             },
             "kind": "method",
-            "comment": "Is [buttonId] up this frame?\n",
+            "comment": "Is [buttonId] up this frame? ",
             "name": "isUp",
             "children": [
               {
@@ -2048,7 +2048,7 @@
               "refId": "double"
             },
             "kind": "method",
-            "comment": "Time [buttonId] was pressed.\n",
+            "comment": "Time [buttonId] was pressed. ",
             "name": "timePressed",
             "children": [
               {
@@ -2069,7 +2069,7 @@
               "refId": "double"
             },
             "kind": "method",
-            "comment": "Time [buttonId] was released.\n",
+            "comment": "Time [buttonId] was released. ",
             "name": "timeReleased",
             "children": [
               {
@@ -2118,7 +2118,7 @@
               "refId": "dynamic"
             },
             "kind": "constructor",
-            "comment": "Create a digital input that supports all buttons in buttonIds.\n",
+            "comment": "Create a digital input that supports all buttons in buttonIds. ",
             "name": "GameLoopDigitalInput",
             "children": [
               {
@@ -2307,7 +2307,7 @@
           "refId": "Object"
         },
         "kind": "class",
-        "comment": "The state of a digital button: frame and time when button was\nlast pressed and released.\n\n",
+        "comment": "The state of a digital button: frame and time when button was\nlast pressed and released.\n",
         "name": "GameLoopDigitalButton",
         "children": [
           {
@@ -2336,7 +2336,7 @@
               "refId": "bool"
             },
             "kind": "method",
-            "comment": "Is button down in this frame?\n",
+            "comment": "Is button down in this frame? ",
             "name": "down",
             "id": "down0()"
           },
@@ -2346,7 +2346,7 @@
               "refId": "bool"
             },
             "kind": "method",
-            "comment": "Is button up in this frame?\n",
+            "comment": "Is button up in this frame? ",
             "name": "up",
             "id": "up0()"
           },
@@ -2356,7 +2356,7 @@
               "refId": "bool"
             },
             "kind": "property",
-            "comment": "Is button down in this frame?\n",
+            "comment": "Is button down in this frame? ",
             "name": "down",
             "id": "down"
           },
@@ -2366,7 +2366,7 @@
               "refId": "bool"
             },
             "kind": "property",
-            "comment": "Is button up in this frame?\n",
+            "comment": "Is button up in this frame? ",
             "name": "up",
             "id": "up"
           },
@@ -2444,16 +2444,26 @@
           "refId": "Object"
         },
         "kind": "class",
-        "comment": "The game loop\n",
+        "comment": "The game loop ",
         "name": "GameLoop",
         "children": [
+          {
+            "returnType": {
+              "name": "double",
+              "refId": "double"
+            },
+            "kind": "method",
+            "comment": "Seconds of accumulated time. ",
+            "name": "accumulatedTime",
+            "id": "accumulatedTime0()"
+          },
           {
             "returnType": {
               "name": "int",
               "refId": "int"
             },
             "kind": "method",
-            "comment": "Width of game display [Element]\n",
+            "comment": "Width of game display [Element] ",
             "name": "width",
             "id": "width0()"
           },
@@ -2463,7 +2473,7 @@
               "refId": "int"
             },
             "kind": "method",
-            "comment": "Height of game display [Element]\n",
+            "comment": "Height of game display [Element] ",
             "name": "height",
             "id": "height0()"
           },
@@ -2473,7 +2483,7 @@
               "refId": "int"
             },
             "kind": "method",
-            "comment": "Frame counter value. Incremented once per frame.\n",
+            "comment": "Frame counter value. Incremented once per frame. ",
             "name": "frame",
             "id": "frame0()"
           },
@@ -2483,9 +2493,9 @@
               "refId": "double"
             },
             "kind": "method",
-            "comment": "Frame time value in seconds.\n",
-            "name": "frameTime",
-            "id": "frameTime0()"
+            "comment": "Current time as seen by onUpdate calls. ",
+            "name": "gameTime",
+            "id": "gameTime0()"
           },
           {
             "returnType": {
@@ -2493,9 +2503,29 @@
               "refId": "double"
             },
             "kind": "method",
-            "comment": "Time elapsed since previous frame\n",
+            "comment": "Seconds between requestAnimationFrameTime calls. ",
+            "name": "requestAnimationFrameTime",
+            "id": "requestAnimationFrameTime0()"
+          },
+          {
+            "returnType": {
+              "name": "double",
+              "refId": "double"
+            },
+            "kind": "method",
+            "comment": "Time elapsed in current frame. ",
             "name": "dt",
             "id": "dt0()"
+          },
+          {
+            "returnType": {
+              "name": "double",
+              "refId": "double"
+            },
+            "kind": "method",
+            "comment": "Interpolation value between 0.0 and 1.0 ",
+            "name": "renderInterpolationFactor",
+            "id": "renderInterpolationFactor0()"
           },
           {
             "isStatic": true,
@@ -2587,7 +2617,7 @@
               "refId": "double"
             },
             "kind": "method",
-            "comment": "Current time.\n",
+            "comment": "Current time. ",
             "name": "time",
             "id": "time0()"
           },
@@ -2606,7 +2636,7 @@
               "refId": "GameLoopKeyboard"
             },
             "kind": "method",
-            "comment": "Keyboard.\n",
+            "comment": "Keyboard. ",
             "name": "keyboard",
             "id": "keyboard0()"
           },
@@ -2616,7 +2646,7 @@
               "refId": "GameLoopMouse"
             },
             "kind": "method",
-            "comment": "Mouse.\n",
+            "comment": "Mouse. ",
             "name": "mouse",
             "id": "mouse0()"
           },
@@ -2626,7 +2656,7 @@
               "refId": "GameLoopGamepad"
             },
             "kind": "method",
-            "comment": "Gamepad #0.\n",
+            "comment": "Gamepad #0. ",
             "name": "gamepad0",
             "id": "gamepad00()"
           },
@@ -2636,7 +2666,7 @@
               "refId": "dynamic"
             },
             "kind": "method",
-            "comment": "Construct a new game loop attaching it to [element]\n",
+            "comment": "Construct a new game loop attaching it to [element] ",
             "name": "GameLoop",
             "children": [
               {
@@ -2855,7 +2885,7 @@
               "refId": "void"
             },
             "kind": "method",
-            "comment": "Start the game loop.\n",
+            "comment": "Start the game loop. ",
             "name": "start",
             "id": "start0()"
           },
@@ -2865,7 +2895,7 @@
               "refId": "void"
             },
             "kind": "method",
-            "comment": "Stop the game loop.\n",
+            "comment": "Stop the game loop. ",
             "name": "stop",
             "id": "stop0()"
           },
@@ -2875,7 +2905,7 @@
               "refId": "bool"
             },
             "kind": "method",
-            "comment": "Is the element being displayed full screen?\n",
+            "comment": "Is the element being displayed full screen? ",
             "name": "isFullscreen",
             "id": "isFullscreen0()"
           },
@@ -2885,7 +2915,7 @@
               "refId": "void"
             },
             "kind": "method",
-            "comment": "Enable or disable fullscreen display of the element.\n",
+            "comment": "Enable or disable fullscreen display of the element. ",
             "name": "enableFullscreen",
             "children": [
               {
@@ -2906,7 +2936,7 @@
               "refId": "GameLoopTimer"
             },
             "kind": "method",
-            "comment": "Add a new timer which calls [callback] in [delay] seconds.\n",
+            "comment": "Add a new timer which calls [callback] in [delay] seconds. ",
             "name": "addTimer",
             "children": [
               {
@@ -2936,9 +2966,19 @@
               "refId": "void"
             },
             "kind": "method",
-            "comment": "Clear all existing timers.\n",
+            "comment": "Clear all existing timers. ",
             "name": "clearTimers",
             "id": "clearTimers0()"
+          },
+          {
+            "ref": {
+              "name": "double",
+              "refId": "double"
+            },
+            "kind": "property",
+            "comment": "Seconds of accumulated time. ",
+            "name": "accumulatedTime",
+            "id": "accumulatedTime"
           },
           {
             "ref": {
@@ -2946,7 +2986,7 @@
               "refId": "int"
             },
             "kind": "property",
-            "comment": "Width of game display [Element]\n",
+            "comment": "Width of game display [Element] ",
             "name": "width",
             "id": "width"
           },
@@ -2956,7 +2996,7 @@
               "refId": "int"
             },
             "kind": "property",
-            "comment": "Height of game display [Element]\n",
+            "comment": "Height of game display [Element] ",
             "name": "height",
             "id": "height"
           },
@@ -2966,7 +3006,7 @@
               "refId": "int"
             },
             "kind": "property",
-            "comment": "Frame counter value. Incremented once per frame.\n",
+            "comment": "Frame counter value. Incremented once per frame. ",
             "name": "frame",
             "id": "frame"
           },
@@ -2976,9 +3016,9 @@
               "refId": "double"
             },
             "kind": "property",
-            "comment": "Frame time value in seconds.\n",
-            "name": "frameTime",
-            "id": "frameTime"
+            "comment": "Current time as seen by onUpdate calls. ",
+            "name": "gameTime",
+            "id": "gameTime"
           },
           {
             "ref": {
@@ -2986,7 +3026,17 @@
               "refId": "double"
             },
             "kind": "property",
-            "comment": "Time elapsed since previous frame\n",
+            "comment": "Seconds between requestAnimationFrameTime calls. ",
+            "name": "requestAnimationFrameTime",
+            "id": "requestAnimationFrameTime"
+          },
+          {
+            "ref": {
+              "name": "double",
+              "refId": "double"
+            },
+            "kind": "property",
+            "comment": "Time elapsed in current frame. ",
             "name": "dt",
             "id": "dt"
           },
@@ -2996,7 +3046,17 @@
               "refId": "double"
             },
             "kind": "property",
-            "comment": "Current time.\n",
+            "comment": "Interpolation value between 0.0 and 1.0 ",
+            "name": "renderInterpolationFactor",
+            "id": "renderInterpolationFactor"
+          },
+          {
+            "ref": {
+              "name": "double",
+              "refId": "double"
+            },
+            "kind": "property",
+            "comment": "Current time. ",
             "name": "time",
             "id": "time"
           },
@@ -3015,7 +3075,7 @@
               "refId": "GameLoopKeyboard"
             },
             "kind": "property",
-            "comment": "Keyboard.\n",
+            "comment": "Keyboard. ",
             "name": "keyboard",
             "id": "keyboard"
           },
@@ -3025,7 +3085,7 @@
               "refId": "GameLoopMouse"
             },
             "kind": "property",
-            "comment": "Mouse.\n",
+            "comment": "Mouse. ",
             "name": "mouse",
             "id": "mouse"
           },
@@ -3035,7 +3095,7 @@
               "refId": "GameLoopGamepad"
             },
             "kind": "property",
-            "comment": "Gamepad #0.\n",
+            "comment": "Gamepad #0. ",
             "name": "gamepad0",
             "id": "gamepad0"
           },
@@ -3045,7 +3105,7 @@
               "refId": "bool"
             },
             "kind": "property",
-            "comment": "Is the element being displayed full screen?\n",
+            "comment": "Is the element being displayed full screen? ",
             "name": "isFullscreen",
             "id": "isFullscreen"
           },
@@ -3109,8 +3169,44 @@
               "refId": "double"
             },
             "kind": "property",
-            "name": "_dt",
-            "id": "_dt"
+            "name": "updateTimeStep",
+            "id": "updateTimeStep"
+          },
+          {
+            "ref": {
+              "name": "double",
+              "refId": "double"
+            },
+            "kind": "property",
+            "name": "maxAccumulatedTime",
+            "id": "maxAccumulatedTime"
+          },
+          {
+            "ref": {
+              "name": "double",
+              "refId": "double"
+            },
+            "kind": "property",
+            "name": "_accumulatedTime",
+            "id": "_accumulatedTime"
+          },
+          {
+            "ref": {
+              "name": "double",
+              "refId": "double"
+            },
+            "kind": "property",
+            "name": "_gameTime",
+            "id": "_gameTime"
+          },
+          {
+            "ref": {
+              "name": "double",
+              "refId": "double"
+            },
+            "kind": "property",
+            "name": "_renderInterpolationFactor",
+            "id": "_renderInterpolationFactor"
           },
           {
             "ref": {
@@ -3204,6 +3300,15 @@
           },
           {
             "ref": {
+              "name": "GameLoopRenderFunction",
+              "refId": "GameLoopRenderFunction"
+            },
+            "kind": "property",
+            "name": "onRender",
+            "id": "onRender"
+          },
+          {
+            "ref": {
               "name": "GameLoopResizeFunction",
               "refId": "GameLoopResizeFunction"
             },
@@ -3221,12 +3326,21 @@
             "id": "onFullscreenChange"
           },
           {
+            "ref": {
+              "name": "GameLoopPointerLockChangeFunction",
+              "refId": "GameLoopPointerLockChangeFunction"
+            },
+            "kind": "property",
+            "name": "onPointerLockChange",
+            "id": "onPointerLockChange"
+          },
+          {
             "returnType": {
               "name": "dynamic",
               "refId": "dynamic"
             },
             "kind": "constructor",
-            "comment": "Construct a new game loop attaching it to [element]\n",
+            "comment": "Construct a new game loop attaching it to [element] ",
             "name": "GameLoop",
             "children": [
               {
@@ -3246,23 +3360,303 @@
       },
       {
         "kind": "typedef",
-        "comment": "Called whenever the element moves between fullscreen and non-fullscreen\nmode.\n\n",
+        "comment": "Called whenever the element moves between locking the pointer and\nnot locking the pointer.\n",
+        "name": "GameLoopPointerLockChangeFunction",
+        "id": "GameLoopPointerLockChangeFunction"
+      },
+      {
+        "kind": "typedef",
+        "comment": "Called whenever the element moves between fullscreen and non-fullscreen\nmode.\n",
         "name": "GameLoopFullscreenChangeFunction",
         "id": "GameLoopFullscreenChangeFunction"
       },
       {
         "kind": "typedef",
-        "comment": "Called whenever the element is resized.\n",
+        "comment": "Called whenever the element is resized. ",
         "name": "GameLoopResizeFunction",
         "id": "GameLoopResizeFunction"
       },
       {
         "kind": "typedef",
-        "comment": "Called once per frame when it is time to update and render.\n",
+        "comment": "Called once per game logic frame. See [updateTimeStep] and\n[maxAccumulatedTime] ",
         "name": "GameLoopUpdateFunction",
         "id": "GameLoopUpdateFunction"
+      },
+      {
+        "kind": "typedef",
+        "comment": "Called when it is time to draw. ",
+        "name": "GameLoopRenderFunction",
+        "id": "GameLoopRenderFunction"
       }
     ],
     "id": "file:///Users/johnmccutchan/workspace/game_loop/lib/game_loop.dart"
+  },
+  {
+    "kind": "library",
+    "name": "metadata",
+    "children": [
+      {
+        "superclass": {
+          "name": "Object",
+          "refId": "Object"
+        },
+        "kind": "class",
+        "comment": "Metadata that specifies that that member is editable through generated\nfiles.",
+        "name": "DocsEditable",
+        "children": [
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "method",
+            "name": "DocsEditable",
+            "id": "DocsEditable0()"
+          },
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "constructor",
+            "name": "DocsEditable",
+            "id": "DocsEditable0()"
+          }
+        ],
+        "id": "DocsEditable"
+      },
+      {
+        "superclass": {
+          "name": "Object",
+          "refId": "Object"
+        },
+        "kind": "class",
+        "comment": "\nMetadata that specifies the DOM name associated with the element.\n\nThis is used for API generation.\n\n[name] should be formatted as `interface.member`.\n",
+        "name": "DomName",
+        "children": [
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "method",
+            "name": "DomName",
+            "children": [
+              {
+                "ref": {
+                  "name": "String",
+                  "refId": "String"
+                },
+                "kind": "param",
+                "name": "name",
+                "id": "name"
+              }
+            ],
+            "id": "DomName1()"
+          },
+          {
+            "ref": {
+              "name": "String",
+              "refId": "String"
+            },
+            "kind": "property",
+            "name": "name",
+            "id": "name"
+          },
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "constructor",
+            "name": "DomName",
+            "children": [
+              {
+                "ref": {
+                  "name": "String",
+                  "refId": "String"
+                },
+                "kind": "param",
+                "name": "name",
+                "id": "name"
+              }
+            ],
+            "id": "DomName1()"
+          }
+        ],
+        "id": "DomName"
+      },
+      {
+        "superclass": {
+          "name": "Object",
+          "refId": "Object"
+        },
+        "kind": "class",
+        "comment": "\nAn annotation used to mark an API as being experimental.\n\nAn API is considered to be experimental if it is still going through the\nprocess of stabilizing and is subject to change or removal.\n\nSee also:\n\n* [W3C recommendation](http://en.wikipedia.org/wiki/W3C_recommendation)\n",
+        "name": "Experimental",
+        "children": [
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "method",
+            "name": "Experimental",
+            "id": "Experimental0()"
+          },
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "constructor",
+            "name": "Experimental",
+            "id": "Experimental0()"
+          }
+        ],
+        "id": "Experimental"
+      },
+      {
+        "superclass": {
+          "name": "Object",
+          "refId": "Object"
+        },
+        "kind": "class",
+        "comment": "\nAn annotation used to mark a feature as only being supported by a subset\nof the browsers that Dart supports by default.\n\nIf an API is not annotated with [SupportedBrowser] then it is assumed to\nwork on all browsers Dart supports.\n",
+        "name": "SupportedBrowser",
+        "children": [
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "method",
+            "name": "SupportedBrowser",
+            "children": [
+              {
+                "ref": {
+                  "name": "String",
+                  "refId": "String"
+                },
+                "kind": "param",
+                "name": "browserName",
+                "id": "browserName"
+              },
+              {
+                "ref": {
+                  "name": "String",
+                  "refId": "String"
+                },
+                "isOptional": true,
+                "kind": "param",
+                "name": "minimumVersion",
+                "id": "minimumVersion"
+              }
+            ],
+            "id": "SupportedBrowser2()"
+          },
+          {
+            "ref": {
+              "name": "String",
+              "refId": "String"
+            },
+            "isStatic": true,
+            "kind": "property",
+            "name": "CHROME",
+            "id": "CHROME"
+          },
+          {
+            "ref": {
+              "name": "String",
+              "refId": "String"
+            },
+            "isStatic": true,
+            "kind": "property",
+            "name": "FIREFOX",
+            "id": "FIREFOX"
+          },
+          {
+            "ref": {
+              "name": "String",
+              "refId": "String"
+            },
+            "isStatic": true,
+            "kind": "property",
+            "name": "IE",
+            "id": "IE"
+          },
+          {
+            "ref": {
+              "name": "String",
+              "refId": "String"
+            },
+            "isStatic": true,
+            "kind": "property",
+            "name": "OPERA",
+            "id": "OPERA"
+          },
+          {
+            "ref": {
+              "name": "String",
+              "refId": "String"
+            },
+            "isStatic": true,
+            "kind": "property",
+            "name": "SAFARI",
+            "id": "SAFARI"
+          },
+          {
+            "ref": {
+              "name": "String",
+              "refId": "String"
+            },
+            "kind": "property",
+            "name": "browserName",
+            "id": "browserName"
+          },
+          {
+            "ref": {
+              "name": "String",
+              "refId": "String"
+            },
+            "kind": "property",
+            "name": "minimumVersion",
+            "id": "minimumVersion"
+          },
+          {
+            "returnType": {
+              "name": "dynamic",
+              "refId": "dynamic"
+            },
+            "kind": "constructor",
+            "name": "SupportedBrowser",
+            "children": [
+              {
+                "ref": {
+                  "name": "String",
+                  "refId": "String"
+                },
+                "kind": "param",
+                "name": "browserName",
+                "id": "browserName"
+              },
+              {
+                "ref": {
+                  "name": "String",
+                  "refId": "String"
+                },
+                "isOptional": true,
+                "kind": "param",
+                "name": "minimumVersion",
+                "id": "minimumVersion"
+              }
+            ],
+            "id": "SupportedBrowser2()"
+          }
+        ],
+        "id": "SupportedBrowser"
+      }
+    ],
+    "id": "file:///Users/johnmccutchan/dart/dart-sdk/lib/html/html_common/metadata.dart"
   }
 ]

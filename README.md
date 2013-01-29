@@ -59,7 +59,7 @@ import 'package:game_loop/game_loop.dart';
 ```dart
 main() {
   // Construct a game loop.
-  GameLoop gameLoop = new GameLoop();
+  GameLoop gameLoop = new GameLoop(canvasElement);
 }
 ```
 
@@ -68,7 +68,7 @@ main() {
 ```dart
 main() {
   // Construct a game loop.
-  GameLoop gameLoop = new GameLoop();
+  GameLoop gameLoop = new GameLoop(canvasElement);
   gameLoop.onUpdate = ((gameLoop) {
     print('${gameLoop.frame}: ${gameLoop.frameTime} [dt = ${gameLoop.dt}].');
   });
@@ -81,7 +81,7 @@ main() {
 ```dart
 main() {
   // Construct a game loop.
-  GameLoop gameLoop = new GameLoop();
+  GameLoop gameLoop = new GameLoop(canvasElement);
   gameLoop.onUpdate = ((gameLoop) {
     print('${gameLoop.frame}: ${gameLoop.frameTime} [dt = ${gameLoop.dt}].');
   });

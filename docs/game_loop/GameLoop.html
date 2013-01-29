@@ -37,13 +37,15 @@
 <li><a href="../game_loop/GameLoopMouse.html"><div class="icon-class"></div>GameLoopMouse</a></li>
 <li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
 <li><a href="../game_loop/GameLoopPointerLock.html"><div class="icon-class"></div>GameLoopPointerLock</a></li>
+<li><a href="../game_loop/GameLoopPointerLockChangeFunction.html"><div class="icon-interface"></div>GameLoopPointerLockChangeFunction</a></li>
 <li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
+<li><a href="../game_loop/GameLoopRenderFunction.html"><div class="icon-interface"></div>GameLoopRenderFunction</a></li>
 <li><a href="../game_loop/GameLoopResizeFunction.html"><div class="icon-interface"></div>GameLoopResizeFunction</a></li>
 <li><a href="../game_loop/GameLoopTimer.html"><div class="icon-class"></div>GameLoopTimer</a></li>
 <li><a href="../game_loop/GameLoopTimerFunction.html"><div class="icon-interface"></div>GameLoopTimerFunction</a></li>
 <li><a href="../game_loop/GameLoopUpdateFunction.html"><div class="icon-interface"></div>GameLoopUpdateFunction</a></li>
 </ul>
-</div>
+<h2><div class="icon-library"></div><a href="../metadata.html">metadata</a></h2></div>
 <div class="content">
         <h2><strong>GameLoop</strong>
           class
@@ -51,7 +53,7 @@
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
-<p>The game loop</p>
+<p>The game loop </p>
 <pre class="source">
 class GameLoop {
  final Element element;
@@ -60,20 +62,35 @@ class GameLoop {
  int _frameCounter = 0;
  double _previousFrameTime;
  double _frameTime = 0.0;
- double _dt;
 
+ /** The time step used for game updates. */
+ double updateTimeStep = 0.015;
+
+ /** Maximum amount of time between subsequent request animation frame
+  * calls that is accumulated. Accumulated time is used to drive onUpdate
+  * calls.
+  */
+ double maxAccumulatedTime = 0.03;
+ double _accumulatedTime = 0.0;
+ /** Seconds of accumulated time. */
+ double get accumulatedTime =&gt; _accumulatedTime;
  /** Width of game display [Element] */
- int get width =&gt; element.width;
+ int get width =&gt; element.clientWidth;
  /** Height of game display [Element] */
- int get height =&gt; element.height;
+ int get height =&gt; element.clientHeight;
 
  /** Frame counter value. Incremented once per frame. */
  int get frame =&gt; _frameCounter;
- /** Frame time value in seconds. */
- double get frameTime =&gt; _frameTime;
- /** Time elapsed since previous frame */
- double get dt =&gt; _dt;
-
+ /** Current time as seen by onUpdate calls. */
+ double get gameTime =&gt; _gameTime;
+ double _gameTime = 0.0;
+ /** Seconds between requestAnimationFrameTime calls. */
+ double get requestAnimationFrameTime =&gt; _frameTime;
+ /** Time elapsed in current frame. */
+ double get dt =&gt; updateTimeStep;
+ double _renderInterpolationFactor = 0.0;
+ /** Interpolation value between 0.0 and 1.0 */
+ double get renderInterpolationFactor =&gt; _renderInterpolationFactor;
  static double timeStampToSeconds(timeStamp) =&gt; timeStamp / 1000.0;
  static double milliseconds(int x) =&gt; x / 1000.0;
  static double seconds(int x) =&gt; x.toDouble();
@@ -138,7 +155,7 @@ class GameLoop {
 
  void _processTimers() {
    for (GameLoopTimer timer in _timers) {
-     timer._update(_dt);
+     timer._update(dt);
    }
    for (int i = _timers.length-1; i &gt;= 0; i--) {
      int lastElement = _timers.length-1;
@@ -167,11 +184,26 @@ class GameLoop {
    _frameCounter++;
    _previousFrameTime = _frameTime;
    _frameTime = time;
-   _dt = _frameTime - _previousFrameTime;
+   double timeDelta = _frameTime - _previousFrameTime;
+   _accumulatedTime += timeDelta;
+   if (_accumulatedTime &gt; maxAccumulatedTime) {
+     // If the animation frame callback was paused we may end up with
+     // a huge time delta. Clamp it to something reasonable.
+     _accumulatedTime = maxAccumulatedTime;
+   }
+   // TODO(johnmccutchan): Process input events in update loop.
    _processInputEvents();
-   _processTimers();
-   if (onUpdate != null) {
-     onUpdate(this);
+   while (_accumulatedTime &gt;= updateTimeStep) {
+     _processTimers();
+     _gameTime += updateTimeStep;
+     if (onUpdate != null) {
+       onUpdate(this);
+     }
+     _accumulatedTime -= updateTimeStep;
+   }
+   if (onRender != null) {
+     double interpolationValue = _accumulatedTime/updateTimeStep;
+     onRender(this);
    }
  }
 
@@ -179,9 +211,7 @@ class GameLoop {
    if (onFullscreenChange == null) {
      return;
    }
-   if (onFullscreenChange == null) {
-     return;
-   }
+   onFullscreenChange(this);
  }
 
  void _fullscreenError(Event _) {
@@ -250,7 +280,7 @@ class GameLoop {
      element.webkitRequestFullscreen();
      return;
    }
-   element.webkitCancelFullScreen();
+   document.webkitExitFullscreen();
  }
 
  final List&lt;GameLoopTimer&gt; _timers = new List&lt;GameLoopTimer&gt;();
@@ -267,12 +297,18 @@ class GameLoop {
    _timers.clear();
  }
 
- /** Called once per frame. */
- GameLoopUpdateFunction onUpdate = null;
+ /** Called once per game logic frame. */
+ GameLoopUpdateFunction onUpdate;
+ /** Called when it is time to draw. */
+ GameLoopRenderFunction onRender;
  /** Called when element is resized. */
- GameLoopResizeFunction onResize = null;
- /** Called when element moves between fullscreen and non-fullscreen mode. */
- GameLoopFullscreenChangeFunction onFullscreenChange = null;
+ GameLoopResizeFunction onResize;
+ /** Called when element enters or exits fullscreen mode. */
+ GameLoopFullscreenChangeFunction onFullscreenChange;
+ /** Called when the element moves between owning and not
+  *  owning the pointer.
+  */
+ GameLoopPointerLockChangeFunction onPointerLockChange;
 }
 </pre>
 </div>
@@ -327,7 +363,7 @@ new <strong>GameLoop</strong>(Element element) <a class="anchor-link" href="#Gam
               title="Permalink to GameLoop.GameLoop">#</a></h4>
 <div class="doc">
 <p>Construct a new game loop attaching it to 
-<span class="param">element</span></p>
+<span class="param">element</span> </p>
 <pre class="source">
 GameLoop(this.element) {
  _keyboard = new GameLoopKeyboard(this);
@@ -341,6 +377,19 @@ GameLoop(this.element) {
 </div>
 <div>
 <h3>Properties</h3>
+<div class="field"><h4 id="accumulatedTime">
+<button class="show-code">Code</button>
+final double         <strong>accumulatedTime</strong> <a class="anchor-link"
+            href="#accumulatedTime"
+            title="Permalink to GameLoop.accumulatedTime">#</a>
+        </h4>
+        <div class="doc">
+<p>Seconds of accumulated time. </p>
+<pre class="source">
+double get accumulatedTime =&gt; _accumulatedTime;
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="dt">
 <button class="show-code">Code</button>
 final double         <strong>dt</strong> <a class="anchor-link"
@@ -348,9 +397,9 @@ final double         <strong>dt</strong> <a class="anchor-link"
             title="Permalink to GameLoop.dt">#</a>
         </h4>
         <div class="doc">
-<p>Time elapsed since previous frame</p>
+<p>Time elapsed in current frame. </p>
 <pre class="source">
-double get dt =&gt; _dt;
+double get dt =&gt; updateTimeStep;
 </pre>
 </div>
 </div>
@@ -362,7 +411,7 @@ final Element         <strong>element</strong> <a class="anchor-link"
         </h4>
         <div class="doc">
 <pre class="source">
-final Element element;
+element
 </pre>
 </div>
 </div>
@@ -373,22 +422,9 @@ final int         <strong>frame</strong> <a class="anchor-link"
             title="Permalink to GameLoop.frame">#</a>
         </h4>
         <div class="doc">
-<p>Frame counter value. Incremented once per frame.</p>
+<p>Frame counter value. Incremented once per frame. </p>
 <pre class="source">
 int get frame =&gt; _frameCounter;
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="frameTime">
-<button class="show-code">Code</button>
-final double         <strong>frameTime</strong> <a class="anchor-link"
-            href="#frameTime"
-            title="Permalink to GameLoop.frameTime">#</a>
-        </h4>
-        <div class="doc">
-<p>Frame time value in seconds.</p>
-<pre class="source">
-double get frameTime =&gt; _frameTime;
 </pre>
 </div>
 </div>
@@ -399,9 +435,22 @@ final <a href="../game_loop/GameLoopGamepad.html">GameLoopGamepad</a>         <s
             title="Permalink to GameLoop.gamepad0">#</a>
         </h4>
         <div class="doc">
-<p>Gamepad #0.</p>
+<p>Gamepad #0. </p>
 <pre class="source">
 GameLoopGamepad get gamepad0 =&gt; _gamepad0;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="gameTime">
+<button class="show-code">Code</button>
+final double         <strong>gameTime</strong> <a class="anchor-link"
+            href="#gameTime"
+            title="Permalink to GameLoop.gameTime">#</a>
+        </h4>
+        <div class="doc">
+<p>Current time as seen by onUpdate calls. </p>
+<pre class="source">
+double get gameTime =&gt; _gameTime;
 </pre>
 </div>
 </div>
@@ -412,9 +461,9 @@ final int         <strong>height</strong> <a class="anchor-link"
             title="Permalink to GameLoop.height">#</a>
         </h4>
         <div class="doc">
-<p>Height of game display <code>Element</code></p>
+<p>Height of game display <code>Element</code> </p>
 <pre class="source">
-int get height =&gt; element.height;
+int get height =&gt; element.clientHeight;
 </pre>
 </div>
 </div>
@@ -425,7 +474,7 @@ final bool         <strong>isFullscreen</strong> <a class="anchor-link"
             title="Permalink to GameLoop.isFullscreen">#</a>
         </h4>
         <div class="doc">
-<p>Is the element being displayed full screen?</p>
+<p>Is the element being displayed full screen? </p>
 <pre class="source">
 bool get isFullscreen =&gt; document.webkitFullscreenElement == element;
 </pre>
@@ -438,9 +487,21 @@ final <a href="../game_loop/GameLoopKeyboard.html">GameLoopKeyboard</a>         
             title="Permalink to GameLoop.keyboard">#</a>
         </h4>
         <div class="doc">
-<p>Keyboard.</p>
+<p>Keyboard. </p>
 <pre class="source">
 GameLoopKeyboard get keyboard =&gt; _keyboard;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="maxAccumulatedTime">
+<button class="show-code">Code</button>
+double         <strong>maxAccumulatedTime</strong> <a class="anchor-link"
+            href="#maxAccumulatedTime"
+            title="Permalink to GameLoop.maxAccumulatedTime">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+maxAccumulatedTime = 0.03
 </pre>
 </div>
 </div>
@@ -451,7 +512,7 @@ final <a href="../game_loop/GameLoopMouse.html">GameLoopMouse</a>         <stron
             title="Permalink to GameLoop.mouse">#</a>
         </h4>
         <div class="doc">
-<p>Mouse.</p>
+<p>Mouse. </p>
 <pre class="source">
 GameLoopMouse get mouse =&gt; _mouse;
 </pre>
@@ -464,9 +525,32 @@ GameLoopMouse get mouse =&gt; _mouse;
             title="Permalink to GameLoop.onFullscreenChange">#</a>
         </h4>
         <div class="doc">
-<p>Called when element moves between fullscreen and non-fullscreen mode.</p>
 <pre class="source">
-GameLoopFullscreenChangeFunction onFullscreenChange = null;
+onFullscreenChange
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onPointerLockChange">
+<button class="show-code">Code</button>
+<a href="../game_loop/GameLoopPointerLockChangeFunction.html">GameLoopPointerLockChangeFunction</a>         <strong>onPointerLockChange</strong> <a class="anchor-link"
+            href="#onPointerLockChange"
+            title="Permalink to GameLoop.onPointerLockChange">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+onPointerLockChange
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onRender">
+<button class="show-code">Code</button>
+<a href="../game_loop/GameLoopRenderFunction.html">GameLoopRenderFunction</a>         <strong>onRender</strong> <a class="anchor-link"
+            href="#onRender"
+            title="Permalink to GameLoop.onRender">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+onRender
 </pre>
 </div>
 </div>
@@ -477,9 +561,8 @@ GameLoopFullscreenChangeFunction onFullscreenChange = null;
             title="Permalink to GameLoop.onResize">#</a>
         </h4>
         <div class="doc">
-<p>Called when element is resized.</p>
 <pre class="source">
-GameLoopResizeFunction onResize = null;
+onResize
 </pre>
 </div>
 </div>
@@ -490,9 +573,8 @@ GameLoopResizeFunction onResize = null;
             title="Permalink to GameLoop.onUpdate">#</a>
         </h4>
         <div class="doc">
-<p>Called once per frame.</p>
 <pre class="source">
-GameLoopUpdateFunction onUpdate = null;
+onUpdate
 </pre>
 </div>
 </div>
@@ -508,6 +590,32 @@ GameLoopPointerLock get pointerLock =&gt; _pointerLock;
 </pre>
 </div>
 </div>
+<div class="field"><h4 id="renderInterpolationFactor">
+<button class="show-code">Code</button>
+final double         <strong>renderInterpolationFactor</strong> <a class="anchor-link"
+            href="#renderInterpolationFactor"
+            title="Permalink to GameLoop.renderInterpolationFactor">#</a>
+        </h4>
+        <div class="doc">
+<p>Interpolation value between 0.0 and 1.0 </p>
+<pre class="source">
+double get renderInterpolationFactor =&gt; _renderInterpolationFactor;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="requestAnimationFrameTime">
+<button class="show-code">Code</button>
+final double         <strong>requestAnimationFrameTime</strong> <a class="anchor-link"
+            href="#requestAnimationFrameTime"
+            title="Permalink to GameLoop.requestAnimationFrameTime">#</a>
+        </h4>
+        <div class="doc">
+<p>Seconds between requestAnimationFrameTime calls. </p>
+<pre class="source">
+double get requestAnimationFrameTime =&gt; _frameTime;
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="time">
 <button class="show-code">Code</button>
 final double         <strong>time</strong> <a class="anchor-link"
@@ -515,9 +623,21 @@ final double         <strong>time</strong> <a class="anchor-link"
             title="Permalink to GameLoop.time">#</a>
         </h4>
         <div class="doc">
-<p>Current time.</p>
+<p>Current time. </p>
 <pre class="source">
 double get time =&gt; timeStampToSeconds(new Date.now().millisecondsSinceEpoch);
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="updateTimeStep">
+<button class="show-code">Code</button>
+double         <strong>updateTimeStep</strong> <a class="anchor-link"
+            href="#updateTimeStep"
+            title="Permalink to GameLoop.updateTimeStep">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+updateTimeStep = 0.015
 </pre>
 </div>
 </div>
@@ -528,9 +648,9 @@ final int         <strong>width</strong> <a class="anchor-link"
             title="Permalink to GameLoop.width">#</a>
         </h4>
         <div class="doc">
-<p>Width of game display <code>Element</code></p>
+<p>Width of game display <code>Element</code> </p>
 <pre class="source">
-int get width =&gt; element.width;
+int get width =&gt; element.clientWidth;
 </pre>
 </div>
 </div>
@@ -544,7 +664,7 @@ int get width =&gt; element.width;
 <div class="doc">
 <p>Add a new timer which calls 
 <span class="param">callback</span> in 
-<span class="param">delay</span> seconds.</p>
+<span class="param">delay</span> seconds. </p>
 <pre class="source">
 GameLoopTimer addTimer(GameLoopTimerFunction callback, double delay) {
  GameLoopTimer timer = new GameLoopTimer._internal(this, delay, callback);
@@ -559,7 +679,7 @@ GameLoopTimer addTimer(GameLoopTimerFunction callback, double delay) {
 void <strong>clearTimers</strong>() <a class="anchor-link" href="#clearTimers"
               title="Permalink to GameLoop.clearTimers">#</a></h4>
 <div class="doc">
-<p>Clear all existing timers.</p>
+<p>Clear all existing timers. </p>
 <pre class="source">
 void clearTimers() {
  _timers.clear();
@@ -572,14 +692,14 @@ void clearTimers() {
 void <strong>enableFullscreen</strong>(bool enable) <a class="anchor-link" href="#enableFullscreen"
               title="Permalink to GameLoop.enableFullscreen">#</a></h4>
 <div class="doc">
-<p>Enable or disable fullscreen display of the element.</p>
+<p>Enable or disable fullscreen display of the element. </p>
 <pre class="source">
 void enableFullscreen(bool enable) {
  if (enable) {
    element.webkitRequestFullscreen();
    return;
  }
- element.webkitCancelFullScreen();
+ document.webkitExitFullscreen();
 }
 </pre>
 </div>
@@ -589,7 +709,7 @@ void enableFullscreen(bool enable) {
 void <strong>start</strong>() <a class="anchor-link" href="#start"
               title="Permalink to GameLoop.start">#</a></h4>
 <div class="doc">
-<p>Start the game loop.</p>
+<p>Start the game loop. </p>
 <pre class="source">
 void start() {
  if (_initialized == false) {
@@ -614,7 +734,7 @@ void start() {
 void <strong>stop</strong>() <a class="anchor-link" href="#stop"
               title="Permalink to GameLoop.stop">#</a></h4>
 <div class="doc">
-<p>Stop the game loop.</p>
+<p>Stop the game loop. </p>
 <pre class="source">
 void stop() {
  _interrupt = true;
@@ -628,7 +748,7 @@ void stop() {
         </div>
         
         <div class="footer">
-          <div>This page was generated at 2013-01-10 11:22:02.107</div>
+          <div>This page was generated at 2013-01-29 07:40:57.816</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>
