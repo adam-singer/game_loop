@@ -2,19 +2,19 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>GameLoopTimer class / game_loop Library / Dart Documentation</title>
+        <title>GameLoopPositionInput abstract class / game_loop Library / Dart Documentation</title>
         <link rel="stylesheet" type="text/css"
             href="../styles.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="../favicon.ico">
         
         </head>
-        <body data-library="game_loop" data-type="GameLoopTimer">
+        <body data-library="game_loop" data-type="GameLoopPositionInput">
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
           <a href="../index.html">Dart Documentation</a>
-         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopTimer.html">GameLoopTimer</a>        <div id="search-box">
+         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopPositionInput.html">GameLoopPositionInput</a>        <div id="search-box">
           <input type="search" name="q" id="q" autocomplete="off"
               class="search-input" placeholder="Search API">
         </div>
@@ -38,107 +38,108 @@
 <li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
 <li><a href="../game_loop/GameLoopPointerLock.html"><div class="icon-class"></div>GameLoopPointerLock</a></li>
 <li><a href="../game_loop/GameLoopPointerLockChangeFunction.html"><div class="icon-interface"></div>GameLoopPointerLockChangeFunction</a></li>
-<li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
+<li><div class="icon-class"></div><strong>GameLoopPositionInput</strong></li>
 <li><a href="../game_loop/GameLoopRenderFunction.html"><div class="icon-interface"></div>GameLoopRenderFunction</a></li>
 <li><a href="../game_loop/GameLoopResizeFunction.html"><div class="icon-interface"></div>GameLoopResizeFunction</a></li>
-<li><div class="icon-class"></div><strong>GameLoopTimer</strong></li>
+<li><a href="../game_loop/GameLoopTimer.html"><div class="icon-class"></div>GameLoopTimer</a></li>
 <li><a href="../game_loop/GameLoopTimerFunction.html"><div class="icon-interface"></div>GameLoopTimerFunction</a></li>
 <li><a href="../game_loop/GameLoopUpdateFunction.html"><div class="icon-interface"></div>GameLoopUpdateFunction</a></li>
 </ul>
 <h2><div class="icon-library"></div><a href="../metadata.html">metadata</a></h2></div>
 <div class="content">
-        <h2><strong>GameLoopTimer</strong>
-          class
+        <h2><strong>GameLoopPositionInput</strong>
+          abstract class
         </h2>
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
-<p>A cancellable timer that calls a <a class="crossref" href="../game_loop/GameLoopTimerFunction.html">GameLoopTimerFunction</a> when it fires.
-A timer can only fire once, afterwards it is dead.</p>
+<p>An input which has a position will implement this interface. For example,
+<a class="crossref" href="../game_loop/GameLoopMouse.html">GameLoopMouse</a>.</p>
 <pre class="source">
-class GameLoopTimer {
- /** Game loop timer was created by */
- final GameLoop gameLoop;
- /** Callback function that will be call when timer fires. */
- final GameLoopTimerFunction onTimer;
- double _timeToFire = 0.0;
- /** Time until timer fires. */
- double get timeToFire =&gt; _timeToFire;
- GameLoopTimer._internal(this.gameLoop, this._timeToFire, this.onTimer);
- void _update(double dt) {
-   if (_timeToFire &lt;= 0.0) {
-     // Dead.
-     return;
-   }
-   _timeToFire -= dt;
-   if (_timeToFire &lt;= 0.0) {
-     if (onTimer != null) {
-       onTimer(this);
-     }
-   }
- }
-
- bool get _dead =&gt; _timeToFire &lt;= 0.0;
-
- /** Cancel the timer. */
- void cancel() {
-   _timeToFire = -1.0;
- }
+abstract class GameLoopPositionInput {
+ int get x;
+ int get y;
+ int get dx;
+ int get dy;
+ double get time;
+ int get frame;
 }
 </pre>
 </div>
+<h3>Subclasses</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../game_loop/GameLoopMouse.html">GameLoopMouse</a></span></p>
 <div>
 <h3>Properties</h3>
-<div class="field"><h4 id="gameLoop">
+<div class="field"><h4 id="dx">
 <button class="show-code">Code</button>
-final <a href="../game_loop/GameLoop.html">GameLoop</a>         <strong>gameLoop</strong> <a class="anchor-link"
-            href="#gameLoop"
-            title="Permalink to GameLoopTimer.gameLoop">#</a>
+final int         <strong>dx</strong> <a class="anchor-link"
+            href="#dx"
+            title="Permalink to GameLoopPositionInput.dx">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-gameLoop
+int get dx;
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="onTimer">
+<div class="field"><h4 id="dy">
 <button class="show-code">Code</button>
-final <a href="../game_loop/GameLoopTimerFunction.html">GameLoopTimerFunction</a>         <strong>onTimer</strong> <a class="anchor-link"
-            href="#onTimer"
-            title="Permalink to GameLoopTimer.onTimer">#</a>
+final int         <strong>dy</strong> <a class="anchor-link"
+            href="#dy"
+            title="Permalink to GameLoopPositionInput.dy">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-onTimer
+int get dy;
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="timeToFire">
+<div class="field"><h4 id="frame">
 <button class="show-code">Code</button>
-final double         <strong>timeToFire</strong> <a class="anchor-link"
-            href="#timeToFire"
-            title="Permalink to GameLoopTimer.timeToFire">#</a>
+final int         <strong>frame</strong> <a class="anchor-link"
+            href="#frame"
+            title="Permalink to GameLoopPositionInput.frame">#</a>
         </h4>
         <div class="doc">
-<p>Time until timer fires. </p>
 <pre class="source">
-double get timeToFire =&gt; _timeToFire;
+int get frame;
 </pre>
 </div>
 </div>
-</div>
-<div>
-<h3>Methods</h3>
-<div class="method"><h4 id="cancel">
+<div class="field"><h4 id="time">
 <button class="show-code">Code</button>
-void <strong>cancel</strong>() <a class="anchor-link" href="#cancel"
-              title="Permalink to GameLoopTimer.cancel">#</a></h4>
-<div class="doc">
-<p>Cancel the timer. </p>
+final double         <strong>time</strong> <a class="anchor-link"
+            href="#time"
+            title="Permalink to GameLoopPositionInput.time">#</a>
+        </h4>
+        <div class="doc">
 <pre class="source">
-void cancel() {
- _timeToFire = -1.0;
-}
+double get time;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="x">
+<button class="show-code">Code</button>
+final int         <strong>x</strong> <a class="anchor-link"
+            href="#x"
+            title="Permalink to GameLoopPositionInput.x">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+int get x;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="y">
+<button class="show-code">Code</button>
+final int         <strong>y</strong> <a class="anchor-link"
+            href="#y"
+            title="Permalink to GameLoopPositionInput.y">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+int get y;
 </pre>
 </div>
 </div>
@@ -146,9 +147,8 @@ void cancel() {
         </div>
         <div class="clear"></div>
         </div>
-        
         <div class="footer">
-          <div>This page was generated at 2013-01-29 07:40:57.660</div>
+          <div>This page was generated at 2013-01-29 07:53:43.895</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>

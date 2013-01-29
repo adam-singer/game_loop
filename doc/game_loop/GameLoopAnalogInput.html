@@ -2,19 +2,19 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>GameLoopPointerLock class / game_loop Library / Dart Documentation</title>
+        <title>GameLoopAnalogInput class / game_loop Library / Dart Documentation</title>
         <link rel="stylesheet" type="text/css"
             href="../styles.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="../favicon.ico">
         
         </head>
-        <body data-library="game_loop" data-type="GameLoopPointerLock">
+        <body data-library="game_loop" data-type="GameLoopAnalogInput">
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
           <a href="../index.html">Dart Documentation</a>
-         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopPointerLock.html">GameLoopPointerLock</a>        <div id="search-box">
+         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopAnalogInput.html">GameLoopAnalogInput</a>        <div id="search-box">
           <input type="search" name="q" id="q" autocomplete="off"
               class="search-input" placeholder="Search API">
         </div>
@@ -27,7 +27,7 @@
 <h2><div class="icon-library"></div><a href="../game_loop.html">game_loop</a></h2><ul class="icon">
 <li><a href="../game_loop/GameLoop.html"><div class="icon-class"></div>GameLoop</a></li>
 <li><a href="../game_loop/GameLoopAnalogButton.html"><div class="icon-class"></div>GameLoopAnalogButton</a></li>
-<li><a href="../game_loop/GameLoopAnalogInput.html"><div class="icon-class"></div>GameLoopAnalogInput</a></li>
+<li><div class="icon-class"></div><strong>GameLoopAnalogInput</strong></li>
 <li><a href="../game_loop/GameLoopDigitalButton.html"><div class="icon-class"></div>GameLoopDigitalButton</a></li>
 <li><a href="../game_loop/GameLoopDigitalButtonEvent.html"><div class="icon-class"></div>GameLoopDigitalButtonEvent</a></li>
 <li><a href="../game_loop/GameLoopDigitalInput.html"><div class="icon-class"></div>GameLoopDigitalInput</a></li>
@@ -36,7 +36,7 @@
 <li><a href="../game_loop/GameLoopKeyboard.html"><div class="icon-class"></div>GameLoopKeyboard</a></li>
 <li><a href="../game_loop/GameLoopMouse.html"><div class="icon-class"></div>GameLoopMouse</a></li>
 <li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
-<li><div class="icon-class"></div><strong>GameLoopPointerLock</strong></li>
+<li><a href="../game_loop/GameLoopPointerLock.html"><div class="icon-class"></div>GameLoopPointerLock</a></li>
 <li><a href="../game_loop/GameLoopPointerLockChangeFunction.html"><div class="icon-interface"></div>GameLoopPointerLockChangeFunction</a></li>
 <li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
 <li><a href="../game_loop/GameLoopRenderFunction.html"><div class="icon-interface"></div>GameLoopRenderFunction</a></li>
@@ -47,55 +47,68 @@
 </ul>
 <h2><div class="icon-library"></div><a href="../metadata.html">metadata</a></h2></div>
 <div class="content">
-        <h2><strong>GameLoopPointerLock</strong>
+        <h2><strong>GameLoopAnalogInput</strong>
           class
         </h2>
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
+<p>A collection of analog input buttons </p>
 <pre class="source">
-class GameLoopPointerLock {
+class GameLoopAnalogInput {
  final GameLoop gameLoop;
+ final Map&lt;int, GameLoopAnalogButton&gt; buttons =
+     new Map&lt;int, GameLoopAnalogButton&gt;();
 
- GameLoopPointerLock(this.gameLoop) {
-   gameLoop.element.on.click.add(_onClick);
-   document.on.pointerLockChange.add(_onPointerLockChange);
- }
-
- void requestLock() {
-   gameLoop.element.webkitRequestPointerLock();
- }
-
- void _onClick(Event event) {
-   if (lockOnClick) {
-     requestLock();
+ /** Create a digital input that supports all buttons in buttonIds. */
+ GameLoopAnalogInput(this.gameLoop, List&lt;int&gt; buttonIds) {
+   for (int buttonId in buttonIds) {
+     buttons[buttonId] = new GameLoopAnalogButton(buttonId);
    }
  }
 
- // Does clicking on the element trigger a pointer lock?
- bool lockOnClick = true;
-
- bool get locked =&gt; document.webkitPointerLockElement == gameLoop.element;
-
- void _onPointerLockChange(Event event) {
-   if (gameLoop.onPointerLockChange != null) {
-     gameLoop.onPointerLockChange(gameLoop);
+ /** The time the button was updated. */
+ double timeUpdated(int buttonId) {
+   GameLoopAnalogButton button = buttons[buttonId];
+   if (button == null) {
+     return 0.0;
    }
+   return button.time;
+ }
+
+ /** The frame the button was updated. */
+ int frameUpdated(int buttonId) {
+   GameLoopAnalogButton button = buttons[buttonId];
+   if (button == null) {
+     return 0;
+   }
+   return button.frame;
+ }
+
+ /** The value of [buttonId]. */
+ double value(int buttonId) {
+   GameLoopAnalogButton button = buttons[buttonId];
+   if (button == null) {
+     return 0.0;
+   }
+   return button.value;
  }
 }
 </pre>
 </div>
 <div>
 <h3>Constructors</h3>
-<div class="method"><h4 id="GameLoopPointerLock">
+<div class="method"><h4 id="GameLoopAnalogInput">
 <button class="show-code">Code</button>
-new <strong>GameLoopPointerLock</strong>(<a href="../game_loop/GameLoop.html">GameLoop</a> gameLoop) <a class="anchor-link" href="#GameLoopPointerLock"
-              title="Permalink to GameLoopPointerLock.GameLoopPointerLock">#</a></h4>
+new <strong>GameLoopAnalogInput</strong>(<a href="../game_loop/GameLoop.html">GameLoop</a> gameLoop, List&lt;int&gt; buttonIds) <a class="anchor-link" href="#GameLoopAnalogInput"
+              title="Permalink to GameLoopAnalogInput.GameLoopAnalogInput">#</a></h4>
 <div class="doc">
+<p>Create a digital input that supports all buttons in buttonIds. </p>
 <pre class="source">
-GameLoopPointerLock(this.gameLoop) {
- gameLoop.element.on.click.add(_onClick);
- document.on.pointerLockChange.add(_onPointerLockChange);
+GameLoopAnalogInput(this.gameLoop, List&lt;int&gt; buttonIds) {
+ for (int buttonId in buttonIds) {
+   buttons[buttonId] = new GameLoopAnalogButton(buttonId);
+ }
 }
 </pre>
 </div>
@@ -103,11 +116,24 @@ GameLoopPointerLock(this.gameLoop) {
 </div>
 <div>
 <h3>Properties</h3>
+<div class="field"><h4 id="buttons">
+<button class="show-code">Code</button>
+final Map&lt;int, <a href="../game_loop/GameLoopAnalogButton.html">GameLoopAnalogButton</a>&gt;         <strong>buttons</strong> <a class="anchor-link"
+            href="#buttons"
+            title="Permalink to GameLoopAnalogInput.buttons">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+buttons =
+new Map&lt;int, GameLoopAnalogButton&gt;()
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="gameLoop">
 <button class="show-code">Code</button>
 final <a href="../game_loop/GameLoop.html">GameLoop</a>         <strong>gameLoop</strong> <a class="anchor-link"
             href="#gameLoop"
-            title="Permalink to GameLoopPointerLock.gameLoop">#</a>
+            title="Permalink to GameLoopAnalogInput.gameLoop">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
@@ -115,41 +141,57 @@ gameLoop
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="locked">
-<button class="show-code">Code</button>
-final bool         <strong>locked</strong> <a class="anchor-link"
-            href="#locked"
-            title="Permalink to GameLoopPointerLock.locked">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-bool get locked =&gt; document.webkitPointerLockElement == gameLoop.element;
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="lockOnClick">
-<button class="show-code">Code</button>
-bool         <strong>lockOnClick</strong> <a class="anchor-link"
-            href="#lockOnClick"
-            title="Permalink to GameLoopPointerLock.lockOnClick">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-lockOnClick = true
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Methods</h3>
-<div class="method"><h4 id="requestLock">
+<div class="method"><h4 id="frameUpdated">
 <button class="show-code">Code</button>
-void <strong>requestLock</strong>() <a class="anchor-link" href="#requestLock"
-              title="Permalink to GameLoopPointerLock.requestLock">#</a></h4>
+int <strong>frameUpdated</strong>(int buttonId) <a class="anchor-link" href="#frameUpdated"
+              title="Permalink to GameLoopAnalogInput.frameUpdated">#</a></h4>
 <div class="doc">
+<p>The frame the button was updated. </p>
 <pre class="source">
-void requestLock() {
- gameLoop.element.webkitRequestPointerLock();
+int frameUpdated(int buttonId) {
+ GameLoopAnalogButton button = buttons[buttonId];
+ if (button == null) {
+   return 0;
+ }
+ return button.frame;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="timeUpdated">
+<button class="show-code">Code</button>
+double <strong>timeUpdated</strong>(int buttonId) <a class="anchor-link" href="#timeUpdated"
+              title="Permalink to GameLoopAnalogInput.timeUpdated">#</a></h4>
+<div class="doc">
+<p>The time the button was updated. </p>
+<pre class="source">
+double timeUpdated(int buttonId) {
+ GameLoopAnalogButton button = buttons[buttonId];
+ if (button == null) {
+   return 0.0;
+ }
+ return button.time;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="value">
+<button class="show-code">Code</button>
+double <strong>value</strong>(int buttonId) <a class="anchor-link" href="#value"
+              title="Permalink to GameLoopAnalogInput.value">#</a></h4>
+<div class="doc">
+<p>The value of 
+<span class="param">buttonId</span>. </p>
+<pre class="source">
+double value(int buttonId) {
+ GameLoopAnalogButton button = buttons[buttonId];
+ if (button == null) {
+   return 0.0;
+ }
+ return button.value;
 }
 </pre>
 </div>
@@ -158,9 +200,8 @@ void requestLock() {
         </div>
         <div class="clear"></div>
         </div>
-        
         <div class="footer">
-          <div>This page was generated at 2013-01-29 07:40:57.645</div>
+          <div>This page was generated at 2013-01-29 07:53:43.889</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>

@@ -252,14 +252,14 @@ class GameLoop {
  /** Start the game loop. */
  void start() {
    if (_initialized == false) {
-     document.on.fullscreenError.add(_fullscreenError);
-     document.on.fullscreenChange.add(_fullscreenChange);
-     window.on.keyDown.add(_keyDown);
-     window.on.keyUp.add(_keyUp);
-     window.on.resize.add(_resize);
-     element.on.mouseMove.add(_mouseMove);
-     element.on.mouseDown.add(_mouseDown);
-     element.on.mouseUp.add(_mouseUp);
+     document.onFullscreenError.listen(_fullscreenError);
+     document.onFullscreenChange.listen(_fullscreenChange);
+     window.onKeyDown.listen(_keyDown);
+     window.onKeyUp.listen(_keyUp);
+     window.onResize.listen(_resize);
+     element.onMouseMove.listen(_mouseMove);
+     element.onMouseDown.listen(_mouseDown);
+     element.onMouseUp.listen(_mouseUp);
      _initialized = true;
    }
    _interrupt = false;
@@ -713,14 +713,14 @@ void <strong>start</strong>() <a class="anchor-link" href="#start"
 <pre class="source">
 void start() {
  if (_initialized == false) {
-   document.on.fullscreenError.add(_fullscreenError);
-   document.on.fullscreenChange.add(_fullscreenChange);
-   window.on.keyDown.add(_keyDown);
-   window.on.keyUp.add(_keyUp);
-   window.on.resize.add(_resize);
-   element.on.mouseMove.add(_mouseMove);
-   element.on.mouseDown.add(_mouseDown);
-   element.on.mouseUp.add(_mouseUp);
+   document.onFullscreenError.listen(_fullscreenError);
+   document.onFullscreenChange.listen(_fullscreenChange);
+   window.onKeyDown.listen(_keyDown);
+   window.onKeyUp.listen(_keyUp);
+   window.onResize.listen(_resize);
+   element.onMouseMove.listen(_mouseMove);
+   element.onMouseDown.listen(_mouseDown);
+   element.onMouseUp.listen(_mouseUp);
    _initialized = true;
  }
  _interrupt = false;
@@ -746,9 +746,8 @@ void stop() {
         </div>
         <div class="clear"></div>
         </div>
-        
         <div class="footer">
-          <div>This page was generated at 2013-01-29 07:40:57.816</div>
+          <div>This page was generated at 2013-01-29 07:53:43.922</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>

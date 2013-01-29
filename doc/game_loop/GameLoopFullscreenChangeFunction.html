@@ -2,19 +2,19 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>GameLoopMouseEvent class / game_loop Library / Dart Documentation</title>
+        <title>GameLoopFullscreenChangeFunction typedef / game_loop Library / Dart Documentation</title>
         <link rel="stylesheet" type="text/css"
             href="../styles.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="../favicon.ico">
         
         </head>
-        <body data-library="game_loop" data-type="GameLoopMouseEvent">
+        <body data-library="game_loop" data-type="GameLoopFullscreenChangeFunction">
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
           <a href="../index.html">Dart Documentation</a>
-         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopMouseEvent.html">GameLoopMouseEvent</a>        <div id="search-box">
+         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopFullscreenChangeFunction.html">GameLoopFullscreenChangeFunction</a>        <div id="search-box">
           <input type="search" name="q" id="q" autocomplete="off"
               class="search-input" placeholder="Search API">
         </div>
@@ -31,11 +31,11 @@
 <li><a href="../game_loop/GameLoopDigitalButton.html"><div class="icon-class"></div>GameLoopDigitalButton</a></li>
 <li><a href="../game_loop/GameLoopDigitalButtonEvent.html"><div class="icon-class"></div>GameLoopDigitalButtonEvent</a></li>
 <li><a href="../game_loop/GameLoopDigitalInput.html"><div class="icon-class"></div>GameLoopDigitalInput</a></li>
-<li><a href="../game_loop/GameLoopFullscreenChangeFunction.html"><div class="icon-interface"></div>GameLoopFullscreenChangeFunction</a></li>
+<li><div class="icon-interface"></div><strong>GameLoopFullscreenChangeFunction</strong></li>
 <li><a href="../game_loop/GameLoopGamepad.html"><div class="icon-class"></div>GameLoopGamepad</a></li>
 <li><a href="../game_loop/GameLoopKeyboard.html"><div class="icon-class"></div>GameLoopKeyboard</a></li>
 <li><a href="../game_loop/GameLoopMouse.html"><div class="icon-class"></div>GameLoopMouse</a></li>
-<li><div class="icon-class"></div><strong>GameLoopMouseEvent</strong></li>
+<li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
 <li><a href="../game_loop/GameLoopPointerLock.html"><div class="icon-class"></div>GameLoopPointerLock</a></li>
 <li><a href="../game_loop/GameLoopPointerLockChangeFunction.html"><div class="icon-interface"></div>GameLoopPointerLockChangeFunction</a></li>
 <li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
@@ -47,118 +47,33 @@
 </ul>
 <h2><div class="icon-library"></div><a href="../metadata.html">metadata</a></h2></div>
 <div class="content">
-        <h2><strong>GameLoopMouseEvent</strong>
-          class
+        <h2><strong>GameLoopFullscreenChangeFunction</strong>
+          typedef
         </h2>
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
+<p>Called whenever the element moves between fullscreen and non-fullscreen
+mode.</p>
 <pre class="source">
-class GameLoopMouseEvent {
- final int x;
- final int y;
- final int dx;
- final int dy;
- final double time;
- final int frame;
- GameLoopMouseEvent(this.x, this.y, this.dx, this.dy, this.time, this.frame);
-}
+typedef void GameLoopFullscreenChangeFunction(GameLoop gameLoop);
 </pre>
 </div>
-<div>
-<h3>Constructors</h3>
-<div class="method"><h4 id="GameLoopMouseEvent">
+<div class="method"><h4 id="GameLoopFullscreenChangeFunction">
 <button class="show-code">Code</button>
-new <strong>GameLoopMouseEvent</strong>(int x, int y, int dx, int dy, double time, int frame) <a class="anchor-link" href="#GameLoopMouseEvent"
-              title="Permalink to GameLoopMouseEvent.GameLoopMouseEvent">#</a></h4>
+typedef void GameLoopFullscreenChangeFunction(<a href="../game_loop/GameLoop.html">GameLoop</a> gameLoop) <a class="anchor-link" href="#GameLoopFullscreenChangeFunction"
+              title="Permalink to GameLoopFullscreenChangeFunction">#</a></h4>
 <div class="doc">
 <pre class="source">
-GameLoopMouseEvent(this.x, this.y, this.dx, this.dy, this.time, this.frame);
+typedef void GameLoopFullscreenChangeFunction(GameLoop gameLoop);
 </pre>
-</div>
-</div>
-</div>
-<div>
-<h3>Properties</h3>
-<div class="field"><h4 id="dx">
-<button class="show-code">Code</button>
-final int         <strong>dx</strong> <a class="anchor-link"
-            href="#dx"
-            title="Permalink to GameLoopMouseEvent.dx">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-dx
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="dy">
-<button class="show-code">Code</button>
-final int         <strong>dy</strong> <a class="anchor-link"
-            href="#dy"
-            title="Permalink to GameLoopMouseEvent.dy">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-dy
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="frame">
-<button class="show-code">Code</button>
-final int         <strong>frame</strong> <a class="anchor-link"
-            href="#frame"
-            title="Permalink to GameLoopMouseEvent.frame">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-frame
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="time">
-<button class="show-code">Code</button>
-final double         <strong>time</strong> <a class="anchor-link"
-            href="#time"
-            title="Permalink to GameLoopMouseEvent.time">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-time
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="x">
-<button class="show-code">Code</button>
-final int         <strong>x</strong> <a class="anchor-link"
-            href="#x"
-            title="Permalink to GameLoopMouseEvent.x">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-x
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="y">
-<button class="show-code">Code</button>
-final int         <strong>y</strong> <a class="anchor-link"
-            href="#y"
-            title="Permalink to GameLoopMouseEvent.y">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-y
-</pre>
-</div>
 </div>
 </div>
         </div>
         <div class="clear"></div>
         </div>
-        
         <div class="footer">
-          <div>This page was generated at 2013-01-29 07:40:57.711</div>
+          <div>This page was generated at 2013-01-29 07:53:43.931</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>

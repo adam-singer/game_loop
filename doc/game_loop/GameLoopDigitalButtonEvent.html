@@ -2,19 +2,19 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>GameLoopRenderFunction typedef / game_loop Library / Dart Documentation</title>
+        <title>GameLoopDigitalButtonEvent class / game_loop Library / Dart Documentation</title>
         <link rel="stylesheet" type="text/css"
             href="../styles.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="../favicon.ico">
         
         </head>
-        <body data-library="game_loop" data-type="GameLoopRenderFunction">
+        <body data-library="game_loop" data-type="GameLoopDigitalButtonEvent">
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
           <a href="../index.html">Dart Documentation</a>
-         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopRenderFunction.html">GameLoopRenderFunction</a>        <div id="search-box">
+         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopDigitalButtonEvent.html">GameLoopDigitalButtonEvent</a>        <div id="search-box">
           <input type="search" name="q" id="q" autocomplete="off"
               class="search-input" placeholder="Search API">
         </div>
@@ -29,7 +29,7 @@
 <li><a href="../game_loop/GameLoopAnalogButton.html"><div class="icon-class"></div>GameLoopAnalogButton</a></li>
 <li><a href="../game_loop/GameLoopAnalogInput.html"><div class="icon-class"></div>GameLoopAnalogInput</a></li>
 <li><a href="../game_loop/GameLoopDigitalButton.html"><div class="icon-class"></div>GameLoopDigitalButton</a></li>
-<li><a href="../game_loop/GameLoopDigitalButtonEvent.html"><div class="icon-class"></div>GameLoopDigitalButtonEvent</a></li>
+<li><div class="icon-class"></div><strong>GameLoopDigitalButtonEvent</strong></li>
 <li><a href="../game_loop/GameLoopDigitalInput.html"><div class="icon-class"></div>GameLoopDigitalInput</a></li>
 <li><a href="../game_loop/GameLoopFullscreenChangeFunction.html"><div class="icon-interface"></div>GameLoopFullscreenChangeFunction</a></li>
 <li><a href="../game_loop/GameLoopGamepad.html"><div class="icon-class"></div>GameLoopGamepad</a></li>
@@ -39,7 +39,7 @@
 <li><a href="../game_loop/GameLoopPointerLock.html"><div class="icon-class"></div>GameLoopPointerLock</a></li>
 <li><a href="../game_loop/GameLoopPointerLockChangeFunction.html"><div class="icon-interface"></div>GameLoopPointerLockChangeFunction</a></li>
 <li><a href="../game_loop/GameLoopPositionInput.html"><div class="icon-class"></div>GameLoopPositionInput</a></li>
-<li><div class="icon-interface"></div><strong>GameLoopRenderFunction</strong></li>
+<li><a href="../game_loop/GameLoopRenderFunction.html"><div class="icon-interface"></div>GameLoopRenderFunction</a></li>
 <li><a href="../game_loop/GameLoopResizeFunction.html"><div class="icon-interface"></div>GameLoopResizeFunction</a></li>
 <li><a href="../game_loop/GameLoopTimer.html"><div class="icon-class"></div>GameLoopTimer</a></li>
 <li><a href="../game_loop/GameLoopTimerFunction.html"><div class="icon-interface"></div>GameLoopTimerFunction</a></li>
@@ -47,33 +47,110 @@
 </ul>
 <h2><div class="icon-library"></div><a href="../metadata.html">metadata</a></h2></div>
 <div class="content">
-        <h2><strong>GameLoopRenderFunction</strong>
-          typedef
+        <h2><strong>GameLoopDigitalButtonEvent</strong>
+          class
         </h2>
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
-<p>Called when it is time to draw. </p>
 <pre class="source">
-typedef void GameLoopRenderFunction(GameLoop gameLoop);
+class GameLoopDigitalButtonEvent {
+ final bool down;
+ final int frame;
+ final int buttonId;
+ final double time;
+
+ GameLoopDigitalButtonEvent(this.buttonId, this.down, this.frame, this.time);
+
+ String toString() =&gt; 'Button: $buttonId DOWN: $down [$frame@$time]';
+}
 </pre>
 </div>
-<div class="method"><h4 id="GameLoopRenderFunction">
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="GameLoopDigitalButtonEvent">
 <button class="show-code">Code</button>
-typedef void GameLoopRenderFunction(<a href="../game_loop/GameLoop.html">GameLoop</a> gameLoop) <a class="anchor-link" href="#GameLoopRenderFunction"
-              title="Permalink to GameLoopRenderFunction">#</a></h4>
+new <strong>GameLoopDigitalButtonEvent</strong>(int buttonId, bool down, int frame, double time) <a class="anchor-link" href="#GameLoopDigitalButtonEvent"
+              title="Permalink to GameLoopDigitalButtonEvent.GameLoopDigitalButtonEvent">#</a></h4>
 <div class="doc">
 <pre class="source">
-typedef void GameLoopRenderFunction(GameLoop gameLoop);
+GameLoopDigitalButtonEvent(this.buttonId, this.down, this.frame, this.time);
 </pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="buttonId">
+<button class="show-code">Code</button>
+final int         <strong>buttonId</strong> <a class="anchor-link"
+            href="#buttonId"
+            title="Permalink to GameLoopDigitalButtonEvent.buttonId">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+buttonId
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="down">
+<button class="show-code">Code</button>
+final bool         <strong>down</strong> <a class="anchor-link"
+            href="#down"
+            title="Permalink to GameLoopDigitalButtonEvent.down">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+down
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="frame">
+<button class="show-code">Code</button>
+final int         <strong>frame</strong> <a class="anchor-link"
+            href="#frame"
+            title="Permalink to GameLoopDigitalButtonEvent.frame">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+frame
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="time">
+<button class="show-code">Code</button>
+final double         <strong>time</strong> <a class="anchor-link"
+            href="#time"
+            title="Permalink to GameLoopDigitalButtonEvent.time">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+time
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="toString">
+<button class="show-code">Code</button>
+String <strong>toString</strong>() <a class="anchor-link" href="#toString"
+              title="Permalink to GameLoopDigitalButtonEvent.toString">#</a></h4>
+<div class="doc">
+<div class="inherited">
+<p>Returns a string representation of this object.</p>
+<div class="docs-inherited-from">docs inherited from Object </div></div>
+<pre class="source">
+String toString() =&gt; 'Button: $buttonId DOWN: $down [$frame@$time]';
+</pre>
+</div>
 </div>
 </div>
         </div>
         <div class="clear"></div>
         </div>
-        
         <div class="footer">
-          <div>This page was generated at 2013-01-29 07:40:57.837</div>
+          <div>This page was generated at 2013-01-29 07:53:43.909</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>

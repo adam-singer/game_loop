@@ -2,19 +2,19 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>GameLoopGamepad class / game_loop Library / Dart Documentation</title>
+        <title>GameLoopDigitalButton class / game_loop Library / Dart Documentation</title>
         <link rel="stylesheet" type="text/css"
             href="../styles.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="../favicon.ico">
         
         </head>
-        <body data-library="game_loop" data-type="GameLoopGamepad">
+        <body data-library="game_loop" data-type="GameLoopDigitalButton">
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
           <a href="../index.html">Dart Documentation</a>
-         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopGamepad.html">GameLoopGamepad</a>        <div id="search-box">
+         &rsaquo; <a href="../game_loop.html">game_loop</a> &rsaquo; <a href="../game_loop/GameLoopDigitalButton.html">GameLoopDigitalButton</a>        <div id="search-box">
           <input type="search" name="q" id="q" autocomplete="off"
               class="search-input" placeholder="Search API">
         </div>
@@ -28,11 +28,11 @@
 <li><a href="../game_loop/GameLoop.html"><div class="icon-class"></div>GameLoop</a></li>
 <li><a href="../game_loop/GameLoopAnalogButton.html"><div class="icon-class"></div>GameLoopAnalogButton</a></li>
 <li><a href="../game_loop/GameLoopAnalogInput.html"><div class="icon-class"></div>GameLoopAnalogInput</a></li>
-<li><a href="../game_loop/GameLoopDigitalButton.html"><div class="icon-class"></div>GameLoopDigitalButton</a></li>
+<li><div class="icon-class"></div><strong>GameLoopDigitalButton</strong></li>
 <li><a href="../game_loop/GameLoopDigitalButtonEvent.html"><div class="icon-class"></div>GameLoopDigitalButtonEvent</a></li>
 <li><a href="../game_loop/GameLoopDigitalInput.html"><div class="icon-class"></div>GameLoopDigitalInput</a></li>
 <li><a href="../game_loop/GameLoopFullscreenChangeFunction.html"><div class="icon-interface"></div>GameLoopFullscreenChangeFunction</a></li>
-<li><div class="icon-class"></div><strong>GameLoopGamepad</strong></li>
+<li><a href="../game_loop/GameLoopGamepad.html"><div class="icon-class"></div>GameLoopGamepad</a></li>
 <li><a href="../game_loop/GameLoopKeyboard.html"><div class="icon-class"></div>GameLoopKeyboard</a></li>
 <li><a href="../game_loop/GameLoopMouse.html"><div class="icon-class"></div>GameLoopMouse</a></li>
 <li><a href="../game_loop/GameLoopMouseEvent.html"><div class="icon-class"></div>GameLoopMouseEvent</a></li>
@@ -47,168 +47,133 @@
 </ul>
 <h2><div class="icon-library"></div><a href="../metadata.html">metadata</a></h2></div>
 <div class="content">
-        <h2><strong>GameLoopGamepad</strong>
+        <h2><strong>GameLoopDigitalButton</strong>
           class
         </h2>
         
 <button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
-<p>A gamepad </p>
+<p>The state of a digital button: frame and time when button was
+last pressed and released.</p>
 <pre class="source">
-class GameLoopGamepad {
- static const int BUTTON0 = 0;
- static const int BUTTON1 = 1;
- static const int BUTTON2 = 2;
- static const int BUTTON3 = 3;
- static const int BUTTON4 = 4;
- static const int BUTTON5 = 5;
- static const int BUTTON6 = 6;
- final GameLoop gameLoop;
+class GameLoopDigitalButton {
+ /** buttonId */
+ final int buttonId;
+ /** Frame when button was last pressed. */
+ int framePressed = 0;
+ /** Frame when button was last released. */
+ int frameReleased = 0;
+ /** Time when button was last pressed. */
+ double timePressed = 0.0;
+ /** Time when button was last released. */
+ double timeReleased = 0.0;
+ GameLoopDigitalButton(this.buttonId);
 
- GameLoopDigitalInput buttons;
- GameLoopAnalogInput sticks;
-
- GameLoopGamepad(this.gameLoop) {
- }
+ /** Is button down in this frame? */
+ bool get down =&gt; framePressed &gt; frameReleased;
+ /** Is button up in this frame? */
+ bool get up =&gt; frameReleased &gt;= framePressed;
 }
 </pre>
-</div>
-<div>
-<h3>Static Properties</h3>
-<div class="field"><h4 id="BUTTON0">
-<button class="show-code">Code</button>
-const int         <strong>BUTTON0</strong> <a class="anchor-link"
-            href="#BUTTON0"
-            title="Permalink to GameLoopGamepad.BUTTON0">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-BUTTON0 = 0
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="BUTTON1">
-<button class="show-code">Code</button>
-const int         <strong>BUTTON1</strong> <a class="anchor-link"
-            href="#BUTTON1"
-            title="Permalink to GameLoopGamepad.BUTTON1">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-BUTTON1 = 1
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="BUTTON2">
-<button class="show-code">Code</button>
-const int         <strong>BUTTON2</strong> <a class="anchor-link"
-            href="#BUTTON2"
-            title="Permalink to GameLoopGamepad.BUTTON2">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-BUTTON2 = 2
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="BUTTON3">
-<button class="show-code">Code</button>
-const int         <strong>BUTTON3</strong> <a class="anchor-link"
-            href="#BUTTON3"
-            title="Permalink to GameLoopGamepad.BUTTON3">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-BUTTON3 = 3
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="BUTTON4">
-<button class="show-code">Code</button>
-const int         <strong>BUTTON4</strong> <a class="anchor-link"
-            href="#BUTTON4"
-            title="Permalink to GameLoopGamepad.BUTTON4">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-BUTTON4 = 4
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="BUTTON5">
-<button class="show-code">Code</button>
-const int         <strong>BUTTON5</strong> <a class="anchor-link"
-            href="#BUTTON5"
-            title="Permalink to GameLoopGamepad.BUTTON5">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-BUTTON5 = 5
-</pre>
-</div>
-</div>
-<div class="field"><h4 id="BUTTON6">
-<button class="show-code">Code</button>
-const int         <strong>BUTTON6</strong> <a class="anchor-link"
-            href="#BUTTON6"
-            title="Permalink to GameLoopGamepad.BUTTON6">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-BUTTON6 = 6
-</pre>
-</div>
-</div>
 </div>
 <div>
 <h3>Constructors</h3>
-<div class="method"><h4 id="GameLoopGamepad">
+<div class="method"><h4 id="GameLoopDigitalButton">
 <button class="show-code">Code</button>
-new <strong>GameLoopGamepad</strong>(<a href="../game_loop/GameLoop.html">GameLoop</a> gameLoop) <a class="anchor-link" href="#GameLoopGamepad"
-              title="Permalink to GameLoopGamepad.GameLoopGamepad">#</a></h4>
+new <strong>GameLoopDigitalButton</strong>(int buttonId) <a class="anchor-link" href="#GameLoopDigitalButton"
+              title="Permalink to GameLoopDigitalButton.GameLoopDigitalButton">#</a></h4>
 <div class="doc">
 <pre class="source">
-GameLoopGamepad(this.gameLoop) {
-}
+GameLoopDigitalButton(this.buttonId);
 </pre>
 </div>
 </div>
 </div>
 <div>
 <h3>Properties</h3>
-<div class="field"><h4 id="buttons">
+<div class="field"><h4 id="buttonId">
 <button class="show-code">Code</button>
-<a href="../game_loop/GameLoopDigitalInput.html">GameLoopDigitalInput</a>         <strong>buttons</strong> <a class="anchor-link"
-            href="#buttons"
-            title="Permalink to GameLoopGamepad.buttons">#</a>
+final int         <strong>buttonId</strong> <a class="anchor-link"
+            href="#buttonId"
+            title="Permalink to GameLoopDigitalButton.buttonId">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-buttons
+buttonId
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="gameLoop">
+<div class="field"><h4 id="down">
 <button class="show-code">Code</button>
-final <a href="../game_loop/GameLoop.html">GameLoop</a>         <strong>gameLoop</strong> <a class="anchor-link"
-            href="#gameLoop"
-            title="Permalink to GameLoopGamepad.gameLoop">#</a>
+final bool         <strong>down</strong> <a class="anchor-link"
+            href="#down"
+            title="Permalink to GameLoopDigitalButton.down">#</a>
         </h4>
         <div class="doc">
+<p>Is button down in this frame? </p>
 <pre class="source">
-gameLoop
+bool get down =&gt; framePressed &gt; frameReleased;
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="sticks">
+<div class="field"><h4 id="framePressed">
 <button class="show-code">Code</button>
-<a href="../game_loop/GameLoopAnalogInput.html">GameLoopAnalogInput</a>         <strong>sticks</strong> <a class="anchor-link"
-            href="#sticks"
-            title="Permalink to GameLoopGamepad.sticks">#</a>
+int         <strong>framePressed</strong> <a class="anchor-link"
+            href="#framePressed"
+            title="Permalink to GameLoopDigitalButton.framePressed">#</a>
         </h4>
         <div class="doc">
 <pre class="source">
-sticks
+framePressed = 0
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="frameReleased">
+<button class="show-code">Code</button>
+int         <strong>frameReleased</strong> <a class="anchor-link"
+            href="#frameReleased"
+            title="Permalink to GameLoopDigitalButton.frameReleased">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+frameReleased = 0
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="timePressed">
+<button class="show-code">Code</button>
+double         <strong>timePressed</strong> <a class="anchor-link"
+            href="#timePressed"
+            title="Permalink to GameLoopDigitalButton.timePressed">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+timePressed = 0.0
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="timeReleased">
+<button class="show-code">Code</button>
+double         <strong>timeReleased</strong> <a class="anchor-link"
+            href="#timeReleased"
+            title="Permalink to GameLoopDigitalButton.timeReleased">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+timeReleased = 0.0
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="up">
+<button class="show-code">Code</button>
+final bool         <strong>up</strong> <a class="anchor-link"
+            href="#up"
+            title="Permalink to GameLoopDigitalButton.up">#</a>
+        </h4>
+        <div class="doc">
+<p>Is button up in this frame? </p>
+<pre class="source">
+bool get up =&gt; frameReleased &gt;= framePressed;
 </pre>
 </div>
 </div>
@@ -216,9 +181,8 @@ sticks
         </div>
         <div class="clear"></div>
         </div>
-        
         <div class="footer">
-          <div>This page was generated at 2013-01-29 07:40:57.677</div>
+          <div>This page was generated at 2013-01-29 07:53:43.914</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>
