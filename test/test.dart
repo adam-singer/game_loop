@@ -37,7 +37,7 @@ void update(GameLoop gameLoop) {
   }
   return;
   print('frame: ${gameLoop.frame}');
-  print('frameTime: ${gameLoop.frameTime}');
+  print('gameTime: ${gameLoop.gameTime}');
   print('time: ${gameLoop.time}');
   print('dt: ${gameLoop.dt}');
 }

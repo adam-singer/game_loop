@@ -6,3 +6,4 @@ authors:
 homepage: https://github.com/johnmccutchan/game_loop
 dependencies:
   unittest: any
+  browser: any

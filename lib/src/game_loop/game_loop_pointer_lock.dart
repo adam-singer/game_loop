@@ -44,10 +44,8 @@ class GameLoopPointerLock {
   bool get locked => document.webkitPointerLockElement == gameLoop.element;
 
   void _onPointerLockChange(Event event) {
-    if (locked) {
-      print('locked.');
-    } else {
-      print('unlocked.');
+    if (gameLoop.onPointerLockChange != null) {
+      gameLoop.onPointerLockChange(gameLoop);
     }
   }
 }

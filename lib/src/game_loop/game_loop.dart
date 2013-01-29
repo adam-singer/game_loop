@@ -20,14 +20,25 @@
 
 part of game_loop;
 
-/** Called once per frame when it is time to update and render. */
+/** Called when it is time to draw. */
+typedef void GameLoopRenderFunction(GameLoop gameLoop);
+
+/** Called once per game logic frame. See [updateTimeStep] and
+ * [maxAccumulatedTime] */
 typedef void GameLoopUpdateFunction(GameLoop gameLoop);
+
 /** Called whenever the element is resized. */
 typedef void GameLoopResizeFunction(GameLoop gameLoop);
+
 /** Called whenever the element moves between fullscreen and non-fullscreen
  * mode.
  */
 typedef void GameLoopFullscreenChangeFunction(GameLoop gameLoop);
+
+/** Called whenever the element moves between locking the pointer and
+ * not locking the pointer.
+ */
+typedef void GameLoopPointerLockChangeFunction(GameLoop gameLoop);
 
 /** The game loop */
 class GameLoop {
@@ -37,20 +48,35 @@ class GameLoop {
   int _frameCounter = 0;
   double _previousFrameTime;
   double _frameTime = 0.0;
-  double _dt;
 
+  /** The time step used for game updates. */
+  double updateTimeStep = 0.015;
+
+  /** Maximum amount of time between subsequent request animation frame
+   * calls that is accumulated. Accumulated time is used to drive onUpdate
+   * calls.
+   */
+  double maxAccumulatedTime = 0.03;
+  double _accumulatedTime = 0.0;
+  /** Seconds of accumulated time. */
+  double get accumulatedTime => _accumulatedTime;
   /** Width of game display [Element] */
-  int get width => element.width;
+  int get width => element.clientWidth;
   /** Height of game display [Element] */
-  int get height => element.height;
+  int get height => element.clientHeight;
 
   /** Frame counter value. Incremented once per frame. */
   int get frame => _frameCounter;
-  /** Frame time value in seconds. */
-  double get frameTime => _frameTime;
-  /** Time elapsed since previous frame */
-  double get dt => _dt;
-
+  /** Current time as seen by onUpdate calls. */
+  double get gameTime => _gameTime;
+  double _gameTime = 0.0;
+  /** Seconds between requestAnimationFrameTime calls. */
+  double get requestAnimationFrameTime => _frameTime;
+  /** Time elapsed in current frame. */
+  double get dt => updateTimeStep;
+  double _renderInterpolationFactor = 0.0;
+  /** Interpolation value between 0.0 and 1.0 */
+  double get renderInterpolationFactor => _renderInterpolationFactor;
   static double timeStampToSeconds(timeStamp) => timeStamp / 1000.0;
   static double milliseconds(int x) => x / 1000.0;
   static double seconds(int x) => x.toDouble();
@@ -115,7 +141,7 @@ class GameLoop {
 
   void _processTimers() {
     for (GameLoopTimer timer in _timers) {
-      timer._update(_dt);
+      timer._update(dt);
     }
     for (int i = _timers.length-1; i >= 0; i--) {
       int lastElement = _timers.length-1;
@@ -144,11 +170,26 @@ class GameLoop {
     _frameCounter++;
     _previousFrameTime = _frameTime;
     _frameTime = time;
-    _dt = _frameTime - _previousFrameTime;
+    double timeDelta = _frameTime - _previousFrameTime;
+    _accumulatedTime += timeDelta;
+    if (_accumulatedTime > maxAccumulatedTime) {
+      // If the animation frame callback was paused we may end up with
+      // a huge time delta. Clamp it to something reasonable.
+      _accumulatedTime = maxAccumulatedTime;
+    }
+    // TODO(johnmccutchan): Process input events in update loop.
     _processInputEvents();
-    _processTimers();
-    if (onUpdate != null) {
-      onUpdate(this);
+    while (_accumulatedTime >= updateTimeStep) {
+      _processTimers();
+      _gameTime += updateTimeStep;
+      if (onUpdate != null) {
+        onUpdate(this);
+      }
+      _accumulatedTime -= updateTimeStep;
+    }
+    if (onRender != null) {
+      double interpolationValue = _accumulatedTime/updateTimeStep;
+      onRender(this);
     }
   }
 
@@ -156,9 +197,7 @@ class GameLoop {
     if (onFullscreenChange == null) {
       return;
     }
-    if (onFullscreenChange == null) {
-      return;
-    }
+    onFullscreenChange(this);
   }
 
   void _fullscreenError(Event _) {
@@ -227,7 +266,7 @@ class GameLoop {
       element.webkitRequestFullscreen();
       return;
     }
-    element.webkitCancelFullScreen();
+    document.webkitExitFullscreen();
   }
 
   final List<GameLoopTimer> _timers = new List<GameLoopTimer>();
@@ -244,10 +283,16 @@ class GameLoop {
     _timers.clear();
   }
 
-  /** Called once per frame. */
-  GameLoopUpdateFunction onUpdate = null;
+  /** Called once per game logic frame. */
+  GameLoopUpdateFunction onUpdate;
+  /** Called when it is time to draw. */
+  GameLoopRenderFunction onRender;
   /** Called when element is resized. */
-  GameLoopResizeFunction onResize = null;
-  /** Called when element moves between fullscreen and non-fullscreen mode. */
-  GameLoopFullscreenChangeFunction onFullscreenChange = null;
+  GameLoopResizeFunction onResize;
+  /** Called when element enters or exits fullscreen mode. */
+  GameLoopFullscreenChangeFunction onFullscreenChange;
+  /** Called when the element moves between owning and not
+   *  owning the pointer.
+   */
+  GameLoopPointerLockChangeFunction onPointerLockChange;
 }
