@@ -24,8 +24,8 @@ class GameLoopPointerLock {
   final GameLoop gameLoop;
 
   GameLoopPointerLock(this.gameLoop) {
-    gameLoop.element.on.click.add(_onClick);
-    document.on.pointerLockChange.add(_onPointerLockChange);
+    gameLoop.element.onClick.listen(_onClick);
+    document.onPointerLockChange.listen(_onPointerLockChange);
   }
 
   void requestLock() {
