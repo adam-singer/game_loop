@@ -238,14 +238,14 @@ class GameLoop {
   /** Start the game loop. */
   void start() {
     if (_initialized == false) {
-      document.on.fullscreenError.add(_fullscreenError);
-      document.on.fullscreenChange.add(_fullscreenChange);
-      window.on.keyDown.add(_keyDown);
-      window.on.keyUp.add(_keyUp);
-      window.on.resize.add(_resize);
-      element.on.mouseMove.add(_mouseMove);
-      element.on.mouseDown.add(_mouseDown);
-      element.on.mouseUp.add(_mouseUp);
+      document.onFullscreenError.listen(_fullscreenError);
+      document.onFullscreenChange.listen(_fullscreenChange);
+      window.onKeyDown.listen(_keyDown);
+      window.onKeyUp.listen(_keyUp);
+      window.onResize.listen(_resize);
+      element.onMouseMove.listen(_mouseMove);
+      element.onMouseDown.listen(_mouseDown);
+      element.onMouseUp.listen(_mouseUp);
       _initialized = true;
     }
     _interrupt = false;
