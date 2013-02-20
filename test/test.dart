@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2012 John McCutchan <john@johnmccutchan.com>
+  Copyright (C) 2013 John McCutchan <john@johnmccutchan.com>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -35,11 +35,14 @@ void update(GameLoop gameLoop) {
     print('D down: $down $timePressed $timeReleased');
     //gameLoop.enableFullscreen(true);
   }
-  return;
   print('frame: ${gameLoop.frame}');
   print('gameTime: ${gameLoop.gameTime}');
   print('time: ${gameLoop.time}');
   print('dt: ${gameLoop.dt}');
+}
+
+void render(GameLoop gameLoop) {
+  print('Interpolation factor: ${gameLoop.renderInterpolationFactor}');
 }
 
 GameLoopTimer timer1;
@@ -56,6 +59,7 @@ void timerFired(GameLoopTimer timer) {
 main() {
   gameLoop = new GameLoop(query('#gameElement'));
   gameLoop.onUpdate = update;
+  gameLoop.onRender = render;
   gameLoop.start();
   timer1 = gameLoop.addTimer(timerFired, 2.5);
   timer2 = gameLoop.addTimer(timerFired, 0.5);

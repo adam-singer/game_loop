@@ -22,8 +22,8 @@ If you are familiar with GLUT, game_loop provides that and more.
 
 ## Why game_loop ? ##
 
-1\. Focus on your game not on the browser platform. A perfect main loop requires code
-which properly combines input, display, and state management. Writing
+1\. Focus on your game not on the browser platform. A perfect main loop requires
+code which properly combines input, time, display, and state management. Writing
 this code is tedious, error prone, and ultimately, a waste of time.
 
 ## Getting Started ##
@@ -70,7 +70,27 @@ main() {
   // Construct a game loop.
   GameLoop gameLoop = new GameLoop(canvasElement);
   gameLoop.onUpdate = ((gameLoop) {
-    print('${gameLoop.frame}: ${gameLoop.frameTime} [dt = ${gameLoop.dt}].');
+    // Update game logic here.
+    print('${gameLoop.frame}: ${gameLoop.gameTime} [dt = ${gameLoop.dt}].');
+  });
+  gameLoop.start();
+}
+```
+
+3\. Hook your game render function up and start drawing:
+
+```dart
+main() {
+  // Construct a game loop.
+  GameLoop gameLoop = new GameLoop(canvasElement);
+  gameLoop.onUpdate = ((gameLoop) {
+    // Update game logic here.
+    print('${gameLoop.frame}: ${gameLoop.gameTime} [dt = ${gameLoop.dt}].');
+  });
+  gameLoop.onRender = ((gameLoop) {
+    // Draw game into canvasElement using WebGL or CanvasRenderingContext here.
+    // The interpolation factor can be used to draw correct inter-frame
+  	print('Interpolation factor: ${gameLoop.renderInterpolationFactor}');
   });
   gameLoop.start();
 }
