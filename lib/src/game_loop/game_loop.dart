@@ -48,7 +48,8 @@ class GameLoop {
   int _frameCounter = 0;
   double _previousFrameTime;
   double _frameTime = 0.0;
-  bool _activeResize = false;
+  bool _resizePending = false;
+  double _nextResize = 0.0;
 
   /** The time step used for game updates. */
   double updateTimeStep = 0.015;
@@ -78,9 +79,8 @@ class GameLoop {
   double _renderInterpolationFactor = 0.0;
   /** Interpolation value between 0.0 and 1.0 */
   double get renderInterpolationFactor => _renderInterpolationFactor;
-  /** The minimum amount of time between two onResize calls in milliseconds
-   * Set to 0 to disable limiting of resize events*/
-  int resizeLimit = 50;
+  /** The minimum amount of time between two onResize calls in seconds*/
+  double resizeLimit = 0.05;
   static double timeStampToSeconds(timeStamp) => timeStamp / 1000.0;
   static double milliseconds(int x) => x / 1000.0;
   static double seconds(int x) => x.toDouble();
@@ -191,6 +191,12 @@ class GameLoop {
       }
       _accumulatedTime -= updateTimeStep;
     }
+    if(_resizePending == true && onResize != null && _nextResize <= _frameTime){
+      onResize(this);
+      _nextResize = _frameTime + resizeLimit;
+      _resizePending = false;
+    }
+    
     if (onRender != null) {
       _renderInterpolationFactor = _accumulatedTime/updateTimeStep;
       onRender(this);
@@ -234,19 +240,8 @@ class GameLoop {
   }
 
   void _resize(Event _) {
-    if (onResize != null && _activeResize == false) {
-      if(resizeLimit >= 0) {
-        window.setTimeout(() {
-          // Retest it may have been removed since the timeout was called.
-          if (onResize != null) {
-            onResize(this);
-          }
-          _activeResize = false;
-        }, resizeLimit);
-        _activeResize = true;
-      }else{
-        onResize(this);
-      }
+    if (_resizePending == false) {
+      _resizePending = true;
     }
   }
 
