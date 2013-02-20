@@ -46,7 +46,7 @@ import 'package:game_loop/game_loop.dart';
 
 ## API ##
 
-[Reference Manual](http://www.dartgamedevs.org/packages/game_loop/game_loop.html)
+[Reference Manual](http://www.dartgamedevs.org/packages/game_loop/docs/)
 
 ## Samples ##
 
