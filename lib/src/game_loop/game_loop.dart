@@ -78,7 +78,7 @@ class GameLoop {
   double _renderInterpolationFactor = 0.0;
   /** Interpolation value between 0.0 and 1.0 */
   double get renderInterpolationFactor => _renderInterpolationFactor;
-  /** The minimum amount of time between to onResize calls in miliseconds
+  /** The minimum amount of time between two onResize calls in milliseconds
    * Set to 0 to disable limiting of resize events*/
   int resizeLimit = 50;
   static double timeStampToSeconds(timeStamp) => timeStamp / 1000.0;
