@@ -202,7 +202,7 @@ class GameLoop {
      _accumulatedTime -= updateTimeStep;
    }
    if (onRender != null) {
-     double interpolationValue = _accumulatedTime/updateTimeStep;
+     _renderInterpolationFactor = _accumulatedTime/updateTimeStep;
      onRender(this);
    }
  }
@@ -747,7 +747,7 @@ void stop() {
         <div class="clear"></div>
         </div>
         <div class="footer">
-          <div>This page was generated at 2013-01-29 07:53:43.922</div>
+          <div>This page was generated at 2013-02-20 10:55:24.032</div>
         </div>
         <script async src="../client-static.js"></script>
         </body></html>
