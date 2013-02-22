@@ -3,6 +3,7 @@ version: 0.6.0
 author: John McCutchan <john@johnmccutchan.com>
 description: The Game Loop for Dart
 homepage: https://github.com/johnmccutchan/game_loop
+documentation: http://dartgamedevs.org/packages/game_loop/docs/game_loop.html
 dependencies:
   unittest: any
   browser: any
