@@ -29,7 +29,7 @@ class GameLoopPointerLock {
   }
 
   void requestLock() {
-    gameLoop.element.webkitRequestPointerLock();
+    gameLoop.element.requestPointerLock();
   }
 
   void _onClick(Event event) {
