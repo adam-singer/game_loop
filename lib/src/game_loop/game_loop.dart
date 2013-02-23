@@ -87,7 +87,7 @@ class GameLoop {
   static double minutes(int x) => x.toDouble() * 60.0;
 
   /** Current time. */
-  double get time => timeStampToSeconds(new Date.now().millisecondsSinceEpoch);
+  double get time => timeStampToSeconds(new DateTime.now().millisecondsSinceEpoch);
 
   GameLoopPointerLock _pointerLock;
   GameLoopPointerLock get pointerLock => _pointerLock;
@@ -128,8 +128,8 @@ class GameLoop {
       if (moveEvent) {
         int x = mouseEvent.offsetX;
         int y = mouseEvent.offsetY;
-        int dx = mouseEvent.webkitMovementX;
-        int dy = mouseEvent.webkitMovementY;
+        int dx = mouseEvent.movementX;
+        int dy = mouseEvent.movementY;
         GameLoopMouseEvent event = new GameLoopMouseEvent(x, y, dx, dy,
                                                           time, frame);
         _mouse.gameLoopMouseEvent(event);
@@ -196,7 +196,7 @@ class GameLoop {
       _nextResize = _frameTime + resizeLimit;
       _resizePending = false;
     }
-    
+
     if (onRender != null) {
       _renderInterpolationFactor = _accumulatedTime/updateTimeStep;
       onRender(this);
@@ -273,7 +273,7 @@ class GameLoop {
   /** Enable or disable fullscreen display of the element. */
   void enableFullscreen(bool enable) {
     if (enable) {
-      element.webkitRequestFullscreen();
+      element.requestFullscreen();
       return;
     }
     document.webkitExitFullscreen();
