@@ -34,8 +34,7 @@ class GameLoopMouseEvent {
  * [LEFT], [MIDDLE], [RIGHT]. Also implements the [GameLoopPositionInput]
  * interface.
  */
-class GameLoopMouse extends GameLoopDigitalInput
-    implements GameLoopPositionInput {
+class Mouse extends DigitalInput implements PositionInput {
   /** Left mouse button */
   static const LEFT = 0;
   /** Middle mouse button */
@@ -72,7 +71,7 @@ class GameLoopMouse extends GameLoopDigitalInput
   /** Frame at which mouse position was last updated. */
   int get frame => _frame;
 
-  GameLoopMouse(gameLoop) : super(gameLoop, _buttonIds);
+  Mouse(gameLoop) : super(gameLoop, _buttonIds);
 
   /** Process one [GameLoopMouseEvent]. */
   void gameLoopMouseEvent(GameLoopMouseEvent event) {

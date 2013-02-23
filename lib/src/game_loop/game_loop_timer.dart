@@ -21,12 +21,12 @@
 part of game_loop;
 
 /** Called when the timer fires. */
-typedef GameLoopTimerFunction(GameLoopTimer gameLoop);
+typedef GameLoopTimerFunction(Timer timer);
 
 /** A cancellable timer that calls a [GameLoopTimerFunction] when it fires.
  * A timer can only fire once, afterwards it is dead.
  */
-class GameLoopTimer {
+class Timer {
   /** Game loop timer was created by */
   final GameLoop gameLoop;
   /** Callback function that will be call when timer fires. */
@@ -34,7 +34,7 @@ class GameLoopTimer {
   double _timeToFire = 0.0;
   /** Time until timer fires. */
   double get timeToFire => _timeToFire;
-  GameLoopTimer._internal(this.gameLoop, this._timeToFire, this.onTimer);
+  Timer._internal(this.gameLoop, this._timeToFire, this.onTimer);
   void _update(double dt) {
     if (_timeToFire <= 0.0) {
       // Dead.

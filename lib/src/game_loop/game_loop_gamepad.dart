@@ -21,7 +21,7 @@
 part of game_loop;
 
 /** A gamepad */
-class GameLoopGamepad {
+class Gamepad {
   static const int BUTTON0 = 0;
   static const int BUTTON1 = 1;
   static const int BUTTON2 = 2;
@@ -31,9 +31,9 @@ class GameLoopGamepad {
   static const int BUTTON6 = 6;
   final GameLoop gameLoop;
 
-  GameLoopDigitalInput buttons;
-  GameLoopAnalogInput sticks;
+  DigitalInput buttons;
+  AnalogInput sticks;
 
-  GameLoopGamepad(this.gameLoop) {
+  Gamepad(this.gameLoop) {
   }
 }

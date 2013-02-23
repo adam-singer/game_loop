@@ -24,17 +24,18 @@ import 'package:game_loop/game_loop.dart';
 GameLoop gameLoop;
 
 void update(GameLoop gameLoop) {
-  bool mouseDown = gameLoop.mouse.isDown(GameLoopMouse.LEFT);
+  bool mouseDown = gameLoop.mouse.isDown(Mouse.LEFT);
   if (mouseDown) {
     print('left down.');
   }
-  bool down = gameLoop.keyboard.isDown(GameLoopKeyboard.D);
-  double timePressed = gameLoop.keyboard.timePressed(GameLoopKeyboard.D);
-  double timeReleased = gameLoop.keyboard.timeReleased(GameLoopKeyboard.D);
-  if (gameLoop.keyboard.released(GameLoopKeyboard.D)) {
+  bool down = gameLoop.keyboard.isDown(Keyboard.D);
+  double timePressed = gameLoop.keyboard.timePressed(Keyboard.D);
+  double timeReleased = gameLoop.keyboard.timeReleased(Keyboard.D);
+  if (gameLoop.keyboard.released(Keyboard.D)) {
     print('D down: $down $timePressed $timeReleased');
     //gameLoop.enableFullscreen(true);
   }
+  return;
   print('frame: ${gameLoop.frame}');
   print('gameTime: ${gameLoop.gameTime}');
   print('time: ${gameLoop.time}');
@@ -42,13 +43,13 @@ void update(GameLoop gameLoop) {
 }
 
 void render(GameLoop gameLoop) {
-  print('Interpolation factor: ${gameLoop.renderInterpolationFactor}');
+  //print('Interpolation factor: ${gameLoop.renderInterpolationFactor}');
 }
 
-GameLoopTimer timer1;
-GameLoopTimer timer2;
+Timer timer1;
+Timer timer2;
 
-void timerFired(GameLoopTimer timer) {
+void timerFired(Timer timer) {
   if (timer == timer1) {
     print('timer1 fired.');
   } else if (timer == timer2) {

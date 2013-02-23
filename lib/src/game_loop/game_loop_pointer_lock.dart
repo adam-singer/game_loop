@@ -20,10 +20,10 @@
 
 part of game_loop;
 
-class GameLoopPointerLock {
+class PointerLock {
   final GameLoop gameLoop;
 
-  GameLoopPointerLock(this.gameLoop) {
+  PointerLock(this.gameLoop) {
     gameLoop.element.onClick.listen(_onClick);
     document.onPointerLockChange.listen(_onPointerLockChange);
   }

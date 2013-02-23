@@ -89,34 +89,34 @@ class GameLoop {
   /** Current time. */
   double get time => timeStampToSeconds(new DateTime.now().millisecondsSinceEpoch);
 
-  GameLoopPointerLock _pointerLock;
-  GameLoopPointerLock get pointerLock => _pointerLock;
+  PointerLock _pointerLock;
+  PointerLock get pointerLock => _pointerLock;
 
-  GameLoopKeyboard _keyboard;
+  Keyboard _keyboard;
   /** Keyboard. */
-  GameLoopKeyboard get keyboard => _keyboard;
-  GameLoopMouse _mouse;
+  Keyboard get keyboard => _keyboard;
+  Mouse _mouse;
   /** Mouse. */
-  GameLoopMouse get mouse => _mouse;
-  GameLoopGamepad _gamepad0;
+  Mouse get mouse => _mouse;
+  Gamepad _gamepad0;
   /** Gamepad #0. */
-  GameLoopGamepad get gamepad0 => _gamepad0;
+  Gamepad get gamepad0 => _gamepad0;
 
   /** Construct a new game loop attaching it to [element] */
   GameLoop(this.element) {
-    _keyboard = new GameLoopKeyboard(this);
-    _mouse = new GameLoopMouse(this);
-    _gamepad0 = new GameLoopGamepad(this);
-    _pointerLock = new GameLoopPointerLock(this);
+    _keyboard = new Keyboard(this);
+    _mouse = new Mouse(this);
+    _gamepad0 = new Gamepad(this);
+    _pointerLock = new PointerLock(this);
   }
 
   void _processInputEvents() {
     for (KeyboardEvent keyboardEvent in _keyboardEvents) {
-      GameLoopDigitalButtonEvent event;
+      DigitalButtonEvent event;
       bool down = keyboardEvent.type == "keydown";
       double time = timeStampToSeconds(keyboardEvent.timeStamp);
       int buttonId = keyboardEvent.keyCode;
-      event = new GameLoopDigitalButtonEvent(buttonId, down, frame, time);
+      event = new DigitalButtonEvent(buttonId, down, frame, time);
       _keyboard.digitalButtonEvent(event);
     }
     _keyboardEvents.clear();
@@ -130,13 +130,11 @@ class GameLoop {
         int y = mouseEvent.offsetY;
         int dx = mouseEvent.movementX;
         int dy = mouseEvent.movementY;
-        GameLoopMouseEvent event = new GameLoopMouseEvent(x, y, dx, dy,
-                                                          time, frame);
+        var event = new GameLoopMouseEvent(x, y, dx, dy, time, frame);
         _mouse.gameLoopMouseEvent(event);
       } else {
-        GameLoopDigitalButtonEvent event;
         int buttonId = mouseEvent.button;
-        event = new GameLoopDigitalButtonEvent(buttonId, down, frame, time);
+        var event = new DigitalButtonEvent(buttonId, down, frame, time);
         _mouse.digitalButtonEvent(event);
       }
     }
@@ -144,7 +142,7 @@ class GameLoop {
   }
 
   void _processTimers() {
-    for (GameLoopTimer timer in _timers) {
+    for (Timer timer in _timers) {
       timer._update(dt);
     }
     for (int i = _timers.length-1; i >= 0; i--) {
@@ -279,11 +277,11 @@ class GameLoop {
     document.webkitExitFullscreen();
   }
 
-  final List<GameLoopTimer> _timers = new List<GameLoopTimer>();
+  final List<Timer> _timers = new List<Timer>();
 
   /** Add a new timer which calls [callback] in [delay] seconds. */
-  GameLoopTimer addTimer(GameLoopTimerFunction callback, double delay) {
-    GameLoopTimer timer = new GameLoopTimer._internal(this, delay, callback);
+  Timer addTimer(GameLoopTimerFunction callback, double delay) {
+    var timer = new Timer._internal(this, delay, callback);
     _timers.add(timer);
     return timer;
   }

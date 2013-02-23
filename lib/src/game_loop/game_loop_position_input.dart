@@ -21,9 +21,9 @@
 part of game_loop;
 
 /** An input which has a position will implement this interface. For example,
- * [GameLoopMouse].
+ * [Mouse].
  */
-abstract class GameLoopPositionInput {
+abstract class PositionInput {
   int get x;
   int get y;
   int get dx;

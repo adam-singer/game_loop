@@ -22,7 +22,7 @@ part of game_loop;
 
 /** A keyboard input. Has digital buttons corresponding to keyboard keys.
  */
-class GameLoopKeyboard extends GameLoopDigitalInput {
+class Keyboard extends DigitalInput {
   /** The A key. */
   static const A = KeyCode.A;
   /** The B key. */
@@ -146,5 +146,5 @@ class GameLoopKeyboard extends GameLoopDigitalInput {
                                RIGHT
                                ];
 
-  GameLoopKeyboard(gameLoop) : super(gameLoop, _buttonIds);
+  Keyboard(gameLoop) : super(gameLoop, _buttonIds);
 }
