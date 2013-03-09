@@ -98,15 +98,15 @@ class GameLoop {
   Mouse _mouse;
   /** Mouse. */
   Mouse get mouse => _mouse;
-  Gamepad _gamepad0;
+  GameLoopGamepad _gamepad0;
   /** Gamepad #0. */
-  Gamepad get gamepad0 => _gamepad0;
+  GameLoopGamepad get gamepad0 => _gamepad0;
 
   /** Construct a new game loop attaching it to [element] */
   GameLoop(this.element) {
     _keyboard = new Keyboard(this);
     _mouse = new Mouse(this);
-    _gamepad0 = new Gamepad(this);
+    _gamepad0 = new GameLoopGamepad(this);
     _pointerLock = new PointerLock(this);
   }
 
