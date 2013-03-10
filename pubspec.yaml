@@ -1,5 +1,5 @@
 name: game_loop
-version: 0.7.0
+version: 0.7.1
 author: John McCutchan <john@johnmccutchan.com>
 description: The Game Loop for Dart
 homepage: https://github.com/johnmccutchan/game_loop
