@@ -20,6 +20,14 @@
 
 part of game_loop;
 
+class _GameLoopTouchEvent {
+  static const Move = 0x1;
+  static const End = 0x2;
+  static const Start = 0x3;
+  final TouchEvent event;
+  final int type;
+  _GameLoopTouchEvent(this.event, this.type);
+}
 /** The position of a touch at a given time and frame. */
 class GameLoopTouchPosition implements PositionInput {
   final int x;

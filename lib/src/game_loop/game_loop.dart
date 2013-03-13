@@ -146,18 +146,22 @@ class GameLoop {
       }
     }
     _mouseEvents.clear();
-    for (TouchEvent touchEvent in _touchMoveEvents) {
-      _touchSet._move(touchEvent);
+    for (_GameLoopTouchEvent touchEvent in _touchEvents) {
+      switch (touchEvent.type) {
+        case _GameLoopTouchEvent.Start:
+          _touchSet._start(touchEvent.event);
+          break;
+        case _GameLoopTouchEvent.End:
+          _touchSet._end(touchEvent.event);
+          break;
+        case _GameLoopTouchEvent.Move:
+          _touchSet._move(touchEvent.event);
+          break;
+        default:
+          throw new StateError('Invalid _GameLoopTouchEven type.');
+      }
     }
-    for (TouchEvent touchEvent in _touchEndEvents) {
-      _touchSet._end(touchEvent);
-    }
-    for (TouchEvent touchEvent in _touchStartEvents) {
-      _touchSet._start(touchEvent);
-    }
-    _touchEndEvents.clear();
-    _touchMoveEvents.clear();
-    _touchStartEvents.clear();
+    _touchEvents.clear();
   }
 
   void _processTimers() {
@@ -234,17 +238,15 @@ class GameLoop {
     onFullscreenChange(this);
   }
 
-  final List<TouchEvent> _touchStartEvents = new List<TouchEvent>();
-  final List<TouchEvent> _touchMoveEvents = new List<TouchEvent>();
-  final List<TouchEvent> _touchEndEvents = new List<TouchEvent>();
+  final List<_GameLoopTouchEvent> _touchEvents = new List<_GameLoopTouchEvent>();
   void _touchStartEvent(TouchEvent event) {
-    _touchStartEvents.add(event);
+    _touchEvents.add(new _GameLoopTouchEvent(event, _GameLoopTouchEvent.Start));
   }
   void _touchMoveEvent(TouchEvent event) {
-    _touchMoveEvents.add(event);
+    _touchEvents.add(new _GameLoopTouchEvent(event, _GameLoopTouchEvent.Move));
   }
   void _touchEndEvent(TouchEvent event) {
-    _touchEndEvents.add(event);
+    _touchEvents.add(new _GameLoopTouchEvent(event, _GameLoopTouchEvent.End));
   }
 
   final List<KeyboardEvent> _keyboardEvents = new List<KeyboardEvent>();
