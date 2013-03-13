@@ -69,8 +69,8 @@ class GameLoopTouchSet {
   void _end(TouchEvent event) {
     event.changedTouches.forEach((Touch touch) {
       var glTouch = activeTouches[touch.identifier];
-      assert(glTouch != null);
       activeTouches.remove(touch.identifier);
+      _addPosition(glTouch, touch);
       if (gameLoop.onTouchEnd != null) {
         gameLoop.onTouchEnd(gameLoop, glTouch);
       }
@@ -79,7 +79,6 @@ class GameLoopTouchSet {
   void _move(TouchEvent event) {
     event.changedTouches.forEach((Touch touch) {
       var glTouch = activeTouches[touch.identifier];
-      assert(glTouch != null);
       _addPosition(glTouch, touch);
     });
   }

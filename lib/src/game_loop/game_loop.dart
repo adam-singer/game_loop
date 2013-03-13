@@ -146,11 +146,11 @@ class GameLoop {
       }
     }
     _mouseEvents.clear();
-    for (TouchEvent touchEvent in _touchEndEvents) {
-      _touchSet._end(touchEvent);
-    }
     for (TouchEvent touchEvent in _touchMoveEvents) {
       _touchSet._move(touchEvent);
+    }
+    for (TouchEvent touchEvent in _touchEndEvents) {
+      _touchSet._end(touchEvent);
     }
     for (TouchEvent touchEvent in _touchStartEvents) {
       _touchSet._start(touchEvent);
