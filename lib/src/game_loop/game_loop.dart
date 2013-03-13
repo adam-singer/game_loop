@@ -146,6 +146,18 @@ class GameLoop {
       }
     }
     _mouseEvents.clear();
+    for (TouchEvent touchEvent in _touchEndEvents) {
+      _touchSet._end(touchEvent);
+    }
+    for (TouchEvent touchEvent in _touchMoveEvents) {
+      _touchSet._move(touchEvent);
+    }
+    for (TouchEvent touchEvent in _touchStartEvents) {
+      _touchSet._start(touchEvent);
+    }
+    _touchEndEvents.clear();
+    _touchMoveEvents.clear();
+    _touchStartEvents.clear();
   }
 
   void _processTimers() {
@@ -226,12 +238,15 @@ class GameLoop {
   final List<TouchEvent> _touchMoveEvents = new List<TouchEvent>();
   final List<TouchEvent> _touchEndEvents = new List<TouchEvent>();
   void _touchStartEvent(TouchEvent event) {
+    print('start');
     _touchStartEvents.add(event);
   }
   void _touchMoveEvent(TouchEvent event) {
+    print('move');
     _touchMoveEvents.add(event);
   }
   void _touchEndEvent(TouchEvent event) {
+    print('end');
     _touchEndEvents.add(event);
   }
 
