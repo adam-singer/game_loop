@@ -142,7 +142,7 @@ class GameLoop {
   }
 
   void _processTimers() {
-    for (Timer timer in _timers) {
+    for (GameLoopTimer timer in _timers) {
       timer._update(dt);
     }
     for (int i = _timers.length-1; i >= 0; i--) {
@@ -277,11 +277,11 @@ class GameLoop {
     document.webkitExitFullscreen();
   }
 
-  final List<Timer> _timers = new List<Timer>();
+  final List<GameLoopTimer> _timers = new List<GameLoopTimer>();
 
   /** Add a new timer which calls [callback] in [delay] seconds. */
-  Timer addTimer(GameLoopTimerFunction callback, double delay) {
-    var timer = new Timer._internal(this, delay, callback);
+  GameLoopTimer addTimer(GameLoopTimerFunction callback, double delay) {
+    var timer = new GameLoopTimer._internal(this, delay, callback);
     _timers.add(timer);
     return timer;
   }

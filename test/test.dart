@@ -46,10 +46,10 @@ void render(GameLoop gameLoop) {
   //print('Interpolation factor: ${gameLoop.renderInterpolationFactor}');
 }
 
-Timer timer1;
-Timer timer2;
+GameLoopTimer timer1;
+GameLoopTimer timer2;
 
-void timerFired(Timer timer) {
+void timerFired(GameLoopTimer timer) {
   if (timer == timer1) {
     print('timer1 fired.');
   } else if (timer == timer2) {
