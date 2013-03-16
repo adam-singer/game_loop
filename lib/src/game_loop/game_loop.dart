@@ -40,6 +40,9 @@ typedef void GameLoopFullscreenChangeFunction(GameLoop gameLoop);
  */
 typedef void GameLoopPointerLockChangeFunction(GameLoop gameLoop);
 
+/** Called whenever a touch event begins */
+typedef void GameLoopTouchEventFunction(GameLoop gameLoop, GameLoopTouch touch);
+
 /** The game loop */
 class GameLoop {
   final Element element;
@@ -101,6 +104,9 @@ class GameLoop {
   GameLoopGamepad _gamepad0;
   /** Gamepad #0. */
   GameLoopGamepad get gamepad0 => _gamepad0;
+  /** Touch */
+  GameLoopTouchSet _touchSet;
+  GameLoopTouchSet get touchSet => _touchSet;
 
   /** Construct a new game loop attaching it to [element] */
   GameLoop(this.element) {
@@ -108,6 +114,7 @@ class GameLoop {
     _mouse = new Mouse(this);
     _gamepad0 = new GameLoopGamepad(this);
     _pointerLock = new PointerLock(this);
+    _touchSet = new GameLoopTouchSet(this);
   }
 
   void _processInputEvents() {
@@ -139,6 +146,22 @@ class GameLoop {
       }
     }
     _mouseEvents.clear();
+    for (_GameLoopTouchEvent touchEvent in _touchEvents) {
+      switch (touchEvent.type) {
+        case _GameLoopTouchEvent.Start:
+          _touchSet._start(touchEvent.event);
+          break;
+        case _GameLoopTouchEvent.End:
+          _touchSet._end(touchEvent.event);
+          break;
+        case _GameLoopTouchEvent.Move:
+          _touchSet._move(touchEvent.event);
+          break;
+        default:
+          throw new StateError('Invalid _GameLoopTouchEven type.');
+      }
+    }
+    _touchEvents.clear();
   }
 
   void _processTimers() {
@@ -215,6 +238,17 @@ class GameLoop {
     onFullscreenChange(this);
   }
 
+  final List<_GameLoopTouchEvent> _touchEvents = new List<_GameLoopTouchEvent>();
+  void _touchStartEvent(TouchEvent event) {
+    _touchEvents.add(new _GameLoopTouchEvent(event, _GameLoopTouchEvent.Start));
+  }
+  void _touchMoveEvent(TouchEvent event) {
+    _touchEvents.add(new _GameLoopTouchEvent(event, _GameLoopTouchEvent.Move));
+  }
+  void _touchEndEvent(TouchEvent event) {
+    _touchEvents.add(new _GameLoopTouchEvent(event, _GameLoopTouchEvent.End));
+  }
+
   final List<KeyboardEvent> _keyboardEvents = new List<KeyboardEvent>();
   void _keyDown(KeyboardEvent event) {
     _keyboardEvents.add(event);
@@ -248,6 +282,9 @@ class GameLoop {
     if (_initialized == false) {
       document.onFullscreenError.listen(_fullscreenError);
       document.onFullscreenChange.listen(_fullscreenChange);
+      window.onTouchStart.listen(_touchStartEvent);
+      window.onTouchEnd.listen(_touchEndEvent);
+      window.onTouchMove.listen(_touchMoveEvent);
       window.onKeyDown.listen(_keyDown);
       window.onKeyUp.listen(_keyUp);
       window.onResize.listen(_resize);
@@ -303,4 +340,8 @@ class GameLoop {
    *  owning the pointer.
    */
   GameLoopPointerLockChangeFunction onPointerLockChange;
+  /** Called when a touch begins. */
+  GameLoopTouchEventFunction onTouchStart;
+  /** Callled when a touch ends. */
+  GameLoopTouchEventFunction onTouchEnd;
 }
