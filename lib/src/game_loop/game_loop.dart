@@ -66,9 +66,9 @@ class GameLoop {
   /** Seconds of accumulated time. */
   double get accumulatedTime => _accumulatedTime;
   /** Width of game display [Element] */
-  int get width => element.clientWidth;
+  int get width => element.client.width;
   /** Height of game display [Element] */
-  int get height => element.clientHeight;
+  int get height => element.client.height;
 
   /** Frame counter value. Incremented once per frame. */
   int get frame => _frameCounter;
@@ -130,15 +130,18 @@ class GameLoop {
     mouse._resetAccumulators();
     for (MouseEvent mouseEvent in _mouseEvents) {
       bool moveEvent = mouseEvent.type == 'mousemove';
+      bool wheelEvent = mouseEvent.type == 'mousewheel';
       bool down = mouseEvent.type == 'mousedown';
       double time = timeStampToSeconds(mouseEvent.timeStamp);
       if (moveEvent) {
-        int x = mouseEvent.offsetX;
-        int y = mouseEvent.offsetY;
-        int dx = mouseEvent.movementX;
-        int dy = mouseEvent.movementY;
+        int x = mouseEvent.offset.x;
+        int y = mouseEvent.offset.y;
+        int dx = mouseEvent.movement.x;
+        int dy = mouseEvent.movement.y;
         var event = new GameLoopMouseEvent(x, y, dx, dy, time, frame);
         _mouse.gameLoopMouseEvent(event);
+      } else if (wheelEvent) {
+        _mouse._accumulateWheel(mouseEvent.deltaX, mouseEvent.deltaY);
       } else {
         int buttonId = mouseEvent.button;
         var event = new DigitalButtonEvent(buttonId, down, frame, time);
@@ -271,6 +274,11 @@ class GameLoop {
     _mouseEvents.add(event);
   }
 
+  void _mouseWheel(MouseEvent event) {
+    _mouseEvents.add(event);
+    event.preventDefault();
+  }
+
   void _resize(Event _) {
     if (_resizePending == false) {
       _resizePending = true;
@@ -291,6 +299,7 @@ class GameLoop {
       element.onMouseMove.listen(_mouseMove);
       element.onMouseDown.listen(_mouseDown);
       element.onMouseUp.listen(_mouseUp);
+      element.onMouseWheel.listen(_mouseWheel);
       _initialized = true;
     }
     _interrupt = false;

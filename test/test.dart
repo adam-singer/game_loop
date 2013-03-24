@@ -35,6 +35,9 @@ void update(GameLoop gameLoop) {
     print('D down: $down $timePressed $timeReleased');
     //gameLoop.enableFullscreen(true);
   }
+  if (gameLoop.mouse.wheelDy != 0) {
+    print('wheel: ${gameLoop.mouse.wheelDx} ${gameLoop.mouse.wheelDy}');
+  }
   return;
   print('frame: ${gameLoop.frame}');
   print('gameTime: ${gameLoop.gameTime}');
