@@ -27,6 +27,7 @@ void update(GameLoop gameLoop) {
   bool mouseDown = gameLoop.mouse.isDown(Mouse.LEFT);
   if (mouseDown) {
     print('left down.');
+    print('pos: ${gameLoop.mouse.x} ${gameLoop.mouse.y}');
   }
   bool down = gameLoop.keyboard.isDown(Keyboard.D);
   double timePressed = gameLoop.keyboard.timePressed(Keyboard.D);

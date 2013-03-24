@@ -134,8 +134,8 @@ class GameLoop {
       bool down = mouseEvent.type == 'mousedown';
       double time = timeStampToSeconds(mouseEvent.timeStamp);
       if (moveEvent) {
-        int x = mouseEvent.offset.x;
-        int y = mouseEvent.offset.y;
+        int x = mouseEvent.page.x - element.offset.left;
+        int y = mouseEvent.page.y - element.offset.top;
         int dx = mouseEvent.movement.x;
         int dy = mouseEvent.movement.y;
         var event = new GameLoopMouseEvent(x, y, dx, dy, time, frame);
@@ -296,16 +296,11 @@ class GameLoop {
       window.onKeyDown.listen(_keyDown);
       window.onKeyUp.listen(_keyUp);
       window.onResize.listen(_resize);
-<<<<<<< HEAD
-      element.onMouseMove.listen(_mouseMove);
-      element.onMouseDown.listen(_mouseDown);
-      element.onMouseUp.listen(_mouseUp);
-      element.onMouseWheel.listen(_mouseWheel);
-=======
+
       window.onMouseMove.listen(_mouseMove);
       window.onMouseDown.listen(_mouseDown);
       window.onMouseUp.listen(_mouseUp);
->>>>>>> get mouse updates global
+      window.onMouseWheel.listen(_mouseWheel);
       _initialized = true;
     }
     _interrupt = false;
