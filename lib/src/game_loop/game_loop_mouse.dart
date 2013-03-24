@@ -43,7 +43,6 @@ class Mouse extends DigitalInput implements PositionInput {
   static const RIGHT = 2;
   static final List<int> _buttonIds = [LEFT, MIDDLE, RIGHT];
 
-
   int _dx = 0;
   /** Mouse movement in x direction since previous frame. */
   int get dx => _dx;
@@ -51,7 +50,6 @@ class Mouse extends DigitalInput implements PositionInput {
   int _dy = 0;
   /** Mouse movement in y direction since previous frame. */
   int get dy => _dy;
-
 
   int _x = 0;
   /** Mouse position in x direction within element. */
@@ -61,11 +59,17 @@ class Mouse extends DigitalInput implements PositionInput {
   /** Mouse position in y direction within element. */
   int get y => _y;
 
+  int _wheelDx = 0;
+  /** Mouse wheel movement in x direction since previous frame. */
+  int get wheelDx => _wheelDx;
+
+  int _wheelDy = 0;
+  /** Mouse wheel movement in y direction since previous frame. */
+  int get wheelDy => _wheelDy;
 
   double _time = 0.0;
   /** Time at which mouse position was last updated. */
   double get time => _time;
-
 
   int _frame  = 0;
   /** Frame at which mouse position was last updated. */
@@ -83,7 +87,14 @@ class Mouse extends DigitalInput implements PositionInput {
     _dy += event.dy;
   }
 
+  void _accumulateWheel(int dx, int dy) {
+    _wheelDx += dx;
+    _wheelDy += dy;
+  }
+
   void _resetAccumulators() {
+    _wheelDx = 0;
+    _wheelDy = 0;
     _dx = 0;
     _dy = 0;
   }

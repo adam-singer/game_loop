@@ -56,8 +56,8 @@ class GameLoopTouchSet {
 
   void _addPosition(GameLoopTouch glTouch, Touch touch) {
     GameLoopTouchPosition position = new GameLoopTouchPosition(
-        touch.clientX,
-        touch.clientY,
+        touch.client.x,
+        touch.client.y,
         0,
         0,
         gameLoop.gameTime, gameLoop.frame);
