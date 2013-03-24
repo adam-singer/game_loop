@@ -138,28 +138,32 @@ class GameLoop {
         int mouseY = mouseEvent.page.y;
         int canvasX = element.offset.left;
         int canvasY = element.offset.top;
-        int x = mouseEvent.page.x - element.offset.left;
-        int y = mouseEvent.page.y - element.offset.top;
-        int clampX;
-        int clampY;
+        int x = mouseX - canvasX;
+        int y = mouseY - canvasY;
+        int clampX = 0;
+        int clampY = 0;
+        bool withinCanvas = false;
         if(mouseX < canvasX) {
           clampX = 0;
         } else if(mouseX > canvasX+width) {
           clampX = width;
         } else {
           clampX = x;
+          withinCanvas = true;
         }
         if(mouseY < canvasY) {
           clampY = 0;
+          withinCanvas = false;
         } else if(mouseY > canvasY+height) {
           clampY = height;
+          withinCanvas = false;
         } else {
           clampY = y;
         }
 
         int dx = mouseEvent.movement.x;
         int dy = mouseEvent.movement.y;
-        var event = new GameLoopMouseEvent(x, y, dx, dy, clampX, clampY, time, frame);
+        var event = new GameLoopMouseEvent(x, y, dx, dy, clampX, clampY, withinCanvas, time, frame);
         _mouse.gameLoopMouseEvent(event);
       } else if (wheelEvent) {
         _mouse._accumulateWheel(mouseEvent.deltaX, mouseEvent.deltaY);

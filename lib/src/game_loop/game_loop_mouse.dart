@@ -28,8 +28,9 @@ class GameLoopMouseEvent {
   final int clampX;
   final int clampY;
   final double time;
+  final bool withinCanvas;
   final int frame;
-  GameLoopMouseEvent(this.x, this.y, this.dx, this.dy, this.clampX, this.clampY, this.time, this.frame);
+  GameLoopMouseEvent(this.x, this.y, this.dx, this.dy, this.clampX, this.clampY, this.withinCanvas, this.time, this.frame);
 }
 
 /** A mouse input. Has digital buttons corresponding to mouse buttons:
@@ -77,6 +78,10 @@ class Mouse extends DigitalInput implements PositionInput {
   /** Mouse wheel movement in y direction since previous frame. */
   int get wheelDy => _wheelDy;
 
+  bool _withinCanvas = false;
+  /** Tells if Mouse is within element. */
+  bool get withinCanvas => _withinCanvas;
+
   double _time = 0.0;
   /** Time at which mouse position was last updated. */
   double get time => _time;
@@ -97,6 +102,7 @@ class Mouse extends DigitalInput implements PositionInput {
     _dy += event.dy;
     _clampX = event.clampX;
     _clampY = event.clampY;
+    _withinCanvas = event.withinCanvas;
   }
 
   void _accumulateWheel(int dx, int dy) {
