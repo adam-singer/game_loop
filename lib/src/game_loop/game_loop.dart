@@ -128,6 +128,8 @@ class GameLoop {
     }
     _keyboardEvents.clear();
     mouse._resetAccumulators();
+    int canvasX = element.offset.left;
+    int canvasY = element.offset.top;
     for (MouseEvent mouseEvent in _mouseEvents) {
       bool moveEvent = mouseEvent.type == 'mousemove';
       bool wheelEvent = mouseEvent.type == 'mousewheel';
@@ -136,8 +138,6 @@ class GameLoop {
       if (moveEvent) {
         int mouseX = mouseEvent.page.x;
         int mouseY = mouseEvent.page.y;
-        int canvasX = element.offset.left;
-        int canvasY = element.offset.top;
         int x = mouseX - canvasX;
         int y = mouseY - canvasY;
         int clampX = 0;

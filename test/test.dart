@@ -47,6 +47,13 @@ void update(GameLoop gameLoop) {
 
 void render(GameLoop gameLoop) {
   //print('Interpolation factor: ${gameLoop.renderInterpolationFactor}');
+
+  context.fillStyle = "rgb(160,160,160)";
+  context.fillRect( 0 , 0 , context.canvas.width , context.canvas.height );
+  context.fillStyle = "rgb(0,0,0)";
+  int posX = gameLoop.mouse.clampX == context.canvas.width ? gameLoop.mouse.clampX-1 : gameLoop.mouse.clampX;
+  int posY = gameLoop.mouse.clampY == context.canvas.height ? gameLoop.mouse.clampY-1 : gameLoop.mouse.clampY;
+  context.fillRect(posX,posY,1,1);
 }
 
 GameLoopTimer timer1;
@@ -60,8 +67,14 @@ void timerFired(GameLoopTimer timer) {
   }
 }
 
-main() {
-  gameLoop = new GameLoop(query('#gameElement'));
+final String canvasID = '#gameElement';
+CanvasRenderingContext2D context;
+
+void main() {
+  CanvasElement canvas = query(canvasID);
+  context = canvas.getContext("2d") as CanvasRenderingContext2D;
+
+  gameLoop = new GameLoop(canvas);
   gameLoop.onUpdate = update;
   gameLoop.onRender = render;
   gameLoop.start();
