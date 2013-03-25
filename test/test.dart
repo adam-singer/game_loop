@@ -50,7 +50,7 @@ void render(GameLoop gameLoop) {
 
   context.fillStyle = "rgb(160,160,160)";
   context.fillRect( 0 , 0 , context.canvas.width , context.canvas.height );
-  context.fillStyle = "rgb(0,0,0)";
+  context.fillStyle = "rgb(255,0,0)";
   int posX = gameLoop.mouse.clampX == context.canvas.width ? gameLoop.mouse.clampX-1 : gameLoop.mouse.clampX;
   int posY = gameLoop.mouse.clampY == context.canvas.height ? gameLoop.mouse.clampY-1 : gameLoop.mouse.clampY;
   context.fillRect(posX,posY,1,1);
