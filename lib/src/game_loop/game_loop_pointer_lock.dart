@@ -41,7 +41,7 @@ class PointerLock {
   /// Does clicking on the element trigger a pointer lock?
   bool lockOnClick = true;
 
-  bool get locked => document.webkitPointerLockElement == gameLoop.element;
+  bool get locked => document.$dom_webkitFullscreenElement == gameLoop.element;
 
   void _onPointerLockChange(Event event) {
     if (gameLoop.onPointerLockChange != null) {
