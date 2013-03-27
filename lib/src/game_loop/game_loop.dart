@@ -128,17 +128,42 @@ class GameLoop {
     }
     _keyboardEvents.clear();
     mouse._resetAccumulators();
+    int canvasX = element.offset.left;
+    int canvasY = element.offset.top;
     for (MouseEvent mouseEvent in _mouseEvents) {
       bool moveEvent = mouseEvent.type == 'mousemove';
       bool wheelEvent = mouseEvent.type == 'mousewheel';
       bool down = mouseEvent.type == 'mousedown';
       double time = timeStampToSeconds(mouseEvent.timeStamp);
       if (moveEvent) {
-        int x = mouseEvent.offset.x;
-        int y = mouseEvent.offset.y;
+        int mouseX = mouseEvent.page.x;
+        int mouseY = mouseEvent.page.y;
+        int x = mouseX - canvasX;
+        int y = mouseY - canvasY;
+        int clampX = 0;
+        int clampY = 0;
+        bool withinCanvas = false;
+        if(mouseX < canvasX) {
+          clampX = 0;
+        } else if(mouseX > canvasX+width) {
+          clampX = width;
+        } else {
+          clampX = x;
+          withinCanvas = true;
+        }
+        if(mouseY < canvasY) {
+          clampY = 0;
+          withinCanvas = false;
+        } else if(mouseY > canvasY+height) {
+          clampY = height;
+          withinCanvas = false;
+        } else {
+          clampY = y;
+        }
+
         int dx = mouseEvent.movement.x;
         int dy = mouseEvent.movement.y;
-        var event = new GameLoopMouseEvent(x, y, dx, dy, time, frame);
+        var event = new GameLoopMouseEvent(x, y, dx, dy, clampX, clampY, withinCanvas, time, frame);
         _mouse.gameLoopMouseEvent(event);
       } else if (wheelEvent) {
         _mouse._accumulateWheel(mouseEvent.deltaX, mouseEvent.deltaY);
@@ -296,10 +321,11 @@ class GameLoop {
       window.onKeyDown.listen(_keyDown);
       window.onKeyUp.listen(_keyUp);
       window.onResize.listen(_resize);
-      element.onMouseMove.listen(_mouseMove);
-      element.onMouseDown.listen(_mouseDown);
-      element.onMouseUp.listen(_mouseUp);
-      element.onMouseWheel.listen(_mouseWheel);
+
+      window.onMouseMove.listen(_mouseMove);
+      window.onMouseDown.listen(_mouseDown);
+      window.onMouseUp.listen(_mouseUp);
+      window.onMouseWheel.listen(_mouseWheel);
       _initialized = true;
     }
     _interrupt = false;
