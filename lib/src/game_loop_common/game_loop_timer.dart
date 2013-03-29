@@ -34,7 +34,13 @@ class GameLoopTimer {
   double _timeToFire = 0.0;
   /** Time until timer fires. */
   double get timeToFire => _timeToFire;
-  GameLoopTimer._internal(this.gameLoop, this._timeToFire, this.onTimer);
+  
+  final double __timeToFire; // TODO(adam): patch up the periodic
+  final bool periodic;
+  
+  GameLoopTimer._internal(this.gameLoop, this.__timeToFire, this.onTimer, {this.periodic: false}) {
+    _timeToFire = __timeToFire;
+  }
   void _update(double dt) {
     if (_timeToFire <= 0.0) {
       // Dead.
