@@ -193,8 +193,9 @@ class GameLoop {
   }
 
   void _processTimers() {
-    for (GameLoopTimer timer in _timers) {
-      timer._update(dt);
+    int _timersLength = _timers.length;
+    for (int i = 0; i < _timersLength; i++) {
+      _timers[i]._update(dt);
     }
     for (int i = _timers.length-1; i >= 0; i--) {
       int lastElement = _timers.length-1;
