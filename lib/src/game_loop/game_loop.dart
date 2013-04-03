@@ -166,7 +166,8 @@ class GameLoop {
         var event = new GameLoopMouseEvent(x, y, dx, dy, clampX, clampY, withinCanvas, time, frame);
         _mouse.gameLoopMouseEvent(event);
       } else if (wheelEvent) {
-        _mouse._accumulateWheel(mouseEvent.deltaX, mouseEvent.deltaY);
+        WheelEvent wheel = mouseEvent as WheelEvent;
+        _mouse._accumulateWheel(wheel.deltaX, wheel.deltaY);
       } else {
         int buttonId = mouseEvent.button;
         var event = new DigitalButtonEvent(buttonId, down, frame, time);
@@ -339,7 +340,7 @@ class GameLoop {
   }
 
   /** Is the element being displayed full screen? */
-  bool get isFullscreen => document.webkitFullscreenElement == element;
+  bool get isFullscreen => document.fullscreenElement == element;
 
   /** Enable or disable fullscreen display of the element. */
   void enableFullscreen(bool enable) {
@@ -347,7 +348,7 @@ class GameLoop {
       element.requestFullscreen();
       return;
     }
-    document.webkitExitFullscreen();
+    document.exitFullscreen();
   }
 
   final List<GameLoopTimer> _timers = new List<GameLoopTimer>();
