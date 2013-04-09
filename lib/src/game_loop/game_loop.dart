@@ -340,7 +340,7 @@ class GameLoop {
   }
 
   /** Is the element visible on the screen? */
-  bool get isVisible => document.visibilityState != "invisible" && element.hidden == false;
+  bool get isVisible => document.visibilityState == 'visible' && element.hidden == false;
 
   /** Is the element being displayed full screen? */
   bool get isFullscreen => document.fullscreenElement == element;
