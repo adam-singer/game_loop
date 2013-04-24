@@ -58,12 +58,18 @@ void render(GameLoopHtml gameLoop) {
 
 GameLoopTimer timer1;
 GameLoopTimer timer2;
-
+GameLoopTimer timer3;
+int periodicCount = 0;
 void timerFired(GameLoopTimer timer) {
   if (timer == timer1) {
     print('timer1 fired.');
   } else if (timer == timer2) {
     print('timer2 fired.');
+  } else if (timer == timer3) {
+    print('timer3 fired. ${periodicCount++}');
+    if (periodicCount == 3) {
+      timer3.cancel();
+    }
   }
 }
 
@@ -72,7 +78,7 @@ CanvasRenderingContext2D context;
 
 void main() {
   CanvasElement canvas = query(canvasID);
-  context = canvas.getContext("2d") as CanvasRenderingContext2D;
+  context = canvas.context2d;
 
   gameLoop = new GameLoopHtml(canvas);
   gameLoop.onUpdate = update;
@@ -80,4 +86,5 @@ void main() {
   gameLoop.start();
   timer1 = gameLoop.addTimer(timerFired, 2.5);
   timer2 = gameLoop.addTimer(timerFired, 0.5);
+  timer3 = gameLoop.addTimer(timerFired, 0.5, periodic: true);
 }
