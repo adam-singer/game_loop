@@ -41,7 +41,7 @@ class GameLoopIsolate extends GameLoop {
   double get gameTime => _gameTime;
 
   /** Current time. */
-  double get time => timeStampToSeconds(_watch.elapsedMicroseconds / 1000.0);
+  double get time => GameLoop.timeStampToSeconds(_watch.elapsedMicroseconds / 1000.0);
   Stopwatch _watch;
   Duration _duration;
 
