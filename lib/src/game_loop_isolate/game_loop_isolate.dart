@@ -27,10 +27,18 @@ class GameLoopIsolate extends GameLoop {
   int _frameCounter = 0;
   double _previousFrameTime;
   double _frameTime = 0.0;
+  double get frameTime => _frameTime;
   double _nextResize = 0.0;
 
   double _accumulatedTime = 0.0;
+  /** Seconds of accumulated time. */
+  double get accumulatedTime => _accumulatedTime;
+
+  /** Frame counter value. Incremented once per frame. */
+  int get frame => _frameCounter;
+
   double _gameTime = 0.0;
+  double get gameTime => _gameTime;
 
   /** Current time. */
   double get time => timeStampToSeconds(_watch.elapsedMicroseconds / 1000.0);

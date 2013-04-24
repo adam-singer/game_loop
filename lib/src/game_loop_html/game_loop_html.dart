@@ -47,6 +47,7 @@ class GameLoopHtml extends GameLoop {
   bool _interrupt = false;
   double _previousFrameTime;
   double _frameTime = 0.0;
+  double get frameTime => _frameTime;
   bool _resizePending = false;
   double _nextResize = 0.0;
 
@@ -64,6 +65,8 @@ class GameLoopHtml extends GameLoop {
   int get height => element.client.height;
 
   double _gameTime = 0.0;
+  double get gameTime => _gameTime;
+
   double _renderInterpolationFactor = 0.0;
   double get renderInterpolationFactor => _renderInterpolationFactor;
   /** The minimum amount of time between two onResize calls in seconds*/
