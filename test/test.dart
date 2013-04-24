@@ -78,7 +78,7 @@ CanvasRenderingContext2D context;
 
 void main() {
   CanvasElement canvas = query(canvasID);
-  context = canvas.context2d;
+  context = canvas.context2D;
 
   gameLoop = new GameLoopHtml(canvas);
   gameLoop.onUpdate = update;
