@@ -31,27 +31,46 @@ class GameLoopTimer {
   final GameLoop gameLoop;
   /** Callback function that will be call when timer fires. */
   final GameLoopTimerFunction onTimer;
-  double _timeToFire = 0.0;
+  double _timeToFireRemaining = 0.0;
   /** Time until timer fires. */
-  double get timeToFire => _timeToFire;
-  GameLoopTimer._internal(this.gameLoop, this._timeToFire, this.onTimer);
+  double get timeToFire => _timeToFireRemaining;
+
+  final double _timeToFire;
+  bool _periodic;
+  bool get periodic => _periodic;
+
+  GameLoopTimer._internal(this.gameLoop, this._timeToFire, this.onTimer,
+      {this._periodic: false}) {
+    _timeToFireRemaining = _timeToFire;
+  }
   void _update(double dt) {
-    if (_timeToFire <= 0.0) {
+    if (_isDead) {
       // Dead.
       return;
     }
-    _timeToFire -= dt;
-    if (_timeToFire <= 0.0) {
+    _timeToFireRemaining -= dt;
+    if (_timeToFireRemaining <= 0.0) {
       if (onTimer != null) {
         onTimer(this);
       }
     }
   }
 
-  bool get _dead => _timeToFire <= 0.0;
+  bool get _isDead {
+    bool expired = _timeToFireRemaining <= 0.0;
+    if (expired && periodic) {
+      _timeToFireRemaining = _timeToFire;
+      return false;
+    } if (expired) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   /** Cancel the timer. */
   void cancel() {
-    _timeToFire = -1.0;
+    _timeToFireRemaining = -1.0;
+    _periodic = false;
   }
 }

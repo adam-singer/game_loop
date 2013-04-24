@@ -65,7 +65,7 @@ abstract class GameLoop {
     }
     for (int i = _timers.length-1; i >= 0; i--) {
       int lastElement = _timers.length-1;
-      if (_timers[i]._dead) {
+      if (_timers[i]._isDead) {
         if (i != lastElement) {
           // Swap into i's place.
           _timers[i] = _timers[lastElement];
@@ -84,8 +84,10 @@ abstract class GameLoop {
   final List<GameLoopTimer> _timers = new List<GameLoopTimer>();
 
   /** Add a new timer which calls [callback] in [delay] seconds. */
-  GameLoopTimer addTimer(GameLoopTimerFunction callback, double delay) {
-    var timer = new GameLoopTimer._internal(this, delay, callback);
+  GameLoopTimer addTimer(GameLoopTimerFunction callback, double delay,
+                         {bool periodic: false}) {
+    var timer = new GameLoopTimer._internal(this, delay, callback,
+        _periodic: periodic);
     _timers.add(timer);
     return timer;
   }
