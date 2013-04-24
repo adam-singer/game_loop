@@ -18,17 +18,16 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-library game_loop;
+library game_loop_html;
+
 import 'dart:html';
 import 'dart:json';
+import 'package:game_loop/game_loop_common.dart';
+export 'package:game_loop/game_loop_common.dart';
 
-part 'src/game_loop/game_loop.dart';
-part 'src/game_loop/game_loop_digital_input.dart';
-part 'src/game_loop/game_loop_position_input.dart';
-part 'src/game_loop/game_loop_analog_input.dart';
-part 'src/game_loop/game_loop_keyboard.dart';
-part 'src/game_loop/game_loop_mouse.dart';
-part 'src/game_loop/game_loop_gamepad.dart';
-part 'src/game_loop/game_loop_timer.dart';
-part 'src/game_loop/game_loop_pointer_lock.dart';
-part 'src/game_loop/game_loop_touch.dart';
+part 'src/game_loop_html/game_loop_html.dart';
+part 'src/game_loop_html/game_loop_keyboard.dart';
+part 'src/game_loop_html/game_loop_mouse.dart';
+part 'src/game_loop_html/game_loop_gamepad.dart';
+part 'src/game_loop_html/game_loop_pointer_lock.dart';
+part 'src/game_loop_html/game_loop_touch.dart';

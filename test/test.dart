@@ -19,9 +19,9 @@
 */
 
 import 'dart:html';
-import 'package:game_loop/game_loop.dart';
+import 'package:game_loop/game_loop_html.dart';
 
-GameLoop gameLoop;
+GameLoopHtml gameLoop;
 
 void update(GameLoop gameLoop) {
   bool mouseDown = gameLoop.mouse.isDown(Mouse.LEFT);
@@ -74,7 +74,7 @@ void main() {
   CanvasElement canvas = query(canvasID);
   context = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-  gameLoop = new GameLoop(canvas);
+  gameLoop = new GameLoopHtml(canvas);
   gameLoop.onUpdate = update;
   gameLoop.onRender = render;
   gameLoop.start();

@@ -18,17 +18,10 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of game_loop;
+library game_loop_io;
 
-/** An input which has a position will implement this interface. For example,
- * [Mouse].
- */
-abstract class PositionInput {
-  int get x;
-  int get y;
-  int get dx;
-  int get dy;
-  double get time;
-  int get frame;
-}
+import 'dart:async';
+import 'package:game_loop/game_loop_common.dart';
+export 'package:game_loop/game_loop_common.dart';
 
+part 'src/game_loop_io/game_loop_io.dart';

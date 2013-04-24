@@ -18,7 +18,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of game_loop;
+part of game_loop_common;
 
 /** The state of an analog input button */
 class AnalogButton {

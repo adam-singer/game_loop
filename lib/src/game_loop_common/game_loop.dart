@@ -18,24 +18,17 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of isolate_game_loop;
+part of game_loop_common;
+
+/** Called when it is time to draw. */
+typedef void GameLoopRenderFunction(GameLoop gameLoop);
 
 /** Called once per game logic frame. See [updateTimeStep] and
  * [maxAccumulatedTime] */
 typedef void GameLoopUpdateFunction(GameLoop gameLoop);
 
-
-
 /** The game loop */
-class GameLoop {
-  bool _initialized = false;
-  bool _interrupt = false;
-  double _interruptTime = 0.0;
-  int _frameCounter = 0;
-  double _previousFrameTime;
-  double _frameTime = 0.0;
-  double _nextResize = 0.0;
-
+abstract class GameLoop {
   /** The time step used for game updates. */
   double updateTimeStep = 0.015;
 
@@ -44,42 +37,39 @@ class GameLoop {
    * calls.
    */
   double maxAccumulatedTime = 0.03;
-  double _accumulatedTime = 0.0;
+  double get _accumulatedTime;
   /** Seconds of accumulated time. */
   double get accumulatedTime => _accumulatedTime;
 
   /** Frame counter value. Incremented once per frame. */
+  int get _frameCounter;
   int get frame => _frameCounter;
   /** Current time as seen by onUpdate calls. */
   double get gameTime => _gameTime;
   double _gameTime = 0.0;
   /** Seconds between requestAnimationFrameTime calls. */
-  double get requestAnimationFrameTime => _frameTime;
+  double get _frameTime;
+  double get frameTime => _frameTime;
   /** Time elapsed in current frame. */
   double get dt => updateTimeStep;
-
+  double _renderInterpolationFactor = 0.0;
+  /** Interpolation value between 0.0 and 1.0 */
+  double get renderInterpolationFactor => _renderInterpolationFactor;
+  /** The minimum amount of time between two onResize calls in seconds*/
+  double resizeLimit = 0.05;
   static double timeStampToSeconds(timeStamp) => timeStamp / 1000.0;
   static double milliseconds(int x) => x / 1000.0;
   static double seconds(int x) => x.toDouble();
   static double minutes(int x) => x.toDouble() * 60.0;
 
   /** Current time. */
-  double get time => timeStampToSeconds(_watch.elapsedMicroseconds / 1000.0);
-  Stopwatch _watch;
-  Duration _duration;
+  double get time => timeStampToSeconds(new DateTime.now().millisecondsSinceEpoch);
 
-  /** Construct a new game loop attaching it to [element] */
+  /** Construct a new game loop */
   GameLoop() {
-    _watch = new Stopwatch();
-    _duration = new Duration(milliseconds: (updateTimeStep*1000.0).toInt());
-
-
   }
 
-  void _processInputEvents() {
-  }
-
-  void _processTimers() {
+  void processTimers() {
     int _timersLength = _timers.length;
     for (int i = 0; i < _timersLength; i++) {
       _timers[i]._update(dt);
@@ -96,58 +86,11 @@ class GameLoop {
     }
   }
 
-  double _timeLost = 0.0;
-  void _update() {
-    //print(time);
-    if (_previousFrameTime == null) {
-      _frameTime = time;
-      _previousFrameTime = _frameTime;
-      _processInputEvents();
-      new Timer(_duration, _update);
-      //window.requestAnimationFrame(_requestAnimationFrame);
-      return;
-    }
-    if (_interrupt == true) {
-      _interruptTime = time;
-      return;
-    }
-
-    _frameCounter++;
-    _previousFrameTime = _frameTime;
-    _frameTime = time;
-    double timeDelta = _frameTime - _previousFrameTime;
-    _accumulatedTime += timeDelta;
-    if (_accumulatedTime > maxAccumulatedTime) {
-      // If the animation frame callback was paused we may end up with
-      // a huge time delta. Clamp it to something reasonable.
-      _timeLost += _accumulatedTime-maxAccumulatedTime;
-      _accumulatedTime = maxAccumulatedTime;
-    }
-
-    while (_accumulatedTime >= updateTimeStep) {
-      _gameTime += updateTimeStep;
-      //_processInputEvents();
-      _processTimers();
-
-      if (onUpdate != null) {
-        onUpdate(this);
-      }
-      _accumulatedTime -= updateTimeStep;
-
-    }
-    new Timer(_duration, _update);
-  }
-
   /** Start the game loop. */
-  void start() {
-    _watch.start();
-    Timer.run(_update);
+  void start();
 
-  }
   /** Stop the game loop. */
-  void stop() {
-    _watch.stop();
-  }
+  void stop();
 
   final List<GameLoopTimer> _timers = new List<GameLoopTimer>();
 
@@ -165,6 +108,6 @@ class GameLoop {
 
   /** Called once per game logic frame. */
   GameLoopUpdateFunction onUpdate;
-
+  /** Called when it is time to draw. */
+  GameLoopRenderFunction onRender;
 }
-

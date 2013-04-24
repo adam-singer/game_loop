@@ -18,22 +18,11 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of game_loop;
+library game_loop_common;
+import 'dart:json';
 
-/** A gamepad */
-class GameLoopGamepad {
-  static const int BUTTON0 = 0;
-  static const int BUTTON1 = 1;
-  static const int BUTTON2 = 2;
-  static const int BUTTON3 = 3;
-  static const int BUTTON4 = 4;
-  static const int BUTTON5 = 5;
-  static const int BUTTON6 = 6;
-  final GameLoop gameLoop;
-
-  DigitalInput buttons;
-  AnalogInput sticks;
-
-  GameLoopGamepad(this.gameLoop) {
-  }
-}
+part 'src/game_loop_common/game_loop.dart';
+part 'src/game_loop_common/game_loop_timer.dart';
+part 'src/game_loop_common/game_loop_position_input.dart';
+part 'src/game_loop_common/game_loop_digital_input.dart';
+part 'src/game_loop_common/game_loop_analog_input.dart';

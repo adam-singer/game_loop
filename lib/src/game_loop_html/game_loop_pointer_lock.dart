@@ -18,40 +18,34 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of game_loop;
+part of game_loop_html;
 
-/** Called when the timer fires. */
-typedef GameLoopTimerFunction(GameLoopTimer timer);
+class PointerLock {
+  final GameLoopHtml gameLoop;
 
-/** A cancellable timer that calls a [GameLoopTimerFunction] when it fires.
- * A timer can only fire once, afterwards it is dead.
- */
-class GameLoopTimer {
-  /** Game loop timer was created by */
-  final GameLoop gameLoop;
-  /** Callback function that will be call when timer fires. */
-  final GameLoopTimerFunction onTimer;
-  double _timeToFire = 0.0;
-  /** Time until timer fires. */
-  double get timeToFire => _timeToFire;
-  GameLoopTimer._internal(this.gameLoop, this._timeToFire, this.onTimer);
-  void _update(double dt) {
-    if (_timeToFire <= 0.0) {
-      // Dead.
-      return;
-    }
-    _timeToFire -= dt;
-    if (_timeToFire <= 0.0) {
-      if (onTimer != null) {
-        onTimer(this);
-      }
+  PointerLock(this.gameLoop) {
+    gameLoop.element.onClick.listen(_onClick);
+    document.onPointerLockChange.listen(_onPointerLockChange);
+  }
+
+  void requestLock() {
+    gameLoop.element.requestPointerLock();
+  }
+
+  void _onClick(Event event) {
+    if (lockOnClick) {
+      requestLock();
     }
   }
 
-  bool get _dead => _timeToFire <= 0.0;
+  /// Does clicking on the element trigger a pointer lock?
+  bool lockOnClick = true;
 
-  /** Cancel the timer. */
-  void cancel() {
-    _timeToFire = -1.0;
+  bool get locked => document.$dom_webkitPointerLockElement == gameLoop.element;
+
+  void _onPointerLockChange(Event event) {
+    if (gameLoop.onPointerLockChange != null) {
+      gameLoop.onPointerLockChange(gameLoop);
+    }
   }
 }

@@ -18,7 +18,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of game_loop;
+part of game_loop_html;
 
 class _GameLoopTouchEvent {
   static const Move = 0x1;
@@ -51,7 +51,7 @@ class GameLoopTouch {
 /** The set of active touches. */
 class GameLoopTouchSet {
   final Map<int, GameLoopTouch> activeTouches = new Map<int, GameLoopTouch>();
-  final GameLoop gameLoop;
+  final GameLoopHtml gameLoop;
   GameLoopTouchSet(this.gameLoop);
 
   void _addPosition(GameLoopTouch glTouch, Touch touch) {

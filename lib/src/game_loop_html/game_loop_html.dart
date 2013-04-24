@@ -18,7 +18,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of game_loop;
+part of game_loop_html;
 
 /** Called when it is time to draw. */
 typedef void GameLoopRenderFunction(GameLoop gameLoop);
@@ -44,43 +44,25 @@ typedef void GameLoopPointerLockChangeFunction(GameLoop gameLoop);
 typedef void GameLoopTouchEventFunction(GameLoop gameLoop, GameLoopTouch touch);
 
 /** The game loop */
-class GameLoop {
+class GameLoopHtml extends GameLoop {
   final Element element;
+  int _frameCounter = 0;
   bool _initialized = false;
   bool _interrupt = false;
-  int _frameCounter = 0;
   double _previousFrameTime;
   double _frameTime = 0.0;
   bool _resizePending = false;
   double _nextResize = 0.0;
 
-  /** The time step used for game updates. */
-  double updateTimeStep = 0.015;
-
-  /** Maximum amount of time between subsequent request animation frame
-   * calls that is accumulated. Accumulated time is used to drive onUpdate
-   * calls.
-   */
   double maxAccumulatedTime = 0.03;
   double _accumulatedTime = 0.0;
-  /** Seconds of accumulated time. */
-  double get accumulatedTime => _accumulatedTime;
   /** Width of game display [Element] */
   int get width => element.client.width;
   /** Height of game display [Element] */
   int get height => element.client.height;
 
-  /** Frame counter value. Incremented once per frame. */
-  int get frame => _frameCounter;
-  /** Current time as seen by onUpdate calls. */
-  double get gameTime => _gameTime;
   double _gameTime = 0.0;
-  /** Seconds between requestAnimationFrameTime calls. */
-  double get requestAnimationFrameTime => _frameTime;
-  /** Time elapsed in current frame. */
-  double get dt => updateTimeStep;
   double _renderInterpolationFactor = 0.0;
-  /** Interpolation value between 0.0 and 1.0 */
   double get renderInterpolationFactor => _renderInterpolationFactor;
   /** The minimum amount of time between two onResize calls in seconds*/
   double resizeLimit = 0.05;
@@ -109,7 +91,7 @@ class GameLoop {
   GameLoopTouchSet get touchSet => _touchSet;
 
   /** Construct a new game loop attaching it to [element] */
-  GameLoop(this.element) {
+  GameLoopHtml(this.element) : super() {
     _keyboard = new Keyboard(this);
     _mouse = new Mouse(this);
     _gamepad0 = new GameLoopGamepad(this);
@@ -193,23 +175,6 @@ class GameLoop {
     _touchEvents.clear();
   }
 
-  void _processTimers() {
-    int _timersLength = _timers.length;
-    for (int i = 0; i < _timersLength; i++) {
-      _timers[i]._update(dt);
-    }
-    for (int i = _timers.length-1; i >= 0; i--) {
-      int lastElement = _timers.length-1;
-      if (_timers[i]._dead) {
-        if (i != lastElement) {
-          // Swap into i's place.
-          _timers[i] = _timers[lastElement];
-        }
-        _timers.removeLast();
-      }
-    }
-  }
-
   void _requestAnimationFrame(num _) {
     if (_previousFrameTime == null) {
       _frameTime = time;
@@ -235,7 +200,7 @@ class GameLoop {
     // TODO(johnmccutchan): Process input events in update loop.
     _processInputEvents();
     while (_accumulatedTime >= updateTimeStep) {
-      _processTimers();
+      processTimers();
       _gameTime += updateTimeStep;
       if (onUpdate != null) {
         onUpdate(this);
@@ -354,24 +319,6 @@ class GameLoop {
     document.exitFullscreen();
   }
 
-  final List<GameLoopTimer> _timers = new List<GameLoopTimer>();
-
-  /** Add a new timer which calls [callback] in [delay] seconds. */
-  GameLoopTimer addTimer(GameLoopTimerFunction callback, double delay) {
-    var timer = new GameLoopTimer._internal(this, delay, callback);
-    _timers.add(timer);
-    return timer;
-  }
-
-  /** Clear all existing timers. */
-  void clearTimers() {
-    _timers.clear();
-  }
-
-  /** Called once per game logic frame. */
-  GameLoopUpdateFunction onUpdate;
-  /** Called when it is time to draw. */
-  GameLoopRenderFunction onRender;
   /** Called when element is resized. */
   GameLoopResizeFunction onResize;
   /** Called when element enters or exits fullscreen mode. */

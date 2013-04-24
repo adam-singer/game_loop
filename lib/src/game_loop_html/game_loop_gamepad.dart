@@ -18,40 +18,22 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-part of isolate_game_loop;
+part of game_loop_html;
 
-/** Called when the timer fires. */
-typedef GameLoopTimerFunction(GameLoopTimer timer);
-
-/** A cancellable timer that calls a [GameLoopTimerFunction] when it fires.
- * A timer can only fire once, afterwards it is dead.
- */
-class GameLoopTimer {
-  /** Game loop timer was created by */
+/** A gamepad */
+class GameLoopGamepad {
+  static const int BUTTON0 = 0;
+  static const int BUTTON1 = 1;
+  static const int BUTTON2 = 2;
+  static const int BUTTON3 = 3;
+  static const int BUTTON4 = 4;
+  static const int BUTTON5 = 5;
+  static const int BUTTON6 = 6;
   final GameLoop gameLoop;
-  /** Callback function that will be call when timer fires. */
-  final GameLoopTimerFunction onTimer;
-  double _timeToFire = 0.0;
-  /** Time until timer fires. */
-  double get timeToFire => _timeToFire;
-  GameLoopTimer._internal(this.gameLoop, this._timeToFire, this.onTimer);
-  void _update(double dt) {
-    if (_timeToFire <= 0.0) {
-      // Dead.
-      return;
-    }
-    _timeToFire -= dt;
-    if (_timeToFire <= 0.0) {
-      if (onTimer != null) {
-        onTimer(this);
-      }
-    }
-  }
 
-  bool get _dead => _timeToFire <= 0.0;
+  DigitalInput buttons;
+  AnalogInput sticks;
 
-  /** Cancel the timer. */
-  void cancel() {
-    _timeToFire = -1.0;
+  GameLoopGamepad(this.gameLoop) {
   }
 }
