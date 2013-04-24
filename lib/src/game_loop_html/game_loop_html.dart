@@ -23,10 +23,6 @@ part of game_loop_html;
 /** Called when it is time to draw. */
 typedef void GameLoopRenderFunction(GameLoop gameLoop);
 
-/** Called once per game logic frame. See [updateTimeStep] and
- * [maxAccumulatedTime] */
-typedef void GameLoopUpdateFunction(GameLoop gameLoop);
-
 /** Called whenever the element is resized. */
 typedef void GameLoopResizeFunction(GameLoop gameLoop);
 
@@ -54,6 +50,12 @@ class GameLoopHtml extends GameLoop {
   bool _resizePending = false;
   double _nextResize = 0.0;
 
+  /** Seconds of accumulated time. */
+  double get accumulatedTime => _accumulatedTime;
+
+  /** Frame counter value. Incremented once per frame. */
+  int get frame => _frameCounter;
+
   double maxAccumulatedTime = 0.03;
   double _accumulatedTime = 0.0;
   /** Width of game display [Element] */
@@ -66,13 +68,6 @@ class GameLoopHtml extends GameLoop {
   double get renderInterpolationFactor => _renderInterpolationFactor;
   /** The minimum amount of time between two onResize calls in seconds*/
   double resizeLimit = 0.05;
-  static double timeStampToSeconds(timeStamp) => timeStamp / 1000.0;
-  static double milliseconds(int x) => x / 1000.0;
-  static double seconds(int x) => x.toDouble();
-  static double minutes(int x) => x.toDouble() * 60.0;
-
-  /** Current time. */
-  double get time => timeStampToSeconds(new DateTime.now().millisecondsSinceEpoch);
 
   PointerLock _pointerLock;
   PointerLock get pointerLock => _pointerLock;
@@ -103,7 +98,7 @@ class GameLoopHtml extends GameLoop {
     for (KeyboardEvent keyboardEvent in _keyboardEvents) {
       DigitalButtonEvent event;
       bool down = keyboardEvent.type == "keydown";
-      double time = timeStampToSeconds(keyboardEvent.timeStamp);
+      double time = GameLoop.timeStampToSeconds(keyboardEvent.timeStamp);
       int buttonId = keyboardEvent.keyCode;
       event = new DigitalButtonEvent(buttonId, down, frame, time);
       _keyboard.digitalButtonEvent(event);
@@ -116,7 +111,7 @@ class GameLoopHtml extends GameLoop {
       bool moveEvent = mouseEvent.type == 'mousemove';
       bool wheelEvent = mouseEvent.type == 'mousewheel';
       bool down = mouseEvent.type == 'mousedown';
-      double time = timeStampToSeconds(mouseEvent.timeStamp);
+      double time = GameLoop.timeStampToSeconds(mouseEvent.timeStamp);
       if (moveEvent) {
         int mouseX = mouseEvent.page.x;
         int mouseY = mouseEvent.page.y;
@@ -318,6 +313,9 @@ class GameLoopHtml extends GameLoop {
     }
     document.exitFullscreen();
   }
+
+  /** Called when it is time to draw. */
+  GameLoopRenderFunction onRender;
 
   /** Called when element is resized. */
   GameLoopResizeFunction onResize;

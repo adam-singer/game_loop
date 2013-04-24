@@ -18,10 +18,10 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-library game_loop_io;
+library game_loop_isolate;
 
 import 'dart:async';
 import 'package:game_loop/game_loop_common.dart';
 export 'package:game_loop/game_loop_common.dart';
 
-part 'src/game_loop_io/game_loop_io.dart';
+part 'src/game_loop_isolate/game_loop_isolate.dart';

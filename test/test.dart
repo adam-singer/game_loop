@@ -23,7 +23,7 @@ import 'package:game_loop/game_loop_html.dart';
 
 GameLoopHtml gameLoop;
 
-void update(GameLoop gameLoop) {
+void update(GameLoopHtml gameLoop) {
   bool mouseDown = gameLoop.mouse.isDown(Mouse.LEFT);
   if (mouseDown) {
     print('left down.');
@@ -45,7 +45,7 @@ void update(GameLoop gameLoop) {
   print('dt: ${gameLoop.dt}');
 }
 
-void render(GameLoop gameLoop) {
+void render(GameLoopHtml gameLoop) {
   //print('Interpolation factor: ${gameLoop.renderInterpolationFactor}');
 
   context.fillStyle = "rgb(160,160,160)";

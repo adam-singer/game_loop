@@ -20,9 +20,6 @@
 
 part of game_loop_common;
 
-/** Called when it is time to draw. */
-typedef void GameLoopRenderFunction(GameLoop gameLoop);
-
 /** Called once per game logic frame. See [updateTimeStep] and
  * [maxAccumulatedTime] */
 typedef void GameLoopUpdateFunction(GameLoop gameLoop);
@@ -37,33 +34,25 @@ abstract class GameLoop {
    * calls.
    */
   double maxAccumulatedTime = 0.03;
-  double get _accumulatedTime;
   /** Seconds of accumulated time. */
-  double get accumulatedTime => _accumulatedTime;
-
+  double get accumulatedTime;
   /** Frame counter value. Incremented once per frame. */
-  int get _frameCounter;
-  int get frame => _frameCounter;
+  int get frame;
   /** Current time as seen by onUpdate calls. */
-  double get gameTime => _gameTime;
-  double _gameTime = 0.0;
+  double get gameTime;
   /** Seconds between requestAnimationFrameTime calls. */
-  double get _frameTime;
-  double get frameTime => _frameTime;
+  double get frameTime;
   /** Time elapsed in current frame. */
   double get dt => updateTimeStep;
-  double _renderInterpolationFactor = 0.0;
-  /** Interpolation value between 0.0 and 1.0 */
-  double get renderInterpolationFactor => _renderInterpolationFactor;
-  /** The minimum amount of time between two onResize calls in seconds*/
-  double resizeLimit = 0.05;
+
   static double timeStampToSeconds(timeStamp) => timeStamp / 1000.0;
   static double milliseconds(int x) => x / 1000.0;
   static double seconds(int x) => x.toDouble();
   static double minutes(int x) => x.toDouble() * 60.0;
 
   /** Current time. */
-  double get time => timeStampToSeconds(new DateTime.now().millisecondsSinceEpoch);
+  double get time => timeStampToSeconds(
+      new DateTime.now().millisecondsSinceEpoch);
 
   /** Construct a new game loop */
   GameLoop() {
@@ -108,6 +97,4 @@ abstract class GameLoop {
 
   /** Called once per game logic frame. */
   GameLoopUpdateFunction onUpdate;
-  /** Called when it is time to draw. */
-  GameLoopRenderFunction onRender;
 }
